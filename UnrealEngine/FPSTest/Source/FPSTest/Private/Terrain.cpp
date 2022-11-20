@@ -15,6 +15,17 @@ ATerrain::ATerrain()
 
 	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
 	ProceduralMesh->SetupAttachment(GetRootComponent());
+	ProceduralMesh->SetCastShadow(true);
+	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
+	//FScalarMaterialInput roughness = FScalarMaterialInput();
+	//FScalarMaterialInput metalic = FScalarMaterialInput();
+	//roughness.Constant = 1.0;
+	//metalic.Constant = 0.0;
+	//mt->Roughness = roughness;
+	//mt->Metallic = metalic;
+	mt->bUsedWithStaticLighting = true;
+	ProceduralMesh->SetMaterial(0, mt);
+	UE_LOG(LogTemp, Warning, TEXT("%s"), (ProceduralMesh->HasStaticLighting()? TEXT("t"):TEXT("f")));
 
 }
 
@@ -26,11 +37,7 @@ void ATerrain::Initialize(int p[])
 	}
 	CreateVertices();
 	CreateTriangles();
-
-	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
-
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
-	ProceduralMesh->SetMaterial(0, mt);
 }
 
 void ATerrain::BeginPlay()
@@ -62,10 +69,10 @@ void ATerrain::CreateTriangles()
 			Triangles.Add(Vertex);//Bottom left corner
 			Triangles.Add(Vertex + 1);//Bottom right corner
 			Triangles.Add(Vertex + Size + 1);//Top left corner
+
 			Triangles.Add(Vertex + 1);//Bottom right corner
 			Triangles.Add(Vertex + Size + 2);//Top right corner
 			Triangles.Add(Vertex + Size + 1);//Top left corner
-
 			++Vertex;
 		}
 		++Vertex;

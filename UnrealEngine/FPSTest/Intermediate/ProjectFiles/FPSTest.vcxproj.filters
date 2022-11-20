@@ -29,6 +29,15 @@
     <None Include="..\..\Config\DefaultEngine.ini">
       <Filter>Config</Filter>
     </None>
+    <None Include="..\..\Config\DefaultNiagara.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Config\HoloLens">
+      <UniqueIdentifier>{4C8DD267-CDE7-336F-8602-F5F485D22BAB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\HoloLens\HoloLensEngine.ini">
+      <Filter>Config\HoloLens</Filter>
+    </None>
     <Filter Include="Source\FPSTest">
       <UniqueIdentifier>{4E1F9ABF-A8D5-37B2-888C-53B7428808DF}</UniqueIdentifier>
     </Filter>
@@ -36,12 +45,6 @@
       <Filter>Source\FPSTest</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\FPSTest\FPSTest.h">
-      <Filter>Source\FPSTest</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\FPSTest\FPSTestCharacter.cpp">
-      <Filter>Source\FPSTest</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\FPSTest\FPSTestCharacter.h">
       <Filter>Source\FPSTest</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\FPSTest\FPSTestGameMode.cpp">
@@ -71,22 +74,34 @@
     <None Include="..\..\Source\FPSTest\FPSTest.Build.cs">
       <Filter>Source\FPSTest</Filter>
     </None>
+    <ClInclude Include="..\..\Source\FPSTest\FPSTestCharacter.h">
+      <Filter>Source\FPSTest</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\FPSTest\FPSTestCharacter.cpp">
+      <Filter>Source\FPSTest</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSTest\Public">
       <UniqueIdentifier>{37D9D157-5106-3C45-ADFB-C7D787FD581C}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSTest\Public\Terrain.h">
+    <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">
+    <ClInclude Include="..\..\Source\FPSTest\Public\TerrainMenager.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Terrain.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <Filter Include="Source\FPSTest\Private">
       <UniqueIdentifier>{8EDE2DCE-0F4E-3AA1-9E11-018204DF3801}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\FPSTest\Private\Terrain.cpp">
+    <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
+    <ClCompile Include="..\..\Source\FPSTest\Private\TerrainMenager.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Terrain.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
   </ItemGroup>
