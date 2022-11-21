@@ -169,6 +169,8 @@
     <AdditionalOptions>/std:c++17</AdditionalOptions>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="Clock.cpp" />
+    <ClInclude Include="Clock.h" />
     <None Include="..\..\FPSTest.uproject" />
     <None Include="..\..\Source\FPSTest.Target.cs" />
     <None Include="..\..\Source\FPSTestEditor.Target.cs" />
