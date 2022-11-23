@@ -7,9 +7,6 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/InputSettings.h"
-#include "Terrain.h"
-
-int terr;
 
 //////////////////////////////////////////////////////////////////////////
 // AFPSTestCharacter
@@ -36,15 +33,12 @@ AFPSTestCharacter::AFPSTestCharacter()
 	Mesh1P->CastShadow = false;
 	Mesh1P->SetRelativeRotation(FRotator(1.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-0.5f, -4.4f, -155.7f));
-
 }
 
 void AFPSTestCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
-	terr = 0;
-
 }
 
 //////////////////////////////////////////////////////////////////////////// Input

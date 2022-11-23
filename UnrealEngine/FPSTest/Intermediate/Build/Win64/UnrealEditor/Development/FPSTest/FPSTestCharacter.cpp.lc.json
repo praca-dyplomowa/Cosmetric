@@ -23,9 +23,7 @@
             "c:\\unreal engine 5.0.3\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\shapecomponent.generated.h",
             "c:\\unreal engine 5.0.3\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\capsulecomponent.generated.h",
             "c:\\unreal engine 5.0.3\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\inputsettings.h",
-            "c:\\unreal engine 5.0.3\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\inputsettings.generated.h",
-            "d:\\git\\me-test-repo\\gra--generowanie__proceduralne\\unrealengine\\fpstest\\source\\fpstest\\public\\terrain.h",
-            "d:\\git\\me-test-repo\\gra--generowanie__proceduralne\\unrealengine\\fpstest\\intermediate\\build\\win64\\unrealeditor\\inc\\fpstest\\terrain.generated.h"
+            "c:\\unreal engine 5.0.3\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\inputsettings.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

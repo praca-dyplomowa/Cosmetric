@@ -105,14 +105,4 @@
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Clock.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>

@@ -15,18 +15,8 @@ ATerrain::ATerrain()
 
 	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
 	ProceduralMesh->SetupAttachment(GetRootComponent());
-	ProceduralMesh->SetCastShadow(true);
 	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
-	//FScalarMaterialInput roughness = FScalarMaterialInput();
-	//FScalarMaterialInput metalic = FScalarMaterialInput();
-	//roughness.Constant = 1.0;
-	//metalic.Constant = 0.0;
-	//mt->Roughness = roughness;
-	//mt->Metallic = metalic;
-	mt->bUsedWithStaticLighting = true;
 	ProceduralMesh->SetMaterial(0, mt);
-	UE_LOG(LogTemp, Warning, TEXT("%s"), (ProceduralMesh->HasStaticLighting()? TEXT("t"):TEXT("f")));
-
 }
 
 void ATerrain::Initialize(int p[])
