@@ -56,7 +56,8 @@ protected:
 	void LookUpAtRate(float Rate);
 	void AddControllerYawInput(float Val) override;
 	void AddControllerPitchInput(float Val) override;
-
+	void Jump() override;
+	void StopJumping() override;
 	void Tick(float DeltaTime);
 
 	struct TouchData

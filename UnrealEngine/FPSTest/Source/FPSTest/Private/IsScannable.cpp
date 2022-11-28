@@ -2,6 +2,7 @@
 
 
 #include "IsScannable.h"
+#include "Components/ProgressBar.h"
 #include "../FPSTestCharacter.h"
 
 // Sets default values
@@ -19,6 +20,7 @@ AIsScannable::AIsScannable()
 	cubeMeshComponent->SetMaterial(0, mt);
 	OnClicked.AddUniqueDynamic(this, &AIsScannable::OnSelected);
 	OnReleased.AddUniqueDynamic(this, &AIsScannable::OnUnselected);
+	OnEndCursorOver.AddDynamic(this, &AIsScannable::OnUnhovered);
 }
 
 // Called when the game starts or when spawned
@@ -32,18 +34,21 @@ void AIsScannable::BeginPlay()
 void AIsScannable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 
 void AIsScannable::OnSelected(AActor* Target, FKey ButtonPressed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Bump"));
 	((AFPSTestCharacter *)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
+	time = 10.0;
 }
 
 void AIsScannable::OnUnselected(AActor* Target, FKey ButtonPressed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Bump2"));
+	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
+}
+
+void AIsScannable::OnUnhovered(AActor* Target)
+{
 	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
 }

@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/ProgressBar.h"
 #include "IsScannable.generated.h"
+
+class UProgressBar;
 
 UCLASS()
 class FPSTEST_API AIsScannable : public AActor
@@ -25,8 +28,12 @@ public:
 
 	UStaticMeshComponent* cubeMeshComponent;
 
+	double time;
+
 	UFUNCTION()
 		void OnSelected(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
 		void OnUnselected(AActor* Target, FKey ButtonPressed);
+	UFUNCTION()
+		void OnUnhovered(AActor* Target);
 };

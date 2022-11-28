@@ -13,6 +13,7 @@
 
 AFPSTestCharacter::AFPSTestCharacter()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 
@@ -50,8 +51,8 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	check(PlayerInputComponent);
 
 	// Bind jump events
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFPSTestCharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AFPSTestCharacter::StopJumping);
 
 	// Bind fire event
 	PlayerInputComponent->BindAction("PrimaryAction", IE_Pressed, this, &AFPSTestCharacter::OnPrimaryAction);
@@ -136,18 +137,28 @@ void AFPSTestCharacter::AddControllerPitchInput(float Val)
 		Super::AddControllerPitchInput(Val);
 }
 
+void AFPSTestCharacter::Jump()
+{
+	if (Movement_Flag)
+		Super::Jump();
+}
+
+void AFPSTestCharacter::StopJumping()
+{
+	if (Movement_Flag)
+		Super::StopJumping();
+}
+
 void AFPSTestCharacter::TurnAtRate(float Rate)
 {
 	if(Movement_Flag)
-	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+		Super::AddControllerYawInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
 }
 
 void AFPSTestCharacter::LookUpAtRate(float Rate)
 {
 	if (Movement_Flag)
-	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+		Super::AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
 }
 
 void AFPSTestCharacter::Tick(float DeltaTime)
