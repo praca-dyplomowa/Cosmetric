@@ -14,9 +14,9 @@ ATerrain::ATerrain()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
-	ProceduralMesh->SetupAttachment(GetRootComponent());
 	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
 	ProceduralMesh->SetMaterial(0, mt);
+	SetRootComponent(ProceduralMesh);
 }
 
 void ATerrain::Initialize(int p[])
@@ -68,4 +68,3 @@ void ATerrain::CreateTriangles()
 		++Vertex;
 	}
 }
-

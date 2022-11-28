@@ -45,6 +45,7 @@ void AFPSTestCharacter::BeginPlay()
 
 void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
+	Movement_Flag = true;
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
 
@@ -65,10 +66,13 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "Mouse" versions handle devices that provide an absolute delta, such as a mouse.
 	// "Gamepad" versions are for devices that we choose to treat as a rate of change, such as an analog joystick
-	PlayerInputComponent->BindAxis("Turn Right / Left Mouse", this, &APawn::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("Look Up / Down Mouse", this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("Turn Right / Left Mouse", this, &AFPSTestCharacter::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("Look Up / Down Mouse", this, &AFPSTestCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("Turn Right / Left Gamepad", this, &AFPSTestCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("Look Up / Down Gamepad", this, &AFPSTestCharacter::LookUpAtRate);
+
+	GetWorld()->GetFirstPlayerController()->bEnableClickEvents = true;
+	GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
 }
 
 void AFPSTestCharacter::OnPrimaryAction()
@@ -104,7 +108,7 @@ void AFPSTestCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVec
 
 void AFPSTestCharacter::MoveForward(float Value)
 {
-	if (Value != 0.0f)
+	if (Movement_Flag && Value != 0.0f)
 	{
 		// add movement in that direction
 		AddMovementInput(GetActorForwardVector(), Value);
@@ -113,23 +117,45 @@ void AFPSTestCharacter::MoveForward(float Value)
 
 void AFPSTestCharacter::MoveRight(float Value)
 {
-	if (Value != 0.0f)
+	if (Movement_Flag && Value != 0.0f)
 	{
 		// add movement in that direction
 		AddMovementInput(GetActorRightVector(), Value);
 	}
 }
 
+void AFPSTestCharacter::AddControllerYawInput(float Val)
+{
+	if (Movement_Flag)
+		Super::AddControllerYawInput(Val);
+}
+
+void AFPSTestCharacter::AddControllerPitchInput(float Val)
+{
+	if (Movement_Flag)
+		Super::AddControllerPitchInput(Val);
+}
+
 void AFPSTestCharacter::TurnAtRate(float Rate)
 {
+	if(Movement_Flag)
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
 }
 
 void AFPSTestCharacter::LookUpAtRate(float Rate)
 {
+	if (Movement_Flag)
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+}
+
+void AFPSTestCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	int32 x, y;
+	GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
+	GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
 }
 
 bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)

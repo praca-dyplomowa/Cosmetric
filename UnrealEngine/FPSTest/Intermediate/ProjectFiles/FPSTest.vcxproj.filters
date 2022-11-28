@@ -53,16 +53,7 @@
     <ClInclude Include="..\..\Source\FPSTest\FPSTestGameMode.h">
       <Filter>Source\FPSTest</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\FPSTest\FPSTestProjectile.cpp">
-      <Filter>Source\FPSTest</Filter>
-    </ClCompile>
     <ClInclude Include="..\..\Source\FPSTest\FPSTestProjectile.h">
-      <Filter>Source\FPSTest</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\FPSTest\TP_PickUpComponent.cpp">
-      <Filter>Source\FPSTest</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\FPSTest\TP_PickUpComponent.h">
       <Filter>Source\FPSTest</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\FPSTest\TP_WeaponComponent.cpp">
@@ -77,13 +68,25 @@
     <ClInclude Include="..\..\Source\FPSTest\FPSTestCharacter.h">
       <Filter>Source\FPSTest</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\FPSTest\FPSTestProjectile.cpp">
+      <Filter>Source\FPSTest</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\FPSTestCharacter.cpp">
       <Filter>Source\FPSTest</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\TP_PickUpComponent.cpp">
+      <Filter>Source\FPSTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\FPSTest\TP_PickUpComponent.h">
+      <Filter>Source\FPSTest</Filter>
+    </ClInclude>
     <Filter Include="Source\FPSTest\Public">
       <UniqueIdentifier>{37D9D157-5106-3C45-ADFB-C7D787FD581C}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Clock.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\TerrainMenager.h">
@@ -92,16 +95,25 @@
     <ClInclude Include="..\..\Source\FPSTest\Public\Terrain.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\IsScannable.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
     <Filter Include="Source\FPSTest\Private">
       <UniqueIdentifier>{8EDE2DCE-0F4E-3AA1-9E11-018204DF3801}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
+    <ClCompile Include="..\..\Source\FPSTest\Private\IsScannable.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\TerrainMenager.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\Terrain.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Clock.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
   </ItemGroup>
