@@ -4,10 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/ProgressBar.h"
 #include "IsScannable.generated.h"
-
-class UProgressBar;
 
 UCLASS()
 class FPSTEST_API AIsScannable : public AActor
@@ -27,7 +24,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UStaticMeshComponent* cubeMeshComponent;
-
 	double time;
 
 	UFUNCTION()
