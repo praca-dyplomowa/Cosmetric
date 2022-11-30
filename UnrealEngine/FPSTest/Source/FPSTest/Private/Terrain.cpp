@@ -14,8 +14,9 @@ ATerrain::ATerrain()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
-	ProceduralMesh->SetupAttachment(GetRootComponent());
-
+	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
+	ProceduralMesh->SetMaterial(0, mt);
+	SetRootComponent(ProceduralMesh);
 }
 
 void ATerrain::Initialize(int p[])
@@ -26,11 +27,7 @@ void ATerrain::Initialize(int p[])
 	}
 	CreateVertices();
 	CreateTriangles();
-
-	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
-
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
-	ProceduralMesh->SetMaterial(0, mt);
 }
 
 void ATerrain::BeginPlay()
@@ -62,13 +59,12 @@ void ATerrain::CreateTriangles()
 			Triangles.Add(Vertex);//Bottom left corner
 			Triangles.Add(Vertex + 1);//Bottom right corner
 			Triangles.Add(Vertex + Size + 1);//Top left corner
+
 			Triangles.Add(Vertex + 1);//Bottom right corner
 			Triangles.Add(Vertex + Size + 2);//Top right corner
 			Triangles.Add(Vertex + Size + 1);//Top left corner
-
 			++Vertex;
 		}
 		++Vertex;
 	}
 }
-
