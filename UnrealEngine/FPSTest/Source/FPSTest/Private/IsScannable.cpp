@@ -59,7 +59,7 @@ void AIsScannable::Tick(float DeltaTime)
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Add(Name);
 			Action = false;
 		}
-		ScanProgressBar->SetValue(ScanTime, 5.0);
+		ScanProgressBar->SetValue(ScanTime, MaxScanTime);
 		ScanTime -= DeltaTime;
 	}
 }
@@ -73,7 +73,7 @@ void AIsScannable::OnSelectedScan(AActor* Target, FKey ButtonPressed)
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
 			ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
 			BeingScanned = true;
-			ScanTime = 5.0;
+			ScanTime = MaxScanTime;
 			Action = true;
 		}
 	}

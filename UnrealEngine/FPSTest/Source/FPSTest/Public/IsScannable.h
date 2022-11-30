@@ -28,6 +28,7 @@ public:
 
 	float ScanTime;
 	bool BeingScanned;
+	static const inline float MaxScanTime = 5.0;
 	UPROPERTY(EditAnywhere)
 		FString Name;
 
