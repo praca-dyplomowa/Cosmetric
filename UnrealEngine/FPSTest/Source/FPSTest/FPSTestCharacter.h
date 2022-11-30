@@ -60,6 +60,7 @@ protected:
 	void StopJumping() override;
 	void Tick(float DeltaTime);
 
+
 	struct TouchData
 	{
 		TouchData() { bIsPressed = false;Location=FVector::ZeroVector;}
@@ -84,5 +85,7 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 	bool Movement_Flag;
+	//Catalog
+	TArray<FString> Catalog;
 };
 

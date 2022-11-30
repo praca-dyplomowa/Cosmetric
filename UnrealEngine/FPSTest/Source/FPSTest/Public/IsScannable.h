@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "AllPurposeProgressBarWidget.h"
+#include "Blueprint/UserWidget.h"
 #include "IsScannable.generated.h"
 
 UCLASS()
@@ -18,18 +20,26 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UStaticMeshComponent* cubeMeshComponent;
-	double time;
+	float Time;
+	bool BeingScanned;
+	UPROPERTY(EditAnywhere)
+		FString Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
+
+	UPROPERTY()
+		class UAllPurposeProgressBarWidget* ScanProgressBar;
 
 	UFUNCTION()
 		void OnSelected(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
 		void OnUnselected(AActor* Target, FKey ButtonPressed);
-	UFUNCTION()
-		void OnUnhovered(AActor* Target);
 };

@@ -73,7 +73,6 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAxis("Look Up / Down Gamepad", this, &AFPSTestCharacter::LookUpAtRate);
 
 	GetWorld()->GetFirstPlayerController()->bEnableClickEvents = true;
-	GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
 }
 
 void AFPSTestCharacter::OnPrimaryAction()

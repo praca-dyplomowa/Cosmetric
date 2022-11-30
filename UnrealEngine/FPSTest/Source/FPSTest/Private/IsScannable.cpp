@@ -4,6 +4,7 @@
 #include "IsScannable.h"
 #include "Components/ProgressBar.h"
 #include "../FPSTestCharacter.h"
+#include "UObject/UObjectGlobals.h"
 
 // Sets default values
 AIsScannable::AIsScannable()
@@ -20,35 +21,69 @@ AIsScannable::AIsScannable()
 	cubeMeshComponent->SetMaterial(0, mt);
 	OnClicked.AddUniqueDynamic(this, &AIsScannable::OnSelected);
 	OnReleased.AddUniqueDynamic(this, &AIsScannable::OnUnselected);
-	OnEndCursorOver.AddDynamic(this, &AIsScannable::OnUnhovered);
+	ProgressBarWidgetClass = nullptr;
+	ScanProgressBar = nullptr;
+	BeingScanned = false;
 }
 
 // Called when the game starts or when spawned
 void AIsScannable::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if (ProgressBarWidgetClass)
+	{
+		APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+		check(ctr);
+		ScanProgressBar = CreateWidget<UAllPurposeProgressBarWidget>(ctr, ProgressBarWidgetClass);
+		check(ScanProgressBar);
+		ScanProgressBar->AddToPlayerScreen();
+		ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void AIsScannable::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (ScanProgressBar)
+	{
+		ScanProgressBar->RemoveFromParent();
+		ScanProgressBar = nullptr;
+	}
+
+	Super::EndPlay(EndPlayReason);
 }
 
 // Called every frame
 void AIsScannable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (BeingScanned)
+	{
+		if (Time <= 0)
+		{
+			BeingScanned = false;
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
+			ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Add(Name);
+		}
+		ScanProgressBar->SetValue(Time, 5.0);
+		Time -= DeltaTime;
+	}
 }
-
 
 void AIsScannable::OnSelected(AActor* Target, FKey ButtonPressed)
 {
-	((AFPSTestCharacter *)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
-	time = 10.0;
+	if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Contains(Name)))
+	{
+		((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
+		ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
+		BeingScanned = true;
+		Time = 5.0;
+	}
 }
 
 void AIsScannable::OnUnselected(AActor* Target, FKey ButtonPressed)
 {
 	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
-}
-
-void AIsScannable::OnUnhovered(AActor* Target)
-{
-	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
+	ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+	BeingScanned = false;
 }
