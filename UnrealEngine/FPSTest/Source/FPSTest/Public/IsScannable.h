@@ -26,7 +26,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UStaticMeshComponent* cubeMeshComponent;
 	float Time;
 	bool BeingScanned;
 	UPROPERTY(EditAnywhere)

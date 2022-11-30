@@ -11,14 +11,6 @@ AIsScannable::AIsScannable()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	cubeMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Cube"));
-
-	// Load the Cube mesh
-	UStaticMesh* cubeMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cube.Cube'")).Object;
-	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Grass"));
-	// Set the component's mesh
-	cubeMeshComponent->SetStaticMesh(cubeMesh);
-	cubeMeshComponent->SetMaterial(0, mt);
 	OnClicked.AddUniqueDynamic(this, &AIsScannable::OnSelected);
 	OnReleased.AddUniqueDynamic(this, &AIsScannable::OnUnselected);
 	ProgressBarWidgetClass = nullptr;
@@ -37,6 +29,7 @@ void AIsScannable::BeginPlay()
 		ScanProgressBar = CreateWidget<UAllPurposeProgressBarWidget>(ctr, ProgressBarWidgetClass);
 		check(ScanProgressBar);
 		ScanProgressBar->AddToPlayerScreen();
+		ScanProgressBar->SetText("Scanning");
 		ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
 	}
 }

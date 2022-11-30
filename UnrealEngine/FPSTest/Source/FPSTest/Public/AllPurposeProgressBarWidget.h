@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/VerticalBox.h"
 #include "Components/ProgressBar.h"
+#include "Components/TextBlock.h"
 #include "AllPurposeProgressBarWidget.generated.h"
 
 /**
@@ -17,8 +18,11 @@ class FPSTEST_API UAllPurposeProgressBarWidget : public UUserWidget
 	GENERATED_BODY()
 public:
 	void SetValue(float val, float max);
+	void SetText(FString txt);
 
 	UPROPERTY(meta = (BindWidget))
 		UProgressBar* ProgressBar;
+	UPROPERTY(meta = (BindWidget))
+		UTextBlock* TextBlock;
 	
 };

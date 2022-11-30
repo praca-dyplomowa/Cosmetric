@@ -10,3 +10,11 @@ void UAllPurposeProgressBarWidget::SetValue(float val, float max)
 		ProgressBar->SetPercent(val / max);
 	}
 }
+
+void UAllPurposeProgressBarWidget::SetText(FString txt)
+{
+	if (TextBlock)
+	{
+		TextBlock->SetText(FText::FromString(txt));
+	}
+}
