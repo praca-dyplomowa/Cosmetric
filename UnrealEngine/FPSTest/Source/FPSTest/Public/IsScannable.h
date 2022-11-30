@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "IsActionable.h"
 #include "AllPurposeProgressBarWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "IsScannable.generated.h"
 
 UCLASS()
-class FPSTEST_API AIsScannable : public AActor
+class FPSTEST_API AIsScannable : public AIsActionable
 {
 	GENERATED_BODY()
 
