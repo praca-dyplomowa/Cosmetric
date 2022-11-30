@@ -86,6 +86,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\AllPurposeProgressBarWidget.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\IsCollectable.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\IsScannable.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
@@ -101,10 +104,16 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\TerrainMenager.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\TestObject.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSTest\Public">
       <UniqueIdentifier>{37D9D157-5106-3C45-ADFB-C7D787FD581C}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\FPSTest\Public\AllPurposeProgressBarWidget.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\IsCollectable.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\IsScannable.h">
@@ -120,6 +129,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\TerrainMenager.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\TestObject.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,19 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "IsScannable.h"
 #include "AllPurposeProgressBarWidget.h"
 #include "Blueprint/UserWidget.h"
-#include "IsScannable.generated.h"
+#include "IsCollectable.generated.h"
 
 UCLASS()
-class FPSTEST_API AIsScannable : public AActor
+class FPSTEST_API AIsCollectable : public AIsScannable
 {
 	GENERATED_BODY()
-
-public:
-	// Sets default values for this pawn's properties
-	AIsScannable();
+	
+public:	
+	// Sets default values for this actor's properties
+	AIsCollectable();
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,19 +26,20 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	float ScanTime;
-	bool BeingScanned;
+	float CollectTime;
+	bool BeingCollected;
+	bool Collectable;
 	UPROPERTY(EditAnywhere)
-		FString Name;
+		int Materials[3];
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
+		TSubclassOf<class UAllPurposeProgressBarWidget> CollectProgressBarWidgetClass;
 
 	UPROPERTY()
-		class UAllPurposeProgressBarWidget* ScanProgressBar;
+		class UAllPurposeProgressBarWidget* CollectProgressBar;
 
 	UFUNCTION()
-		void OnSelectedScan(AActor* Target, FKey ButtonPressed);
+		void OnSelectedCollect(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
-		void OnUnselectedScan(AActor* Target, FKey ButtonPressed);
+		void OnUnselectedCollect(AActor* Target, FKey ButtonPressed);
 };

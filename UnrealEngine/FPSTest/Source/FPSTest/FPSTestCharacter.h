@@ -87,5 +87,6 @@ public:
 	bool Movement_Flag;
 	//Catalog
 	TArray<FString> Catalog;
+	int Equipment[3];
 };
 
