@@ -31,8 +31,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		FString Name;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
+	TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
 
 	UPROPERTY()
 		class UAllPurposeProgressBarWidget* ScanProgressBar;

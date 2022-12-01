@@ -101,6 +101,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\ProgressBarWidget.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Singleton.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\Terrain.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
@@ -129,6 +132,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\ProgressBarWidget.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Singleton.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\Terrain.h">

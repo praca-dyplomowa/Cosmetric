@@ -4,6 +4,8 @@
 #include "IsScannable.h"
 #include "Components/ProgressBar.h"
 #include "../FPSTestCharacter.h"
+#include "UObject/ConstructorHelpers.h"
+#include "../Public/Singleton.h"
 #include "UObject/UObjectGlobals.h"
 
 // Sets default values
@@ -13,7 +15,15 @@ AIsScannable::AIsScannable()
 	PrimaryActorTick.bCanEverTick = true;
 	OnClicked.AddUniqueDynamic(this, &AIsScannable::OnSelectedScan);
 	OnReleased.AddUniqueDynamic(this, &AIsScannable::OnUnselectedScan);
-	ProgressBarWidgetClass = nullptr;
+	static ConstructorHelpers::FObjectFinder<ASingleton> temp(TEXT("Class'/Script/FPSTest.Singleton'"));
+	if (temp.Object != nullptr)
+	{
+		ProgressBarWidgetClass = temp.Object->ProgressBarWidgetClass;
+	}
+	else
+	{
+		ProgressBarWidgetClass = nullptr;
+	}
 	ScanProgressBar = nullptr;
 	BeingScanned = false;
 }

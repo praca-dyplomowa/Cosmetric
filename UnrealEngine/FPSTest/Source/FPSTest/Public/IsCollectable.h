@@ -32,7 +32,6 @@ public:
 	UPROPERTY(EditAnywhere)
 		int Materials[3];
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UAllPurposeProgressBarWidget> CollectProgressBarWidgetClass;
 
 	UPROPERTY()
