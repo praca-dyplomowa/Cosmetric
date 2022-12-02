@@ -75,6 +75,7 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 
 	GetWorld()->GetFirstPlayerController()->bEnableClickEvents = true;
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::RightMouseButton);
+	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::LeftMouseButton);
 }
 
 void AFPSTestCharacter::OnPrimaryAction()

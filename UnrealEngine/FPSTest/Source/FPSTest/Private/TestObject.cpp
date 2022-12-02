@@ -8,8 +8,8 @@ ATestObject::ATestObject()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	AActor::PrimaryActorTick.bCanEverTick = true;
-	auto cubeMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cube.Cube'")).Object;
-	auto cubeMaterial = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Wood_Walnut"));
+	auto cubeMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Game/LevelPrototyping/Meshes/SM_Cube.SM_Cube'")).Object;
+	auto cubeMaterial = LoadObject<UMaterial>(nullptr, TEXT("Material'/Game/StarterContent/Materials/M_Wood_Walnut.M_Wood_Walnut'"));
 	Cube = NewObject<UStaticMeshComponent>(this, TEXT("Root"));
 	SetRootComponent(Cube);
 	Cube->SetStaticMesh(cubeMesh);

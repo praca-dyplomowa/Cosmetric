@@ -7,7 +7,7 @@
 #include "TestObject.generated.h"
 
 UCLASS()
-class FPSTEST_API ATestObject : public AIsScannable
+class FPSTEST_API ATestObject : public AIsCollectable
 {
 	GENERATED_BODY()
 	

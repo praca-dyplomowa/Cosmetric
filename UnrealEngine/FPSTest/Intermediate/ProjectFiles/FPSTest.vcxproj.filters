@@ -92,6 +92,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\IsCollectable.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\IsDamagable.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\IsScannable.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
@@ -123,6 +126,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\IsCollectable.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\IsDamagable.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\IsScannable.h">

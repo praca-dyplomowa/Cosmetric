@@ -7,6 +7,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "../Public/Singleton.h"
 #include "UObject/UObjectGlobals.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AIsScannable::AIsScannable()
@@ -15,23 +16,25 @@ AIsScannable::AIsScannable()
 	PrimaryActorTick.bCanEverTick = true;
 	OnClicked.AddUniqueDynamic(this, &AIsScannable::OnSelectedScan);
 	OnReleased.AddUniqueDynamic(this, &AIsScannable::OnUnselectedScan);
-	static ConstructorHelpers::FObjectFinder<ASingleton> temp(TEXT("Class'/Script/FPSTest.Singleton'"));
-	if (temp.Object != nullptr)
-	{
-		ProgressBarWidgetClass = temp.Object->ProgressBarWidgetClass;
-	}
-	else
-	{
-		ProgressBarWidgetClass = nullptr;
-	}
 	ScanProgressBar = nullptr;
 	BeingScanned = false;
+	ProgressBarWidgetClass = nullptr;
 }
 
 // Called when the game starts or when spawned
 void AIsScannable::BeginPlay()
 {
 	Super::BeginPlay();
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			ProgressBarWidgetClass = single->ProgressBarWidgetClass;
+		}
+	}
 	if (ProgressBarWidgetClass)
 	{
 		APlayerController* ctr = GetWorld()->GetFirstPlayerController();

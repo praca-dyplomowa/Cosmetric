@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "IsScannable.h"
+#include "IsDamagable.h"
 #include "AllPurposeProgressBarWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "IsCollectable.generated.h"
 
 UCLASS()
-class FPSTEST_API AIsCollectable : public AIsScannable
+class FPSTEST_API AIsCollectable : public AIsDamagable
 {
 	GENERATED_BODY()
 	
@@ -31,11 +32,7 @@ public:
 	bool Collectable;
 	UPROPERTY(EditAnywhere)
 		int Materials[3];
-
-		TSubclassOf<class UAllPurposeProgressBarWidget> CollectProgressBarWidgetClass;
-
-	UPROPERTY()
-		class UAllPurposeProgressBarWidget* CollectProgressBar;
+	UAllPurposeProgressBarWidget* CollectProgressBar;
 
 	UFUNCTION()
 		void OnSelectedCollect(AActor* Target, FKey ButtonPressed);

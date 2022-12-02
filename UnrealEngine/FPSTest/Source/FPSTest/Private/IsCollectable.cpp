@@ -5,7 +5,6 @@
 #include "Components/ProgressBar.h"
 #include "../FPSTestCharacter.h"
 #include "UObject/UObjectGlobals.h"
-#include "../Public/Singleton.h"
 
 // Sets default values
 AIsCollectable::AIsCollectable()
@@ -69,7 +68,7 @@ void AIsCollectable::Tick(float DeltaTime)
 
 void AIsCollectable::OnSelectedCollect(AActor* Target, FKey ButtonPressed)
 {
-	if (EKeys::LeftMouseButton == ButtonPressed && !Action)
+	if (EKeys::LeftMouseButton == ButtonPressed && !Action && !Alive)
 	{
 		if (Collectable)
 		{
