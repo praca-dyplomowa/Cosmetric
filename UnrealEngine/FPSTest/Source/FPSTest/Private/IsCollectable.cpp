@@ -61,7 +61,7 @@ void AIsCollectable::Tick(float DeltaTime)
 				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Equipment[i] += Materials[i];
 			Action = false;
 		}
-		CollectProgressBar->SetValue(CollectTime, 3.0);
+		CollectProgressBar->SetValue(CollectTime, MaxCollectTime);
 		CollectTime -= DeltaTime;
 	}
 }
@@ -75,7 +75,7 @@ void AIsCollectable::OnSelectedCollect(AActor* Target, FKey ButtonPressed)
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
 			CollectProgressBar->SetVisibility(ESlateVisibility::Visible);
 			BeingCollected = true;
-			CollectTime = 3.0;
+			CollectTime = MaxCollectTime;
 			Action = true;
 		}
 	}
