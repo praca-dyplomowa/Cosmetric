@@ -101,6 +101,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Player_HUD_Widget.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\ProgressBarWidget.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
@@ -135,6 +138,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Player_HUD_Widget.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\ProgressBarWidget.h">

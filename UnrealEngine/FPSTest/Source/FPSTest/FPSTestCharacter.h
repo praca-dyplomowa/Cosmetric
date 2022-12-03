@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Public/Player_HUD_Widget.h"
+#include "Blueprint/UserWidget.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;
@@ -87,6 +89,18 @@ public:
 	bool Movement_Flag;
 	//Catalog
 	TArray<FString> Catalog;
-	int Equipment[3];
+	float Equipment[3];
+
+	TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
+
+	UPROPERTY()
+		class UPlayer_HUD_Widget* HUD;
+
+	//Stats
+	float Health;
+	float Hunger;
+	float Temperature;
+
+	void EAT();
 };
 
