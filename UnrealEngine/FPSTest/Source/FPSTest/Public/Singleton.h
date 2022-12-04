@@ -26,4 +26,6 @@ public:
 		TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class UInGameMenu> PauseClass;
 };

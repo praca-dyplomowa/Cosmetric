@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Public/Player_HUD_Widget.h"
 #include "Blueprint/UserWidget.h"
+#include "Public/InGameMenu.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;
@@ -92,9 +93,13 @@ public:
 	float Equipment[3];
 
 	TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
+	TSubclassOf<class UInGameMenu> PauseClass;
 
 	UPROPERTY()
 		class UPlayer_HUD_Widget* HUD;
+
+	UPROPERTY()
+		class UInGameMenu* PauseMenu;
 
 	//Stats
 	float Health;
@@ -104,5 +109,7 @@ public:
 	void EAT();
 
 	bool menuing;
+
+	void EnterMenu();
 };
 

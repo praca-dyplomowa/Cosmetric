@@ -40,6 +40,8 @@ AFPSTestCharacter::AFPSTestCharacter()
 	Mesh1P->SetRelativeLocation(FVector(-0.5f, -4.4f, -155.7f));
 	HUD = nullptr;
 	HUDClass = nullptr;
+	PauseClass = nullptr;
+	PauseMenu = nullptr;
 	Health = 100.0;
 	Hunger = 100.0;
 	Equipment[0] = 100.0;
@@ -58,6 +60,7 @@ void AFPSTestCharacter::BeginPlay()
 		if (single)
 		{
 			HUDClass = single->HUDClass;
+			PauseClass = single->PauseClass;
 		}
 	}
 	if (HUDClass)
@@ -72,6 +75,14 @@ void AFPSTestCharacter::BeginPlay()
 		HUD->SetHunger(100.0);
 		HUD->SetHunger(100.0);
 		HUD->SetVisibility(ESlateVisibility::Visible);
+	}
+	if (PauseClass)
+	{
+		APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+		check(ctr);
+		PauseMenu = CreateWidget<UInGameMenu>(ctr, PauseClass);
+		check(PauseMenu);
+		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
 
@@ -92,6 +103,8 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAction("SecondaryAction", IE_Pressed, this, &AFPSTestCharacter::OnPrimaryAction);
 
 	PlayerInputComponent->BindAction("EAT", IE_Pressed, this, &AFPSTestCharacter::EAT);
+
+	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &AFPSTestCharacter::EnterMenu);
 
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
@@ -151,6 +164,14 @@ void AFPSTestCharacter::EAT()
 			Equipment[0] = 0.0;
 		}
 	}
+}
+
+void AFPSTestCharacter::EnterMenu()
+{
+	this->menuing = true;
+	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+	if (PauseMenu)
+		PauseMenu->SetVisibility(ESlateVisibility::Visible);
 }
 
 void AFPSTestCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
