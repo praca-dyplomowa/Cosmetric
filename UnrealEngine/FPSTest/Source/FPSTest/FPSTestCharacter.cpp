@@ -242,10 +242,13 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 	{
 		Health -= DeltaTime;
 	}
-	HUD->SetHealth(Health);
-	HUD->SetHunger(Hunger);
-	HUD->SetFood(Equipment[0]);
-	HUD->SetTemp(Temperature);
+	if (HUD)
+	{
+		HUD->SetHealth(Health);
+		HUD->SetHunger(Hunger);
+		HUD->SetFood(Equipment[0]);
+		HUD->SetTemp(Temperature);
+	}
 }
 
 bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)

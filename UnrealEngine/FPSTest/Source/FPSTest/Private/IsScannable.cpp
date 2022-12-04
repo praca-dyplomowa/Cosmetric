@@ -68,7 +68,10 @@ void AIsScannable::Tick(float DeltaTime)
 		{
 			BeingScanned = false;
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
-			ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+			if (ScanProgressBar)
+			{
+				ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+			}
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Add(Name);
 			Action = false;
 		}
@@ -84,7 +87,10 @@ void AIsScannable::OnSelectedScan(AActor* Target, FKey ButtonPressed)
 		if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Contains(Name)))
 		{
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
-			ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
+			if (ScanProgressBar)
+			{
+				ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
+			}
 			BeingScanned = true;
 			ScanTime = 5.0;
 			Action = true;
@@ -97,7 +103,10 @@ void AIsScannable::OnUnselectedScan(AActor* Target, FKey ButtonPressed)
 	if (EKeys::RightMouseButton == ButtonPressed && BeingScanned)
 	{
 		((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
-		ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+		if (ScanProgressBar)
+		{
+			ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+		}
 		BeingScanned = false;
 		Action = false;
 	}
