@@ -111,6 +111,7 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	GetWorld()->GetFirstPlayerController()->bEnableClickEvents = true;
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::RightMouseButton);
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::LeftMouseButton);
+	menuing = true;
 }
 
 void AFPSTestCharacter::OnPrimaryAction()
@@ -235,19 +236,22 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	int32 x, y;
-	GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
-	GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
-	Hunger -= DeltaTime;
-	if (0.0 >= Hunger)
+	if (!menuing)
 	{
-		Health -= DeltaTime;
-	}
-	if (HUD)
-	{
-		HUD->SetHealth(Health);
-		HUD->SetHunger(Hunger);
-		HUD->SetFood(Equipment[0]);
-		HUD->SetTemp(Temperature);
+		GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
+		GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
+		Hunger -= DeltaTime;
+		if (0.0 >= Hunger)
+		{
+			Health -= DeltaTime;
+		}
+		if (HUD)
+		{
+			HUD->SetHealth(Health);
+			HUD->SetHunger(Hunger);
+			HUD->SetFood(Equipment[0]);
+			HUD->SetTemp(Temperature);
+		}
 	}
 }
 

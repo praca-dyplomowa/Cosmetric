@@ -102,5 +102,7 @@ public:
 	float Temperature;
 
 	void EAT();
+
+	bool menuing;
 };
 

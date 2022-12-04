@@ -2,6 +2,7 @@
 
 
 #include "Singleton.h"
+#include "../FPSTestCharacter.h"
 
 // Sets default values
 ASingleton::ASingleton()
@@ -15,7 +16,7 @@ ASingleton::ASingleton()
 void ASingleton::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->menuing = false;
 }
 
 // Called every frame
