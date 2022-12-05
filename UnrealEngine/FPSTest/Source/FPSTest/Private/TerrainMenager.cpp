@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TerrainMenager.h"
+#include "Kismet/GameplayStatics.h"
 
 ATerrainMenager::ATerrainMenager()
 {
@@ -9,6 +10,7 @@ ATerrainMenager::ATerrainMenager()
 
 void ATerrainMenager::Move(FVector2D NewCenter)
 {
+	//GetWorld()->GetGameInstance()->
 	FVector2D dCenter = FVector2D(
 		NewCenter.X - CenterRegion.X,
 		NewCenter.Y - CenterRegion.Y

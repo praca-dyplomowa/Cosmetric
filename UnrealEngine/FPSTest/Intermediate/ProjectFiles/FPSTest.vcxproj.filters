@@ -101,6 +101,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\IsScannable.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\MyGameInstance.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
@@ -141,6 +144,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\IsScannable.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\MyGameInstance.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">

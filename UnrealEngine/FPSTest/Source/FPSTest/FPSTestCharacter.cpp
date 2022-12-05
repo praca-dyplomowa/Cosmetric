@@ -11,6 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Public/Player_HUD_Widget.h"
 #include "GameFramework/InputSettings.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFPSTestCharacter
@@ -40,8 +41,8 @@ AFPSTestCharacter::AFPSTestCharacter()
 	Mesh1P->SetRelativeLocation(FVector(-0.5f, -4.4f, -155.7f));
 	HUD = nullptr;
 	HUDClass = nullptr;
-	PauseClass = nullptr;
-	PauseMenu = nullptr;
+	//PauseClass = nullptr;
+	//PauseMenu = nullptr;
 	Health = 100.0;
 	Hunger = 100.0;
 	Equipment[0] = 100.0;
@@ -52,6 +53,8 @@ void AFPSTestCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+	check(ctr);
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
 	for (AActor* Singleton : ActorsToFind)
@@ -65,8 +68,6 @@ void AFPSTestCharacter::BeginPlay()
 	}
 	if (HUDClass)
 	{
-		APlayerController* ctr = GetWorld()->GetFirstPlayerController();
-		check(ctr);
 		HUD = CreateWidget<UPlayer_HUD_Widget>(ctr, HUDClass);
 		check(HUD);
 		HUD->AddToPlayerScreen();
@@ -78,10 +79,9 @@ void AFPSTestCharacter::BeginPlay()
 	}
 	if (PauseClass)
 	{
-		APlayerController* ctr = GetWorld()->GetFirstPlayerController();
-		check(ctr);
 		PauseMenu = CreateWidget<UInGameMenu>(ctr, PauseClass);
 		check(PauseMenu);
+		PauseMenu->AddToPlayerScreen();
 		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
@@ -168,10 +168,22 @@ void AFPSTestCharacter::EAT()
 
 void AFPSTestCharacter::EnterMenu()
 {
-	this->menuing = true;
-	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
-	if (PauseMenu)
-		PauseMenu->SetVisibility(ESlateVisibility::Visible);
+	if (!menuing)
+	{
+		this->menuing = true;
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+		if (PauseMenu)
+			PauseMenu->SetVisibility(ESlateVisibility::Visible);
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+	}
+	else
+	{
+		this->menuing = false;
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
+		if (PauseMenu)
+			PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+	}
 }
 
 void AFPSTestCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
