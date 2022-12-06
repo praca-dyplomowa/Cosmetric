@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TreeManager.h"
 #include "GameFramework/Actor.h"
 #include "Terrain.generated.h"
 
@@ -21,8 +22,9 @@ public:
 	int Permutation[256];
 
 	ATerrain();
-	void Initialize(int p[]);
-
+	void Initialize(int p[], int seed);
+	virtual void OnConstruction(const FTransform& transform) override;
+	virtual void Destroyed() override;
 protected:
 	virtual void BeginPlay() override;
 
@@ -31,6 +33,7 @@ private:
 	TArray<FVector> Vertices;
 	TArray<int> Triangles;
 	TArray<FVector2D> UV0;
+	UTreeManager* TreeManager;
 	
 	void CreateVertices();
 
