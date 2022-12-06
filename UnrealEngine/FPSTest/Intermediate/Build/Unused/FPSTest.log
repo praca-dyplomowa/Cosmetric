@@ -1,57 +1,62 @@
 ﻿  Cleaning FPSTestEditor and UnrealHeaderTool binaries...
   Using bundled DotNet SDK
-  Log file: C:\Users\Mati\AppData\Local\UnrealBuildTool\Log.txt
+  Log file: C:\Users\macie\AppData\Local\UnrealBuildTool\Log.txt
   Creating makefile for FPSTestEditor (no existing makefile)
   Parsing headers for FPSTestEditor
-    Running UnrealHeaderTool "D:\GitHub\gra--generowanie__proceduralne\UnrealEngine\FPSTest\FPSTest.uproject" "D:\GitHub\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\FPSTestEditor\Development\FPSTestEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\Mati\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
-  Reflection code generated for FPSTestEditor in 5.2044168 seconds
+    Running UnrealHeaderTool "D:\Project\gra--generowanie__proceduralne\UnrealEngine\FPSTest\FPSTest.uproject" "D:\Project\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\FPSTestEditor\DebugGame\FPSTestEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\macie\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
+  Reflection code generated for FPSTestEditor in 5,3921634 seconds
   Building FPSTestEditor...
-  Using Visual Studio 2022 14.34.31933 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933) and Windows 10.0.18362.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-  [Adaptive Build] Excluded from FPSTest unity file: AllPurposeProgressBarWidget.cpp, GenericTree.cpp, IsActionable.cpp, IsCollectable.cpp, IsScannable.cpp, PerlinNoise.cpp, ProgressBarWidget.cpp, SpruceLikeTree.cpp, Terrain.cpp, TerrainMenager.cpp, TestObject.cpp, TreeManager.cpp, FPSTest.cpp, FPSTestCharacter.cpp, FPSTestGameMode.cpp, FPSTestProjectile.cpp, TP_PickUpComponent.cpp, TP_WeaponComponent.cpp
-  Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
-    Executing up to 6 processes, one per physical core
-  Building 40 actions with 6 processes...
-  [1/40] Resource Default.rc2
-  [2/40] Compile SharedPCH.Engine.ShadowErrors.cpp
-  [3/40] Compile TP_WeaponComponent.gen.cpp
-  [4/40] Compile PerlinNoise.cpp
-  [5/40] Compile FPSTestGameMode.cpp
-  [6/40] Compile GenericTree.cpp
-  [7/40] Compile FPSTestGameMode.gen.cpp
-  [8/40] Compile SpruceLikeTree.cpp
-  [9/40] Compile TP_PickUpComponent.gen.cpp
-  [10/40] Compile AllPurposeProgressBarWidget.cpp
-  [11/40] Compile IsScannable.cpp
-  [12/40] Compile FPSTest.cpp
-  [13/40] Compile FPSTestProjectile.cpp
-  [14/40] Compile FPSTest.init.gen.cpp
-  [15/40] Compile TerrainMenager.cpp
-  [16/40] Compile TP_WeaponComponent.cpp
-  [17/40] Compile FPSTestCharacter.cpp
-  [18/40] Compile IsCollectable.cpp
-  [19/40] Compile SpruceLikeTree.gen.cpp
-  [20/40] Compile IsActionable.cpp
-  [21/40] Compile FPSTestCharacter.gen.cpp
-  [22/40] Compile TerrainMenager.gen.cpp
-  [23/40] Compile Terrain.cpp
-  [24/40] Compile IsActionable.gen.cpp
-  [25/40] Compile Terrain.gen.cpp
-  [26/40] Compile TP_PickUpComponent.cpp
-  [27/40] Compile ProgressBarWidget.cpp
-  [28/40] Compile AllPurposeProgressBarWidget.gen.cpp
-  [29/40] Compile TreeManager.cpp
-  [30/40] Compile FPSTestProjectile.gen.cpp
-  [31/40] Compile ProgressBarWidget.gen.cpp
-  [32/40] Compile IsScannable.gen.cpp
-  [33/40] Compile TreeManager.gen.cpp
-  [34/40] Compile TestObject.cpp
-  [35/40] Compile GenericTree.gen.cpp
-  [36/40] Compile TestObject.gen.cpp
-  [37/40] Compile IsCollectable.gen.cpp
-  [38/40] Link UnrealEditor-FPSTest.lib
-     Creating library D:\GitHub\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\Development\FPSTest\UnrealEditor-FPSTest.lib and object D:\GitHub\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\Development\FPSTest\UnrealEditor-FPSTest.exp
-  [39/40] Link UnrealEditor-FPSTest.dll
-     Creating library D:\GitHub\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\Development\FPSTest\UnrealEditor-FPSTest.suppressed.lib and object D:\GitHub\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\Development\FPSTest\UnrealEditor-FPSTest.suppressed.exp
-  [40/40] WriteMetadata FPSTestEditor.target
-  Total time in Parallel executor: 59.70 seconds
-  Total execution time: 79.97 seconds
+  Using Visual Studio 2022 14.34.31935 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933) and Windows 10.0.22000.0 SDK (D:\Windows Kits\10).
+  [Adaptive Build] Excluded from FPSTest unity file: AllPurposeProgressBarWidget.cpp, GenericTree.cpp, IsActionable.cpp, IsCollectable.cpp, IsDamagable.cpp, IsScannable.cpp, PerlinNoise.cpp, ProgressBarWidget.cpp, Singleton.cpp, SpruceLikeTree.cpp, Terrain.cpp, TerrainMenager.cpp, TestObject.cpp, TreeManager.cpp, FPSTest.cpp, FPSTestCharacter.cpp, FPSTestGameMode.cpp, FPSTestProjectile.cpp, TP_PickUpComponent.cpp, TP_WeaponComponent.cpp
+  Determining max actions to execute in parallel (4 physical cores, 8 logical cores)
+    Executing up to 4 processes, one per physical core
+    Requested 1,5 GB free memory per action, 1,41 GB available: limiting max parallel actions to 1
+  Building 44 actions with 1 process...
+  [1/44] Compile SharedPCH.Engine.NonOptimized.ShadowErrors.cpp
+  [2/44] Compile FPSTestCharacter.cpp
+  [3/44] Compile TP_PickUpComponent.cpp
+  [4/44] Compile FPSTestCharacter.gen.cpp
+  [5/44] Compile Terrain.gen.cpp
+  [6/44] Compile IsActionable.gen.cpp
+  [7/44] Compile IsDamagable.gen.cpp
+  [8/44] Compile TestObject.cpp
+  [9/44] Compile IsActionable.cpp
+  [10/44] Compile IsDamagable.cpp
+  [11/44] Compile GenericTree.cpp
+  [12/44] Compile ProgressBarWidget.cpp
+  [13/44] Compile SpruceLikeTree.gen.cpp
+  [14/44] Compile Singleton.gen.cpp
+  [15/44] Compile FPSTestGameMode.cpp
+  [16/44] Compile TestObject.gen.cpp
+  [17/44] Compile TerrainMenager.cpp
+  [18/44] Compile TP_WeaponComponent.gen.cpp
+  [19/44] Compile FPSTestProjectile.cpp
+  [20/44] Compile IsCollectable.gen.cpp
+  [21/44] Compile TP_PickUpComponent.gen.cpp
+  [22/44] Compile TreeManager.cpp
+  [23/44] Compile TP_WeaponComponent.cpp
+  [24/44] Compile TerrainMenager.gen.cpp
+  [25/44] Compile FPSTestGameMode.gen.cpp
+  [26/44] Compile SpruceLikeTree.cpp
+  [27/44] Compile Singleton.cpp
+  [28/44] Compile AllPurposeProgressBarWidget.cpp
+  [29/44] Compile PerlinNoise.cpp
+  [30/44] Compile IsScannable.gen.cpp
+  [31/44] Compile FPSTestProjectile.gen.cpp
+  [32/44] Compile FPSTest.cpp
+  [33/44] Compile AllPurposeProgressBarWidget.gen.cpp
+  [34/44] Compile FPSTest.init.gen.cpp
+  [35/44] Compile IsCollectable.cpp
+  [36/44] Compile IsScannable.cpp
+  [37/44] Compile GenericTree.gen.cpp
+  [38/44] Compile Terrain.cpp
+  [39/44] Compile TreeManager.gen.cpp
+  [40/44] Resource Default.rc2
+  [41/44] Compile ProgressBarWidget.gen.cpp
+  [42/44] Link UnrealEditor-FPSTest-Win64-DebugGame.lib
+     Creating library D:\Project\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\DebugGame\FPSTest\UnrealEditor-FPSTest-Win64-DebugGame.lib and object D:\Project\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\DebugGame\FPSTest\UnrealEditor-FPSTest-Win64-DebugGame.exp
+  [43/44] Link UnrealEditor-FPSTest-Win64-DebugGame.dll
+     Creating library D:\Project\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\DebugGame\FPSTest\UnrealEditor-FPSTest-Win64-DebugGame.suppressed.lib and object D:\Project\gra--generowanie__proceduralne\UnrealEngine\FPSTest\Intermediate\Build\Win64\UnrealEditor\DebugGame\FPSTest\UnrealEditor-FPSTest-Win64-DebugGame.suppressed.exp
+  [44/44] WriteMetadata FPSTestEditor-Win64-DebugGame.target
+  Total time in Parallel executor: 200,44 seconds
+  Total execution time: 222,17 seconds

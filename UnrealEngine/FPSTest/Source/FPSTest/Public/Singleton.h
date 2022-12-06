@@ -24,4 +24,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
+	UPROPERTY(EditAnywhere)
+		int Seed;
 };
