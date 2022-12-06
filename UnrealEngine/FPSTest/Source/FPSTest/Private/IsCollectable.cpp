@@ -13,7 +13,6 @@ AIsCollectable::AIsCollectable()
 	PrimaryActorTick.bCanEverTick = true;
 	OnClicked.AddUniqueDynamic(this, &AIsCollectable::OnSelectedCollect);
 	OnReleased.AddUniqueDynamic(this, &AIsCollectable::OnUnselectedCollect);
-	ProgressBarWidgetClass = nullptr;
 	CollectProgressBar = nullptr;
 	BeingCollected = false;
 	Collectable = true;
@@ -23,7 +22,7 @@ AIsCollectable::AIsCollectable()
 void AIsCollectable::BeginPlay()
 {
 	Super::BeginPlay();
-	if (CollectProgressBarWidgetClass)
+	if (ProgressBarWidgetClass)
 	{
 		APlayerController* ctr = GetWorld()->GetFirstPlayerController();
 		check(ctr);
@@ -69,7 +68,7 @@ void AIsCollectable::Tick(float DeltaTime)
 
 void AIsCollectable::OnSelectedCollect(AActor* Target, FKey ButtonPressed)
 {
-	if (EKeys::LeftMouseButton == ButtonPressed && !Action)
+	if (EKeys::LeftMouseButton == ButtonPressed && !Action && !Alive)
 	{
 		if (Collectable)
 		{
