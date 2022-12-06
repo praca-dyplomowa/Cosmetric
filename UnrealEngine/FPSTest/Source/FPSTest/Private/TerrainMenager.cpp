@@ -64,6 +64,7 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 // Called when the game starts or when spawned
 void ATerrainMenager::BeginPlay()
 {
+
 	Super::BeginPlay();
 	for (int i = 0; i < 256; i++)
 	{

@@ -19,7 +19,6 @@ public:
 	static const inline double Scale = 100.0;
 	static const inline double UVScale = 1.0;
 	static const inline double Size = 20.0;
-
 	int Permutation[256];
 
 	ATerrain();
