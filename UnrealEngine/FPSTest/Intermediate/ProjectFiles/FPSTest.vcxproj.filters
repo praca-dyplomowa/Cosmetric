@@ -86,6 +86,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\AllPurposeProgressBarWidget.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\GenericTree.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\IsActionable.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
@@ -104,7 +107,7 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\ProgressBarWidget.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\Singleton.cpp">
+    <ClCompile Include="..\..\Source\FPSTest\Private\SpruceLikeTree.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\Terrain.cpp">
@@ -116,10 +119,16 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\TestObject.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\TreeManager.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSTest\Public">
       <UniqueIdentifier>{37D9D157-5106-3C45-ADFB-C7D787FD581C}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\FPSTest\Public\AllPurposeProgressBarWidget.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\GenericTree.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\IsActionable.h">
@@ -140,7 +149,7 @@
     <ClInclude Include="..\..\Source\FPSTest\Public\ProgressBarWidget.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\Singleton.h">
+    <ClInclude Include="..\..\Source\FPSTest\Public\SpruceLikeTree.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\Terrain.h">
@@ -150,6 +159,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\TestObject.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\TreeManager.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
   </ItemGroup>
