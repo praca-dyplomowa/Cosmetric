@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "MyGameInstance.h"
 #include "Singleton.generated.h"
 
 UCLASS()
@@ -26,6 +27,9 @@ public:
 		TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+
+		TSubclassOf<class UMyGameInstance> GameInstanceClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UInGameMenu> PauseClass;
 };

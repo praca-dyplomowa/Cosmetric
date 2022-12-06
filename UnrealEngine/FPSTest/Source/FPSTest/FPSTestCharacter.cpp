@@ -175,6 +175,7 @@ void AFPSTestCharacter::EnterMenu()
 		if (PauseMenu)
 			PauseMenu->SetVisibility(ESlateVisibility::Visible);
 		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(true);
 	}
 	else
 	{
@@ -183,6 +184,7 @@ void AFPSTestCharacter::EnterMenu()
 		if (PauseMenu)
 			PauseMenu->SetVisibility(ESlateVisibility::Hidden);
 		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(false);
 	}
 }
 

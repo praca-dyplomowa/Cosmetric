@@ -2,15 +2,19 @@
 
 #include "TerrainMenager.h"
 #include "Kismet/GameplayStatics.h"
+#include "../Public/Singleton.h"
+#include "../Public/MyGameInstance.h"
 
 ATerrainMenager::ATerrainMenager()
 {
+	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	this->Seed = GI->Seed;
 	PrimaryActorTick.bCanEverTick = true;
 }
 
 void ATerrainMenager::Move(FVector2D NewCenter)
 {
-	//GetWorld()->GetGameInstance()->
 	FVector2D dCenter = FVector2D(
 		NewCenter.X - CenterRegion.X,
 		NewCenter.Y - CenterRegion.Y
@@ -67,6 +71,8 @@ void ATerrainMenager::BeginPlay()
 {
 
 	Super::BeginPlay();
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("%d"), ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->Seed));
 	for (int i = 0; i < 256; i++)
 	{
 		Permutation[i] = i;

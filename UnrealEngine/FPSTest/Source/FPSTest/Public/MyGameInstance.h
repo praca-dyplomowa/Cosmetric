@@ -13,5 +13,9 @@ UCLASS()
 class FPSTEST_API UMyGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
+
+public:
+
+	int Seed;
 	
 };
