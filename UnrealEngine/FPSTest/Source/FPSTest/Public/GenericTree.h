@@ -112,7 +112,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Treetop")
 	FTreeComponentRender TreetopRender;
 	FRandomStream Stream;
-	int Seed;
+	int Seed = 0;
 
 private:
 	double InitStruct(FTreeComponentInit& init, FTreeComponentRender& render);

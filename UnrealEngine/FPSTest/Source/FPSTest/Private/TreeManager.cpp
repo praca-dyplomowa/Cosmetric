@@ -2,9 +2,12 @@
 
 
 #include "TreeManager.h"
-#include "SpruceLikeTree.h"
-#include "Math/RandomStream.h"
+#include "Singleton.h"
 #include "PerlinNoise.h"
+#include "SpruceLikeTree.h"
+
+#include "Math/RandomStream.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 UTreeManager::UTreeManager() {
@@ -18,8 +21,19 @@ UClass* UTreeManager::treeClasses[] = {
 
 void UTreeManager::Initialize(int(&permutation)[256], FVector terrainPosition, FVector2D terrainSize)
 {
+	int seed = 0;
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			seed = single->Seed;
+		}
+	}
 	auto stream = FRandomStream(
-		0 // Seed
+		seed
 		+ terrainPosition.X
 		+ terrainPosition.Y
 		+ terrainPosition.Z

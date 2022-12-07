@@ -22,7 +22,7 @@ public:
 	int Permutation[256];
 
 	ATerrain();
-	void Initialize(int p[], int seed);
+	void Initialize(int p[]);
 	virtual void OnConstruction(const FTransform& transform) override;
 	virtual void Destroyed() override;
 protected:
