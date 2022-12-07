@@ -7,16 +7,6 @@
 
 ATerrainMenager::ATerrainMenager()
 {
-	TArray<AActor*> ActorsToFind;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	for (AActor* Singleton : ActorsToFind)
-	{
-		ASingleton* single = Cast<ASingleton>(Singleton);
-		if (single)
-		{
-			Seed = single->Seed;
-		}
-	}
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -27,6 +17,27 @@ void ATerrainMenager::init()
 		Permutation[i] = i;
 	}
 	std::shuffle(&Permutation[0], &Permutation[255], std::default_random_engine(Seed));
+
+	CenterRegion = FVector2D(0, 0);
+	Size = 2 * RenderDistance + 1;
+	RenderedTerrain = new ATerrain * *[Size];
+	for (int y = 0; y < Size; y++)
+	{
+		RenderedTerrain[y] = new ATerrain * [Size];
+		for (int x = 0; x < Size; x++)
+		{
+			FTransform pos = FTransform(FVector(
+				(x - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
+				(y - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
+				0)
+			);
+			RenderedTerrain[y][x] = GetWorld()->SpawnActorDeferred<ATerrain>(
+				ATerrain::StaticClass(),
+				pos);
+			RenderedTerrain[y][x]->Initialize(Permutation);
+			RenderedTerrain[y][x]->FinishSpawning(pos);
+		}
+	}
 }
 
 void ATerrainMenager::Move(FVector2D NewCenter)
@@ -87,26 +98,6 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 void ATerrainMenager::BeginPlay()
 {
 	Super::BeginPlay();
-	CenterRegion = FVector2D(0, 0);
-	Size = 2 * RenderDistance + 1;
-	RenderedTerrain = new ATerrain ** [Size];
-	for (int y = 0; y < Size; y++)
-	{
-		RenderedTerrain[y] = new ATerrain * [Size];
-		for (int x = 0; x < Size; x++)
-		{
-			FTransform pos = FTransform(FVector(
-				(x - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
-				(y - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
-				0)
-			);
-			RenderedTerrain[y][x] = GetWorld()->SpawnActorDeferred<ATerrain>(
-				ATerrain::StaticClass(),
-				pos);
-			RenderedTerrain[y][x]->Initialize(Permutation);
-			RenderedTerrain[y][x]->FinishSpawning(pos);
-		}
-	}
 }
 
 // Called every frame

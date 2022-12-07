@@ -54,8 +54,11 @@ void UTreeManager::Initialize(int(&permutation)[256], FVector terrainPosition, F
 
 void UTreeManager::DestroyTrees()
 {
-	for (AGenericTree* tree : Trees)
-		tree->Destroy();
-	Trees.Empty();
+	if (!Trees.IsEmpty())
+	{
+		for (AGenericTree* tree : Trees)
+			tree->Destroy();
+		Trees.Empty();
+	}
 }
 
