@@ -22,7 +22,8 @@ public:
 
 	UPROPERTY(EditAnywhere, meta=(ClampMin="1"))
 		int RenderDistance;
-	UPROPERTY(EditAnywhere, meta = (ClampMin = "0"))
+
+	UPROPERTY(EditAnywhere)
 		int Seed;
 
 	void Move(FVector2D NewCenter);
