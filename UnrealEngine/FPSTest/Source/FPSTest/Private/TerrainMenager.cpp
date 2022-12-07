@@ -7,7 +7,26 @@
 
 ATerrainMenager::ATerrainMenager()
 {
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			Seed = single->Seed;
+		}
+	}
 	PrimaryActorTick.bCanEverTick = true;
+}
+
+void ATerrainMenager::init()
+{
+	for (int i = 0; i < 256; i++)
+	{
+		Permutation[i] = i;
+	}
+	std::shuffle(&Permutation[0], &Permutation[255], std::default_random_engine(Seed));
 }
 
 void ATerrainMenager::Move(FVector2D NewCenter)
@@ -67,22 +86,7 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 // Called when the game starts or when spawned
 void ATerrainMenager::BeginPlay()
 {
-	TArray<AActor*> ActorsToFind;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	for (AActor* Singleton : ActorsToFind)
-	{
-		ASingleton* single = Cast<ASingleton>(Singleton);
-		if (single)
-		{
-			Seed = single->Seed;
-		}
-	}
 	Super::BeginPlay();
-	for (int i = 0; i < 256; i++)
-	{
-		Permutation[i] = i;
-	}
-	std::shuffle(&Permutation[0], &Permutation[255], std::default_random_engine(Seed));
 	CenterRegion = FVector2D(0, 0);
 	Size = 2 * RenderDistance + 1;
 	RenderedTerrain = new ATerrain ** [Size];

@@ -23,8 +23,11 @@ public:
 	UPROPERTY(EditAnywhere, meta=(ClampMin="1"))
 		int RenderDistance;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Seed;
+	UFUNCTION(BlueprintCallable)
+		void init();
+
 
 	void Move(FVector2D NewCenter);
 
