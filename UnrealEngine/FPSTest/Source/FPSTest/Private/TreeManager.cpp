@@ -19,6 +19,23 @@ UClass* UTreeManager::treeClasses[] = {
 	ASpruceLikeTree::StaticClass()
 };
 
+UClass* UTreeManager::getClass(int seed)
+{
+	auto stream = FRandomStream(
+		seed
+	);
+	int i = stream.RandRange(0, 0);
+	switch (i)
+	{
+	case 0:
+		return ASpruceLikeTree::StaticClass();
+	default:
+		break;
+	}
+	return nullptr;
+}
+
+
 void UTreeManager::Initialize(int(&permutation)[256], FVector terrainPosition, FVector2D terrainSize)
 {
 	int seed = 0;
@@ -45,8 +62,15 @@ void UTreeManager::Initialize(int(&permutation)[256], FVector terrainPosition, F
 		position.Y *= terrainSize.Y;
 		position += terrainPosition;
 		position.Z = PerlinNoise::Noise(position.X / terrainSize.X, position.Y / terrainSize.Y, permutation) * 500;
-		AGenericTree* tree = GetWorld()->SpawnActor<AGenericTree>(treeClasses[stream.RandRange(0, 0)], FTransform(position));
+		UClass* boop = getClass(seed
+			+ terrainPosition.X
+			+ terrainPosition.Y
+			+ terrainPosition.Z);
+		AGenericTree* tree = GetWorld()->SpawnActor<AGenericTree>(boop, FTransform(position));
 		if (tree) {
+			tree->Materials[0] = stream.GetFraction() * 20;
+			tree->Materials[1] = stream.GetFraction() * 30;
+			tree->Name = FString("Drzewo");
 			Trees.Add(tree);
 		}
 	}

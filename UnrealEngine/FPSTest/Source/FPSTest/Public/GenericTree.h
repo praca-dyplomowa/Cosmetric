@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/InstancedStaticMeshComponent.h"
+#include "IsCollectable.h"
 #include "GenericTree.generated.h"
 
 USTRUCT(BlueprintType)
@@ -66,7 +67,7 @@ struct FTrunkRenderVariables : public FTreeComponentRenderVariables {
 };
 
 UCLASS()
-class FPSTEST_API AGenericTree : public AActor
+class FPSTEST_API AGenericTree : public AIsCollectable
 {
 	GENERATED_BODY()
 	
@@ -98,6 +99,8 @@ protected:
 	double GetMeshOffset(UStaticMesh* staticMesh, double size);
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	virtual void Tick(float DeltaTime) override;
 	virtual void RenderUp(FTreeComponentRender &generatedStruct, FVector from = FVector(0,0,0), double Offset = 1);
 	virtual void RenderTrunk(double offset);
 	virtual void RenderTreetop(double offset);

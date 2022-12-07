@@ -108,6 +108,16 @@ void AGenericTree::BeginPlay()
 	}
 }
 
+void AGenericTree::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+}
+
+void AGenericTree::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
 void AGenericTree::RenderUp(FTreeComponentRender& generatedStruct, FVector from, double Offset)
 {
 	if (generatedStruct.Instanced &&

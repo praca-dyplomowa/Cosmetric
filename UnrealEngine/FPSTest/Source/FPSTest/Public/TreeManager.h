@@ -20,4 +20,5 @@ public:
 private:	
 	TArray<AGenericTree*> Trees;
 	static UClass* treeClasses[];
+	UClass* getClass(int seed);
 };

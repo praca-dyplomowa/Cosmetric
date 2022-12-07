@@ -275,10 +275,13 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 	{
 		GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
 		GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
-		Hunger -= DeltaTime;
 		if (0.0 >= Hunger)
 		{
 			Health -= DeltaTime;
+		}
+		else
+		{
+			Hunger -= DeltaTime;
 		}
 		if (HUD)
 		{
