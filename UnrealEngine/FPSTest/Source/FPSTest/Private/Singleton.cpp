@@ -3,7 +3,7 @@
 
 #include "Singleton.h"
 #include "../FPSTestCharacter.h"
-#include "../Public/MyGameInstance.h"
+#include "GUI/MyGameInstance.h"
 
 // Sets default values
 ASingleton::ASingleton()

@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Terrain.h"
-#include "SpruceLikeTree.h"
 #include <cmath>
 #include <random>
 #include <algorithm>

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "IsActionable.h"
-#include "AllPurposeProgressBarWidget.h"
+#include "HUD/AllPurposeProgressBarWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "IsScannable.generated.h"
 

@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/InstancedStaticMeshComponent.h"
-#include "IsCollectable.h"
+#include "Interfaces/IsCollectable.h"
 #include "GenericTree.generated.h"
 
 USTRUCT(BlueprintType)

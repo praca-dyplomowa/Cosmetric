@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Public/Player_HUD_Widget.h"
+#include "Public/HUD/Player_HUD_Widget.h"
 #include "Blueprint/UserWidget.h"
-#include "Public/InGameMenu.h"
+#include "Public/GUI/InGameMenu.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;

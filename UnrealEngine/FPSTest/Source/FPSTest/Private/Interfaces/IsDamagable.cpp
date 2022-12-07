@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "IsDamagable.h"
+#include "Interfaces/IsDamagable.h"
 #include "UObject/UObjectGlobals.h"
 
 AIsDamagable::AIsDamagable()

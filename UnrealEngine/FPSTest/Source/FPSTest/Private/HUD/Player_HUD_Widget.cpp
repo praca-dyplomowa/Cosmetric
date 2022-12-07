@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Player_HUD_Widget.h"
+#include "HUD/Player_HUD_Widget.h"
 
 void UPlayer_HUD_Widget::SetHealth(float val)
 {

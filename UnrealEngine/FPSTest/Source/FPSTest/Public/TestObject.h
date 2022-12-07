@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "IsCollectable.h"
+#include "Interfaces/IsCollectable.h"
 #include "TestObject.generated.h"
 
 UCLASS()

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TreeManager.h"
+#include "Tree/TreeManager.h"
 #include "GameFramework/Actor.h"
 #include "Terrain.generated.h"
 

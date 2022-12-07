@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "IsScannable.h"
+#include "Interfaces/IsScannable.h"
 #include "Components/ProgressBar.h"
 #include "../FPSTestCharacter.h"
 #include "UObject/ConstructorHelpers.h"
-#include "../Public/Singleton.h"
+#include "Singleton.h"
 #include "UObject/UObjectGlobals.h"
 #include "Kismet/GameplayStatics.h"
 

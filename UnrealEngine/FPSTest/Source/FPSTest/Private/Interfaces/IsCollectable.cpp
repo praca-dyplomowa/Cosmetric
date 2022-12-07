@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "IsCollectable.h"
+#include "Interfaces/IsCollectable.h"
 #include "Components/ProgressBar.h"
 #include "../FPSTestCharacter.h"
 #include "UObject/UObjectGlobals.h"

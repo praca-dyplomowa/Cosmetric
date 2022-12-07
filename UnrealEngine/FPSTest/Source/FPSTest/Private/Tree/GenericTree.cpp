@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GenericTree.h"
+#include "Tree/GenericTree.h"
 #include "Singleton.h"
 
 #include "Math/RandomStream.h"
@@ -186,6 +186,8 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 		+ GetActorLocation().Y
 		+ GetActorLocation().Z
 	);
+	Materials[0] = Stream.GetFraction() * 20;
+	Materials[1] = Stream.GetFraction() * 30;
 	RenderTrunk(InitStruct(TrunkInit, TrunkRender));
 	RenderTreetop(InitStruct(TreetopInit, TreetopRender));
 	RootComponent->SetMobility(EComponentMobility::Movable);

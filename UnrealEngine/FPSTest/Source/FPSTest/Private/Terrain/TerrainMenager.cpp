@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "TerrainMenager.h"
+#include "Terrain/TerrainMenager.h"
 #include "Singleton.h"
 
 #include "Kismet/GameplayStatics.h"

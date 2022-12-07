@@ -83,110 +83,140 @@
     <Filter Include="Source\FPSTest\Private">
       <UniqueIdentifier>{8EDE2DCE-0F4E-3AA1-9E11-018204DF3801}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\FPSTest\Private\AllPurposeProgressBarWidget.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\GenericTree.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\InGameMenu.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\IsActionable.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\IsCollectable.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\IsDamagable.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\IsScannable.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\MyGameInstance.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\Player_HUD_Widget.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\ProgressBarWidget.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\Singleton.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\SpruceLikeTree.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\Terrain.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\TerrainMenager.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\TestObject.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\TreeManager.cpp">
-      <Filter>Source\FPSTest\Private</Filter>
+    <Filter Include="Source\FPSTest\Private\GUI">
+      <UniqueIdentifier>{08ACD07F-F1AA-3E8F-80FC-FCE7265BD02B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSTest\Private\GUI\InGameMenu.cpp">
+      <Filter>Source\FPSTest\Private\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\GUI\MyGameInstance.cpp">
+      <Filter>Source\FPSTest\Private\GUI</Filter>
+    </ClCompile>
+    <Filter Include="Source\FPSTest\Private\HUD">
+      <UniqueIdentifier>{B19A6C8F-7406-3194-84F2-5944D0FE1EFC}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSTest\Private\HUD\AllPurposeProgressBarWidget.cpp">
+      <Filter>Source\FPSTest\Private\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\HUD\Player_HUD_Widget.cpp">
+      <Filter>Source\FPSTest\Private\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\HUD\ProgressBarWidget.cpp">
+      <Filter>Source\FPSTest\Private\HUD</Filter>
+    </ClCompile>
+    <Filter Include="Source\FPSTest\Private\Interfaces">
+      <UniqueIdentifier>{A3D1AB97-5D19-3038-AD22-D9334B3BC53A}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Interfaces\IsActionable.cpp">
+      <Filter>Source\FPSTest\Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Interfaces\IsCollectable.cpp">
+      <Filter>Source\FPSTest\Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Interfaces\IsDamagable.cpp">
+      <Filter>Source\FPSTest\Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Interfaces\IsScannable.cpp">
+      <Filter>Source\FPSTest\Private\Interfaces</Filter>
+    </ClCompile>
+    <Filter Include="Source\FPSTest\Private\Terrain">
+      <UniqueIdentifier>{B94F15C7-2A21-3C08-99AF-07A67F8180AA}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Terrain\Terrain.cpp">
+      <Filter>Source\FPSTest\Private\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Terrain\TerrainMenager.cpp">
+      <Filter>Source\FPSTest\Private\Terrain</Filter>
+    </ClCompile>
+    <Filter Include="Source\FPSTest\Private\Tree">
+      <UniqueIdentifier>{A0CF6EB4-E3B1-3159-AB92-7081241B1F9D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Tree\GenericTree.cpp">
+      <Filter>Source\FPSTest\Private\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Tree\SpruceLikeTree.cpp">
+      <Filter>Source\FPSTest\Private\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Tree\TreeManager.cpp">
+      <Filter>Source\FPSTest\Private\Tree</Filter>
     </ClCompile>
     <Filter Include="Source\FPSTest\Public">
       <UniqueIdentifier>{37D9D157-5106-3C45-ADFB-C7D787FD581C}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSTest\Public\AllPurposeProgressBarWidget.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\GenericTree.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\InGameMenu.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\IsActionable.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\IsCollectable.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\IsDamagable.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\IsScannable.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\MyGameInstance.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\Player_HUD_Widget.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\ProgressBarWidget.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\Singleton.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\SpruceLikeTree.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\Terrain.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\TerrainMenager.h">
-      <Filter>Source\FPSTest\Public</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\TestObject.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\TreeManager.h">
-      <Filter>Source\FPSTest\Public</Filter>
+    <Filter Include="Source\FPSTest\Public\GUI">
+      <UniqueIdentifier>{5B4C7823-90A0-3045-948A-D5E021C9085F}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\FPSTest\Public\GUI\InGameMenu.h">
+      <Filter>Source\FPSTest\Public\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\GUI\MyGameInstance.h">
+      <Filter>Source\FPSTest\Public\GUI</Filter>
+    </ClInclude>
+    <Filter Include="Source\FPSTest\Public\HUD">
+      <UniqueIdentifier>{7A1E7EBF-5464-3FCC-956C-243568E8B9D4}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\FPSTest\Public\HUD\AllPurposeProgressBarWidget.h">
+      <Filter>Source\FPSTest\Public\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\HUD\Player_HUD_Widget.h">
+      <Filter>Source\FPSTest\Public\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\HUD\ProgressBarWidget.h">
+      <Filter>Source\FPSTest\Public\HUD</Filter>
+    </ClInclude>
+    <Filter Include="Source\FPSTest\Public\Interfaces">
+      <UniqueIdentifier>{F4D75645-1460-3163-84FE-0B6381C902FA}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Interfaces\IsActionable.h">
+      <Filter>Source\FPSTest\Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Interfaces\IsCollectable.h">
+      <Filter>Source\FPSTest\Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Interfaces\IsDamagable.h">
+      <Filter>Source\FPSTest\Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Interfaces\IsScannable.h">
+      <Filter>Source\FPSTest\Public\Interfaces</Filter>
+    </ClInclude>
+    <Filter Include="Source\FPSTest\Public\Terrain">
+      <UniqueIdentifier>{03BCCA02-DDB2-3F02-85DD-2477953D6984}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Terrain\Terrain.h">
+      <Filter>Source\FPSTest\Public\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Terrain\TerrainMenager.h">
+      <Filter>Source\FPSTest\Public\Terrain</Filter>
+    </ClInclude>
+    <Filter Include="Source\FPSTest\Public\Tree">
+      <UniqueIdentifier>{EE8CAAC6-28F2-3E21-8340-FD277785D0BC}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Tree\GenericTree.h">
+      <Filter>Source\FPSTest\Public\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Tree\SpruceLikeTree.h">
+      <Filter>Source\FPSTest\Public\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Tree\TreeManager.h">
+      <Filter>Source\FPSTest\Public\Tree</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

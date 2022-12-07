@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Terrain.h"
+#include "Terrain/Terrain.h"
 #include "ProceduralMeshComponent.h"
 #include <random>
 #include <algorithm>
 #include <cmath>
-#include "TerrainMenager.h"
+#include "Terrain/TerrainMenager.h"
 #include "PerlinNoise.h"
 
 ATerrain::ATerrain()
