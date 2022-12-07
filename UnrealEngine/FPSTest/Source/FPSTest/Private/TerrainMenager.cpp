@@ -1,9 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TerrainMenager.h"
+<<<<<<< HEAD
 #include "Kismet/GameplayStatics.h"
 #include "../Public/Singleton.h"
 #include "../Public/MyGameInstance.h"
+=======
+#include "Singleton.h"
+
+#include "Kismet/GameplayStatics.h"
+>>>>>>> master
 
 ATerrainMenager::ATerrainMenager()
 {
@@ -40,7 +46,7 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 				NewRenderedTerrain[y][x] = GetWorld()->SpawnActorDeferred<ATerrain>(
 					ATerrain::StaticClass(),
 					pos);
-				NewRenderedTerrain[y][x]->Initialize(Permutation, Seed);
+				NewRenderedTerrain[y][x]->Initialize(Permutation);
 				NewRenderedTerrain[y][x]->FinishSpawning(pos);
 			}
 		}
@@ -67,6 +73,19 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 // Called when the game starts or when spawned
 void ATerrainMenager::BeginPlay()
 {
+<<<<<<< HEAD
+=======
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			Seed = single->Seed;
+		}
+	}
+>>>>>>> master
 	Super::BeginPlay();
 	for (int i = 0; i < 256; i++)
 	{
@@ -89,7 +108,7 @@ void ATerrainMenager::BeginPlay()
 			RenderedTerrain[y][x] = GetWorld()->SpawnActorDeferred<ATerrain>(
 				ATerrain::StaticClass(),
 				pos);
-			RenderedTerrain[y][x]->Initialize(Permutation, Seed);
+			RenderedTerrain[y][x]->Initialize(Permutation);
 			RenderedTerrain[y][x]->FinishSpawning(pos);
 		}
 	}

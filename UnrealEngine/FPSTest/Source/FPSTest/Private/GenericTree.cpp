@@ -2,10 +2,14 @@
 
 
 #include "GenericTree.h"
-#include <cmath>
+#include "Singleton.h"
+
 #include "Math/RandomStream.h"
+#include "Kismet/GameplayStatics.h"
 #include "Engine/StaticMeshActor.h"
 #include "UObject/UObjectGlobals.h"
+
+#include <cmath>
 
 class UInstancedStaticMeshComponent;
 
@@ -92,6 +96,16 @@ double AGenericTree::GetMeshOffset(UStaticMesh* staticMesh, double size)
 void AGenericTree::BeginPlay()
 {
 	Super::BeginPlay();
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			Seed = single->Seed;
+		}
+	}
 }
 
 void AGenericTree::RenderUp(FTreeComponentRender& generatedStruct, FVector from, double Offset)

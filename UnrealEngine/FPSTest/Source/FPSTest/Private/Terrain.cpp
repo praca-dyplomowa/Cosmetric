@@ -20,7 +20,7 @@ ATerrain::ATerrain()
 	SetRootComponent(ProceduralMesh);
 }
 
-void ATerrain::Initialize(int p[], int seed)
+void ATerrain::Initialize(int p[])
 {
 	for (int i = 0; i < 256; i++)
 	{
