@@ -7,9 +7,6 @@
 
 ATerrainMenager::ATerrainMenager()
 {
-	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
-	UMyGameInstance* GI = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	this->Seed = GI->Seed;
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -70,10 +67,7 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 // Called when the game starts or when spawned
 void ATerrainMenager::BeginPlay()
 {
-
 	Super::BeginPlay();
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("%d"), ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->Seed));
 	for (int i = 0; i < 256; i++)
 	{
 		Permutation[i] = i;
