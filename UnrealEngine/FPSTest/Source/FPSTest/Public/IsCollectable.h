@@ -30,6 +30,7 @@ public:
 	float CollectTime;
 	bool BeingCollected;
 	bool Collectable;
+	static const inline float MaxCollectTime = 3.0;
 	UPROPERTY(EditAnywhere)
 		int Materials[3];
 	UAllPurposeProgressBarWidget* CollectProgressBar;
