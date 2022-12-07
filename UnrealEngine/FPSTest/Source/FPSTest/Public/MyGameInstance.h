@@ -3,16 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GenericTree.h"
-#include "SpruceLikeTree.generated.h"
+#include "Engine/GameInstance.h"
+#include "MyGameInstance.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class FPSTEST_API ASpruceLikeTree : public AGenericTree
+class FPSTEST_API UMyGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
+
 public:
-	ASpruceLikeTree();
+
+	int Seed;
+	
 };

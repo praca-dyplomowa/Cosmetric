@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Public/Player_HUD_Widget.h"
+#include "Blueprint/UserWidget.h"
+#include "Public/InGameMenu.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;
@@ -87,6 +90,26 @@ public:
 	bool Movement_Flag;
 	//Catalog
 	TArray<FString> Catalog;
-	int Equipment[3];
+	float Equipment[3];
+
+	TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
+	TSubclassOf<class UInGameMenu> PauseClass;
+
+	UPROPERTY()
+		class UPlayer_HUD_Widget* HUD;
+
+	UPROPERTY()
+		class UInGameMenu* PauseMenu;
+
+	//Stats
+	float Health;
+	float Hunger;
+	float Temperature;
+
+	void EAT();
+
+	bool menuing;
+
+	void EnterMenu();
 };
 

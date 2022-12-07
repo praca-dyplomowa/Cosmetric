@@ -6,7 +6,12 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "../Public/Singleton.h"
+#include "UObject/UObjectGlobals.h"
+#include "Kismet/GameplayStatics.h"
+#include "Public/Player_HUD_Widget.h"
 #include "GameFramework/InputSettings.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFPSTestCharacter
@@ -34,12 +39,51 @@ AFPSTestCharacter::AFPSTestCharacter()
 	Mesh1P->CastShadow = false;
 	Mesh1P->SetRelativeRotation(FRotator(1.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-0.5f, -4.4f, -155.7f));
+	HUD = nullptr;
+	HUDClass = nullptr;
+	//PauseClass = nullptr;
+	//PauseMenu = nullptr;
+	Health = 100.0;
+	Hunger = 100.0;
+	Equipment[0] = 100.0;
+	Temperature = 0.0;
 }
 
 void AFPSTestCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+	check(ctr);
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			HUDClass = single->HUDClass;
+			PauseClass = single->PauseClass;
+		}
+	}
+	if (HUDClass)
+	{
+		HUD = CreateWidget<UPlayer_HUD_Widget>(ctr, HUDClass);
+		check(HUD);
+		HUD->AddToPlayerScreen();
+		HUD->SetTemp(0.0);
+		HUD->SetHealth(100.0);
+		HUD->SetHunger(100.0);
+		HUD->SetHunger(100.0);
+		HUD->SetVisibility(ESlateVisibility::Visible);
+	}
+	if (PauseClass)
+	{
+		PauseMenu = CreateWidget<UInGameMenu>(ctr, PauseClass);
+		check(PauseMenu);
+		PauseMenu->AddToPlayerScreen();
+		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -57,6 +101,10 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	// Bind fire event
 	PlayerInputComponent->BindAction("PrimaryAction", IE_Pressed, this, &AFPSTestCharacter::OnPrimaryAction);
 	PlayerInputComponent->BindAction("SecondaryAction", IE_Pressed, this, &AFPSTestCharacter::OnPrimaryAction);
+
+	PlayerInputComponent->BindAction("EAT", IE_Pressed, this, &AFPSTestCharacter::EAT);
+
+	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &AFPSTestCharacter::EnterMenu);
 
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
@@ -76,12 +124,68 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	GetWorld()->GetFirstPlayerController()->bEnableClickEvents = true;
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::RightMouseButton);
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::LeftMouseButton);
+	menuing = true;
 }
 
 void AFPSTestCharacter::OnPrimaryAction()
 {
 	// Trigger the OnItemUsed Event
 	OnUseItem.Broadcast();
+}
+
+void AFPSTestCharacter::EAT()
+{
+	if (90.0 >= Hunger)
+	{
+		if (10.0 <= Equipment[0])
+		{
+			Equipment[0] -= 10.0;
+			Hunger += 10.0;
+		}
+		else
+		{
+			if (0.0 <= Equipment[0])
+			{
+				Hunger += Equipment[0];
+				Equipment[0] = 0.0;
+			}
+		}
+	}
+	else
+	{
+		if (100.0 - Hunger <= Equipment[0])
+		{
+			Equipment[0] -= 100 - Hunger;
+			Hunger = 100.0;
+		}
+		else
+		{
+			Hunger += Equipment[0];
+			Equipment[0] = 0.0;
+		}
+	}
+}
+
+void AFPSTestCharacter::EnterMenu()
+{
+	if (!menuing)
+	{
+		this->menuing = true;
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+		if (PauseMenu)
+			PauseMenu->SetVisibility(ESlateVisibility::Visible);
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(true);
+	}
+	else
+	{
+		this->menuing = false;
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
+		if (PauseMenu)
+			PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(false);
+	}
 }
 
 void AFPSTestCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
@@ -167,8 +271,23 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	int32 x, y;
-	GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
-	GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
+	if (!menuing)
+	{
+		GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
+		GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
+		Hunger -= DeltaTime;
+		if (0.0 >= Hunger)
+		{
+			Health -= DeltaTime;
+		}
+		if (HUD)
+		{
+			HUD->SetHealth(Health);
+			HUD->SetHunger(Hunger);
+			HUD->SetFood(Equipment[0]);
+			HUD->SetTemp(Temperature);
+		}
+	}
 }
 
 bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)
