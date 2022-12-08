@@ -39,18 +39,21 @@ void AIsDamagable::OnSelectedDamage(AActor* Target, FKey ButtonPressed)
 {
 	if (EKeys::LeftMouseButton == ButtonPressed)
 	{
-		if (Alive && !BeingDamaged)
+		if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 		{
-			Health -= 1.0;
-			if (Health > 0.0)
+			if (Alive && !BeingDamaged)
 			{
-				BeingDamaged = true;
-				DamageTime = 1.0;
-				Action = true;
-			}
-			else
-			{
-				Alive = false;
+				Health -= 1.0;
+				if (Health > 0.0)
+				{
+					BeingDamaged = true;
+					DamageTime = 1.0;
+					Action = true;
+				}
+				else
+				{
+					Alive = false;
+				}
 			}
 		}
 	}

@@ -84,16 +84,19 @@ void AIsScannable::OnSelectedScan(AActor* Target, FKey ButtonPressed)
 {
 	if (EKeys::RightMouseButton == ButtonPressed && !Action)
 	{
-		if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Contains(Name)))
+		if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 		{
-			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
-			if (ScanProgressBar)
+			if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Contains(Name)))
 			{
-				ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
+				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
+				if (ScanProgressBar)
+				{
+					ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
+				}
+				BeingScanned = true;
+				ScanTime = MaxScanTime;
+				Action = true;
 			}
-			BeingScanned = true;
-			ScanTime = MaxScanTime;
-			Action = true;
 		}
 	}
 }

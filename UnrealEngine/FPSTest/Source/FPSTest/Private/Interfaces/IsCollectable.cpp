@@ -75,14 +75,17 @@ void AIsCollectable::OnSelectedCollect(AActor* Target, FKey ButtonPressed)
 	{
 		if (Collectable)
 		{
-			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
-			if (CollectProgressBar)
+			if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 			{
-				CollectProgressBar->SetVisibility(ESlateVisibility::Visible);
+				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
+				if (CollectProgressBar)
+				{
+					CollectProgressBar->SetVisibility(ESlateVisibility::Visible);
+				}
+				BeingCollected = true;
+				CollectTime = MaxCollectTime;
+				Action = true;
 			}
-			BeingCollected = true;
-			CollectTime = MaxCollectTime;
-			Action = true;
 		}
 	}
 }
