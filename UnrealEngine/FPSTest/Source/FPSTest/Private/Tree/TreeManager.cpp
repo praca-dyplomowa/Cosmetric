@@ -33,6 +33,7 @@ UClass* UTreeManager::getClass(int seed)
 
 void UTreeManager::Initialize(int(&permutation)[256], FVector terrainPosition, FVector2D terrainSize)
 {
+	cleared = false;
 	int seed = 0;
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
@@ -72,10 +73,14 @@ void UTreeManager::Initialize(int(&permutation)[256], FVector terrainPosition, F
 
 void UTreeManager::DestroyTrees()
 {
-	if (!Trees.IsEmpty())
+
+	if (!Trees.IsEmpty() && !cleared)
 	{
-		for (AGenericTree* tree : Trees)
-			tree->Destroy();
+		cleared = true;
+		int l = Trees.Num();
+		for (int i = 0; i<l; i++)
+			if(IsValid(Trees[i]))
+				Trees[i]->Destroy();
 		Trees.Empty();
 	}
 }

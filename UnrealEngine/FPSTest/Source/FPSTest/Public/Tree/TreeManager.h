@@ -20,4 +20,5 @@ public:
 private:	
 	TArray<AGenericTree*> Trees;
 	UClass* getClass(int seed);
+	bool cleared;
 };

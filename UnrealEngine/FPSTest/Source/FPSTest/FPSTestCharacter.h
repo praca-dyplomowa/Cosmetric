@@ -104,7 +104,8 @@ public:
 	//Stats
 	float Health;
 	float Hunger;
-	float Temperature;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Temperature;
 
 	void EAT();
 

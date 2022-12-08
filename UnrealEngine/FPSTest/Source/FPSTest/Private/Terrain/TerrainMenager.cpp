@@ -85,7 +85,8 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 				y - dCenter.Y < 0 ||
 				y - dCenter.Y >= Size
 				)
-				RenderedTerrain[y][x]->Destroy();
+				if(IsValid(RenderedTerrain[y][x]))
+					RenderedTerrain[y][x]->Destroy();
 		}
 		delete[] RenderedTerrain[y];
 	}

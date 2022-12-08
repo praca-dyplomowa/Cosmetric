@@ -23,7 +23,7 @@ void UPlayer_HUD_Widget::SetTemp(float val)
 {
 	if (Temperature)
 	{
-		Temperature->SetText(FText::FromString(FString::SanitizeFloat(val)));
+		Temperature->SetText(FText::FromString(FString::SanitizeFloat(floor(val))));
 	}
 }
 
