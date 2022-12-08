@@ -6,7 +6,11 @@
 #include <random>
 #include <algorithm>
 #include <cmath>
+#include "Singleton.h"
+#include "Math/RandomStream.h"
+#include "Tree/SpruceLikeTree.h"
 #include "Terrain/TerrainMenager.h"
+#include "Kismet/GameplayStatics.h"
 #include "PerlinNoise.h"
 
 ATerrain::ATerrain()
@@ -14,7 +18,7 @@ ATerrain::ATerrain()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
-	TreeManager = CreateDefaultSubobject<UTreeManager>(TEXT("Tree manager"));
+
 	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
 	ProceduralMesh->SetMaterial(0, mt);
 	SetRootComponent(ProceduralMesh);
@@ -39,19 +43,64 @@ void ATerrain::OnConstruction(const FTransform& transform) {
 	Super::OnConstruction(transform);
 
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
-	TreeManager->Initialize(
-		Permutation,
-		GetActorLocation(),
-		FVector2D(Size * Scale, Size * Scale)
-	);
+	InitializeTrees();
 }
 
 void ATerrain::Destroyed()
 {
-	if (TreeManager) {
-		TreeManager->DestroyTrees();
+	for (auto tree : Trees) {
+		if (tree->IsValidLowLevelFast()) {
+			tree->Destroy();
+		}
 	}
 	Super::Destroyed();
+}
+
+void ATerrain::SpawnTree(UClass* treeClass, FVector position)
+{
+	auto tree = GetWorld()->SpawnActor<AGenericTree>(treeClass, FTransform(position));
+	if (tree) {
+		tree->SetOwner(this);
+		tree->Name = TEXT("Drzewo");
+		Trees.Add(tree);
+	}
+}
+
+void ATerrain::InitializeTrees()
+{
+	int seed = 0;
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			seed = single->Seed;
+		}
+	}
+	auto terrainPosition = GetActorLocation();
+	auto terrainSize = Scale * Size;
+	auto stream = FRandomStream(
+		seed
+		+ terrainPosition.X
+		+ terrainPosition.Y
+		+ terrainPosition.Z
+	);
+	auto treeNum = stream.RandRange(0, 3);
+	for (int i = 0; i < treeNum; i++) {
+		FVector position = stream.GetUnitVector();
+		position.X *= terrainSize;
+		position.Y *= terrainSize;
+		position += terrainPosition;
+		position.Z = PerlinNoise::Noise(position.X / terrainSize, position.Y / terrainSize, Permutation) * 500;
+		UClass* treeStaticClass = GetTreeClass(seed +
+			position.X +
+			position.Y +
+			position.Z
+		);
+		SpawnTree(treeStaticClass, position);
+	}
 }
 
 void ATerrain::CreateVertices()
@@ -86,4 +135,21 @@ void ATerrain::CreateTriangles()
 		}
 		++Vertex;
 	}
+}
+
+UClass* ATerrain::GetTreeClass(int seed)
+{
+	auto stream = FRandomStream(
+		seed
+	);
+
+	int i = stream.RandRange(0, 0);
+	switch (i)
+	{
+	case 0:
+		return ASpruceLikeTree::StaticClass();
+	default:
+		break;
+	}
+	return nullptr;
 }

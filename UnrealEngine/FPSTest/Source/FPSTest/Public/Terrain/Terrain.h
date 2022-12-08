@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Tree/TreeManager.h"
+#include "Tree/GenericTree.h"
 #include "GameFramework/Actor.h"
 #include "Terrain.generated.h"
 
@@ -25,6 +25,8 @@ public:
 	void Initialize(int p[]);
 	virtual void OnConstruction(const FTransform& transform) override;
 	virtual void Destroyed() override;
+	void SpawnTree(UClass* treeClass, FVector position);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -33,9 +35,10 @@ private:
 	TArray<FVector> Vertices;
 	TArray<int> Triangles;
 	TArray<FVector2D> UV0;
-	UTreeManager* TreeManager;
-	
-	void CreateVertices();
+	TArray<AGenericTree*> Trees;
 
+	void InitializeTrees();
+	void CreateVertices();
 	void CreateTriangles();
+	UClass* GetTreeClass(int seed);
 };
