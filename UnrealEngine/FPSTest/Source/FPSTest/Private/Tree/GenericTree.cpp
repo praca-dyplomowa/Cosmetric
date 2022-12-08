@@ -16,6 +16,7 @@ class UInstancedStaticMeshComponent;
 // Sets default values
 AGenericTree::AGenericTree()
 {
+	Name = TEXT("Drzewo");
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	Seed = 0;
 	PrimaryActorTick.bCanEverTick = true;
@@ -124,7 +125,7 @@ void AGenericTree::RenderUp(FTreeComponentRender& generatedStruct, FVector from,
 		generatedStruct.Instanced->GetStaticMesh() &&
 		generatedStruct.Instanced->GetMaterial(0)) {
 		auto segmentHeight = generatedStruct.SegmentSize * Offset;
-		auto segmentNumber = round(generatedStruct.Height / segmentHeight);
+		auto segmentNumber = round((generatedStruct.Height - generatedStruct.SegmentSize) / segmentHeight) + 1;
 		auto translation = from;
 		auto segmentScale = generatedStruct.SegmentSize / generatedStruct.Instanced->GetStaticMesh()->GetBoundingBox().GetSize().Z;
 		TArray<FTransform> transforms;

@@ -9,6 +9,7 @@
 #include "Singleton.h"
 #include "Math/RandomStream.h"
 #include "Tree/SpruceLikeTree.h"
+#include "Tree/OakLikeTree.h"
 #include "Terrain/TerrainMenager.h"
 #include "Kismet/GameplayStatics.h"
 #include "PerlinNoise.h"
@@ -61,7 +62,6 @@ void ATerrain::SpawnTree(UClass* treeClass, FVector position)
 	auto tree = GetWorld()->SpawnActor<AGenericTree>(treeClass, FTransform(position));
 	if (tree) {
 		tree->SetOwner(this);
-		tree->Name = TEXT("Drzewo");
 		Trees.Add(tree);
 	}
 }
@@ -143,11 +143,13 @@ UClass* ATerrain::GetTreeClass(int seed)
 		seed
 	);
 
-	int i = stream.RandRange(0, 0);
+	int i = stream.RandRange(0, 1);
 	switch (i)
 	{
 	case 0:
 		return ASpruceLikeTree::StaticClass();
+	case 1:
+		return AOakLikeTree::StaticClass();
 	default:
 		break;
 	}

@@ -5,9 +5,9 @@
 
 ASpruceLikeTree::ASpruceLikeTree()
 {
+	Name = TEXT("SpruceLike tree");
 	TrunkInit.HeightBounds = FVector2D(400, 700);
 	TrunkInit.InitialSegmentSize = 35;
-
 	TrunkInit.Material = LoadObject<UMaterial>(
 		nullptr,
 		TEXT("/Game/Trees/Materials/M_Spruce_Bark")
