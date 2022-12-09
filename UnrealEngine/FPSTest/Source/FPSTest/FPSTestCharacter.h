@@ -7,6 +7,7 @@
 #include "Public/HUD/Player_HUD_Widget.h"
 #include "Blueprint/UserWidget.h"
 #include "Public/GUI/InGameMenu.h"
+#include "Public/GUI/BuildingMenu.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;
@@ -89,17 +90,26 @@ public:
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 	bool Movement_Flag;
 	//Catalog
+	UPROPERTY(BlueprintReadWrite)
 	TArray<FString> Catalog;
-	float Equipment[3];
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Food;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Wood;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float AnimalMaterial;
 
 	TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
 	TSubclassOf<class UInGameMenu> PauseClass;
+	TSubclassOf<class UBuildingMenu> BuildingClass;
 
 	UPROPERTY()
 		class UPlayer_HUD_Widget* HUD;
 
 	UPROPERTY()
 		class UInGameMenu* PauseMenu;
+	UPROPERTY()
+		class UBuildingMenu* BuildingMenu;
 
 	//Stats
 	float Health;
@@ -107,10 +117,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Temperature;
 
-	void EAT();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float TemperatureChange;
 
-	bool menuing;
+	void EAT();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool menuing;
 
 	void EnterMenu();
+	void EnterBuildMenu();
 };
 

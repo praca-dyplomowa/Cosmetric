@@ -44,7 +44,9 @@ AFPSTestCharacter::AFPSTestCharacter()
 	//PauseMenu = nullptr;
 	Health = 100.0;
 	Hunger = 100.0;
-	Equipment[0] = 100.0;
+	Food = 100.0;
+	Wood = 100.0;
+	AnimalMaterial = 0.0;
 	Temperature = 0.0;
 }
 
@@ -63,6 +65,7 @@ void AFPSTestCharacter::BeginPlay()
 		{
 			HUDClass = single->HUDClass;
 			PauseClass = single->PauseClass;
+			BuildingClass = single->BuildingClass;
 		}
 	}
 	if (HUDClass)
@@ -83,6 +86,13 @@ void AFPSTestCharacter::BeginPlay()
 		PauseMenu->AddToPlayerScreen();
 		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
 	}
+	if (BuildingClass)
+	{
+		BuildingMenu = CreateWidget<UBuildingMenu>(ctr, BuildingClass);
+		check(BuildingMenu);
+		BuildingMenu->AddToPlayerScreen();
+		BuildingMenu->SetVisibility(ESlateVisibility::Hidden);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -102,6 +112,8 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAction("SecondaryAction", IE_Pressed, this, &AFPSTestCharacter::OnPrimaryAction);
 
 	PlayerInputComponent->BindAction("EAT", IE_Pressed, this, &AFPSTestCharacter::EAT);
+
+	PlayerInputComponent->BindAction("Build", IE_Pressed, this, &AFPSTestCharacter::EnterBuildMenu);
 
 	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &AFPSTestCharacter::EnterMenu);
 
@@ -136,31 +148,31 @@ void AFPSTestCharacter::EAT()
 {
 	if (90.0 >= Hunger)
 	{
-		if (10.0 <= Equipment[0])
+		if (10.0 <= Food)
 		{
-			Equipment[0] -= 10.0;
+			Food -= 10.0;
 			Hunger += 10.0;
 		}
 		else
 		{
-			if (0.0 <= Equipment[0])
+			if (0.0 <= Food)
 			{
-				Hunger += Equipment[0];
-				Equipment[0] = 0.0;
+				Hunger += Food;
+				Food = 0.0;
 			}
 		}
 	}
 	else
 	{
-		if (100.0 - Hunger <= Equipment[0])
+		if (100.0 - Hunger <= Food)
 		{
-			Equipment[0] -= 100 - Hunger;
+			Food -= 100 - Hunger;
 			Hunger = 100.0;
 		}
 		else
 		{
-			Hunger += Equipment[0];
-			Equipment[0] = 0.0;
+			Hunger += Food;
+			Food = 0.0;
 		}
 	}
 }
@@ -182,6 +194,28 @@ void AFPSTestCharacter::EnterMenu()
 		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
 		if (PauseMenu)
 			PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(false);
+	}
+}
+
+void AFPSTestCharacter::EnterBuildMenu()
+{
+	if (!menuing)
+	{
+		this->menuing = true;
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+		if (BuildingMenu)
+			BuildingMenu->SetVisibility(ESlateVisibility::Visible);
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(true);
+	}
+	else
+	{
+		this->menuing = false;
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
+		if (BuildingMenu)
+			BuildingMenu->SetVisibility(ESlateVisibility::Hidden);
 		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
 		GetWorld()->GetFirstPlayerController()->SetPause(false);
 	}
@@ -270,6 +304,10 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	int32 x, y;
+	if (TemperatureChange > 0.0 && Temperature < 40.0 || TemperatureChange<0.0 && Temperature > -20.0)
+		Temperature += TemperatureChange * DeltaTime;
+	if (Temperature <= -1.0)
+		Health -= DeltaTime;
 	if (!menuing)
 	{
 		GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
@@ -286,7 +324,7 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 		{
 			HUD->SetHealth(Health);
 			HUD->SetHunger(Hunger);
-			HUD->SetFood(Equipment[0]);
+			HUD->SetFood(Food);
 			HUD->SetTemp(Temperature);
 		}
 	}

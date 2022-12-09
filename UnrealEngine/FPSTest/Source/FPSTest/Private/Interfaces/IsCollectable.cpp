@@ -60,8 +60,9 @@ void AIsCollectable::Tick(float DeltaTime)
 			{
 				CollectProgressBar->SetVisibility(ESlateVisibility::Hidden);
 			}
-			for (int i = 0; i < 3; i++)
-				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Equipment[i] += Materials[i];
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Food += Materials[0];
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Wood += Materials[1];
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalMaterial += Materials[1];
 			Action = false;
 		}
 		CollectProgressBar->SetValue(CollectTime, MaxCollectTime);

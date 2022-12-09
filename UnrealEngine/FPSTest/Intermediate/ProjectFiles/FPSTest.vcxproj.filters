@@ -95,6 +95,9 @@
     <Filter Include="Source\FPSTest\Private\GUI">
       <UniqueIdentifier>{08ACD07F-F1AA-3E8F-80FC-FCE7265BD02B}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\FPSTest\Private\GUI\BuildingMenu.cpp">
+      <Filter>Source\FPSTest\Private\GUI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\GUI\InGameMenu.cpp">
       <Filter>Source\FPSTest\Private\GUI</Filter>
     </ClCompile>
@@ -164,6 +167,9 @@
     <Filter Include="Source\FPSTest\Public\GUI">
       <UniqueIdentifier>{5B4C7823-90A0-3045-948A-D5E021C9085F}</UniqueIdentifier>
     </Filter>
+    <ClInclude Include="..\..\Source\FPSTest\Public\GUI\BuildingMenu.h">
+      <Filter>Source\FPSTest\Public\GUI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\GUI\InGameMenu.h">
       <Filter>Source\FPSTest\Public\GUI</Filter>
     </ClInclude>
