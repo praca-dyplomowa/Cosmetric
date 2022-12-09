@@ -46,7 +46,7 @@ AFPSTestCharacter::AFPSTestCharacter()
 	Hunger = 100.0;
 	Food = 100.0;
 	Wood = 100.0;
-	AnimalMaterial = 0.0;
+	AnimalMaterial = 100.0;
 	Temperature = 0.0;
 }
 
@@ -206,7 +206,10 @@ void AFPSTestCharacter::EnterBuildMenu()
 		this->menuing = true;
 		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
 		if (BuildingMenu)
+		{
 			BuildingMenu->SetVisibility(ESlateVisibility::Visible);
+			BuildingMenu->SetEQ();
+		}
 		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
 		GetWorld()->GetFirstPlayerController()->SetPause(true);
 	}

@@ -40,6 +40,11 @@ void ATerrainMenager::init()
 	}
 }
 
+float ATerrainMenager::Noise(float x, float y)
+{
+	return PerlinNoise::Noise(x, y, Permutation)*500;
+}
+
 void ATerrainMenager::Move(FVector2D NewCenter)
 {
 	FVector2D dCenter = FVector2D(

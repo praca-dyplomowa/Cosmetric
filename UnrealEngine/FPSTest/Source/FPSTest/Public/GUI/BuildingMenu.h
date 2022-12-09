@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
 #include "BuildingMenu.generated.h"
 
 /**
@@ -19,7 +20,13 @@ public:
 	UPROPERTY(meta = (BindWidget))
 		UButton* ContinueButton;
 
+	UPROPERTY(meta = (BindWidget))
+		UTextBlock* EQ;
+
 	UFUNCTION()
 		void OnContinueButtonClicked();
+
+	UFUNCTION()
+		void SetEQ();
 	
 };

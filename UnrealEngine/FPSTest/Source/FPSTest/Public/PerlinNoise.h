@@ -8,6 +8,7 @@ static class PerlinNoise
 {
 public:
 
+	UPROPERTY(BlueprintCallable, Category="MyOwnMath")
 	static double Noise(double x, double y, int permutation[]);
 
 protected:

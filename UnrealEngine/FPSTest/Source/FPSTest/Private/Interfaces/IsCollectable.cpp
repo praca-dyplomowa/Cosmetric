@@ -64,6 +64,7 @@ void AIsCollectable::Tick(float DeltaTime)
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Wood += Materials[1];
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalMaterial += Materials[1];
 			Action = false;
+			this->SetLifeSpan(5);
 		}
 		CollectProgressBar->SetValue(CollectTime, MaxCollectTime);
 		CollectTime -= DeltaTime;

@@ -8,6 +8,7 @@
 #include <cmath>
 #include <random>
 #include <algorithm>
+#include "../PerlinNoise.h"
 #include "TerrainMenager.generated.h"
 
 UCLASS()
@@ -26,6 +27,9 @@ public:
 		int Seed;
 	UFUNCTION(BlueprintCallable)
 		void init();
+
+	UFUNCTION(BlueprintCallable)
+		float Noise(float x, float y);
 
 
 	void Move(FVector2D NewCenter);

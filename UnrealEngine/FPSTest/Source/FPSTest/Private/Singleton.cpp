@@ -3,6 +3,10 @@
 
 #include "Singleton.h"
 #include "../FPSTestCharacter.h"
+#include <cmath>
+#include <random>
+#include <algorithm>
+#include "../Public/PerlinNoise.h"
 #include "GUI/MyGameInstance.h"
 
 // Sets default values
