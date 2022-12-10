@@ -105,7 +105,8 @@ protected:
 	virtual void RenderTrunk(double offset);
 	virtual void RenderTreetop(double offset);
 	virtual void OnConstruction(const FTransform& transform) override;
-
+	virtual void OnCollected() override;
+	virtual void SaveTreeDestroyed();
 	UPROPERTY(EditAnywhere, Category = "Trunk")
 	FTreeComponentInit TrunkInit;
 	UPROPERTY(EditAnywhere, Category = "Treetop")

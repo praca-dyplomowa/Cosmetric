@@ -41,4 +41,6 @@ private:
 	void CreateVertices();
 	void CreateTriangles();
 	UClass* GetTreeClass(int seed);
+
+	int TreesLeft;
 };
