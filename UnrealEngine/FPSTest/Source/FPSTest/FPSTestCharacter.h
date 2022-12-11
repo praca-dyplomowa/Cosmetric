@@ -62,12 +62,11 @@ protected:
 	void AddControllerPitchInput(float Val) override;
 	void Jump() override;
 	void StopJumping() override;
-	void Tick(float DeltaTime);
 
-
+//touch pack
 	struct TouchData
 	{
-		TouchData() { bIsPressed = false;Location=FVector::ZeroVector;}
+		TouchData() { bIsPressed = false; Location = FVector::ZeroVector; }
 		bool bIsPressed;
 		ETouchIndex::Type FingerIndex;
 		FVector Location;
@@ -77,6 +76,9 @@ protected:
 	void EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location);
 	void TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location);
 	TouchData	TouchItem;
+
+//Tick Event
+	void Tick(float DeltaTime);
 	
 protected:
 	// APawn interface
@@ -89,9 +91,10 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 	bool Movement_Flag;
-	//Catalog
+//Catalog
 	UPROPERTY(BlueprintReadWrite)
-	TArray<FString> Catalog;
+		TArray<FString> Catalog;
+//Equipment
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Food;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -99,32 +102,27 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float AnimalMaterial;
 
+protected:
 	TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
+	class UPlayer_HUD_Widget* HUD;
+
 	TSubclassOf<class UInGameMenu> PauseClass;
+	class UInGameMenu* PauseMenu;
+	void EnterMenu();
+
 	TSubclassOf<class UBuildingMenu> BuildingClass;
-
-	UPROPERTY()
-		class UPlayer_HUD_Widget* HUD;
-
-	UPROPERTY()
-		class UInGameMenu* PauseMenu;
-	UPROPERTY()
-		class UBuildingMenu* BuildingMenu;
-
-	//Stats
+	class UBuildingMenu* BuildingMenu;
+	void EnterBuildMenu();
+public:
+//Stats
 	float Health;
 	float Hunger;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float Temperature;
+	float HungerTimer;
+	void EAT();
+	void ManageHunger(float dT);
+	float Temperature;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TemperatureChange;
-
-	void EAT();
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool menuing;
-
-	void EnterMenu();
-	void EnterBuildMenu();
 };
 

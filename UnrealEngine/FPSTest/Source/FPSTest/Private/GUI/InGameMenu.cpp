@@ -13,7 +13,6 @@ void UInGameMenu::NativeConstruct()
 
 void UInGameMenu::OnContinueButtonClicked()
 {
-	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->menuing = false;
 	this->SetVisibility(ESlateVisibility::Hidden);
 	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
 	GetWorld()->GetFirstPlayerController()->SetPause(false);
