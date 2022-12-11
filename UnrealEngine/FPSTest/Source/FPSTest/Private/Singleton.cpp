@@ -24,8 +24,6 @@ void ASingleton::BeginPlay()
 	Super::BeginPlay();
 	int saveGameIndex = 0;
 	FString saveGameName = TEXT("New Game Save");
-	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->menuing = false;
-	this->Seed = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->Seed;
 
 	LoadGameFromMemory(saveGameIndex, saveGameName);
 }
