@@ -69,6 +69,7 @@ void ATerrain::SpawnTree(UClass* treeClass, FVector position)
 void ATerrain::InitializeTrees()
 {
 	int seed = 0;
+	TSet<FVector2D> DestroyedTrees;
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
 	for (AActor* Singleton : ActorsToFind)
@@ -77,6 +78,10 @@ void ATerrain::InitializeTrees()
 		if (single)
 		{
 			seed = single->Seed;
+			auto thisChunkInfo = single->GameInfo->ChunkInfo.Find(GetActorLocation());
+			if (thisChunkInfo != nullptr) {
+				DestroyedTrees = thisChunkInfo->DestroyedTreePositions; // all destroyed trees positions 
+			}
 		}
 	}
 	auto terrainPosition = GetActorLocation();
@@ -87,19 +92,24 @@ void ATerrain::InitializeTrees()
 		+ terrainPosition.Y
 		+ terrainPosition.Z
 	);
-	auto treeNum = stream.RandRange(0, 3);
-	for (int i = 0; i < treeNum; i++) {
+	TreesLeft = stream.RandRange(0, 3);
+	if (DestroyedTrees.Num() == TreesLeft) {
+		return;
+	}
+	for (int i = 0; i < TreesLeft; i++) {
 		FVector position = stream.GetUnitVector();
 		position.X *= terrainSize;
 		position.Y *= terrainSize;
 		position += terrainPosition;
-		position.Z = PerlinNoise::Noise(position.X / terrainSize, position.Y / terrainSize, Permutation) * 500;
-		UClass* treeStaticClass = GetTreeClass(seed +
-			position.X +
-			position.Y +
-			position.Z
-		);
-		SpawnTree(treeStaticClass, position);
+		if (!DestroyedTrees.Contains(FVector2D(position))) {
+			position.Z = PerlinNoise::Noise(position.X / terrainSize, position.Y / terrainSize, Permutation) * 500;
+			UClass* treeStaticClass = GetTreeClass(seed +
+				position.X +
+				position.Y +
+				position.Z
+			);
+			SpawnTree(treeStaticClass, position);
+		}
 	}
 }
 

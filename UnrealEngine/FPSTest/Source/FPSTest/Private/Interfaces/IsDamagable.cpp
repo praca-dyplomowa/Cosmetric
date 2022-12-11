@@ -43,6 +43,7 @@ void AIsDamagable::OnSelectedDamage(AActor* Target, FKey ButtonPressed)
 		{
 			if (Alive && !BeingDamaged)
 			{
+				OnDamageTaken();
 				Health -= 1.0;
 				if (Health > 0.0)
 				{
@@ -52,9 +53,18 @@ void AIsDamagable::OnSelectedDamage(AActor* Target, FKey ButtonPressed)
 				}
 				else
 				{
-					Alive = false;
+					OnKilled();
 				}
 			}
 		}
 	}
+}
+
+void AIsDamagable::OnKilled()
+{
+	Alive = false;
+}
+
+void AIsDamagable::OnDamageTaken()
+{
 }

@@ -45,6 +45,8 @@ void AIsCollectable::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 }
 
+void AIsCollectable::OnCollected() { }
+
 // Called every frame
 void AIsCollectable::Tick(float DeltaTime)
 {
@@ -68,6 +70,9 @@ void AIsCollectable::Tick(float DeltaTime)
 		}
 		CollectProgressBar->SetValue(CollectTime, MaxCollectTime);
 		CollectTime -= DeltaTime;
+		if (!Collectable) {
+			OnCollected();
+		}
 	}
 }
 

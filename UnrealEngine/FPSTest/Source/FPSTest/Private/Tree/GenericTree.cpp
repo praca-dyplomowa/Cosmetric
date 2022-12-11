@@ -181,6 +181,7 @@ void AGenericTree::RenderTreetop(double offset)
 
 void AGenericTree::OnConstruction(const FTransform& transform)
 {
+
 	Stream = FRandomStream(
 		Seed
 		+ GetActorLocation().X
@@ -192,6 +193,41 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 	RenderTrunk(InitStruct(TrunkInit, TrunkRender));
 	RenderTreetop(InitStruct(TreetopInit, TreetopRender));
 	RootComponent->SetMobility(EComponentMobility::Movable);
+}
+
+void AGenericTree::OnCollected()
+{
+	Super::OnCollected();
+	SaveTreeDestroyed();
+	Destroy();
+}
+
+
+void AGenericTree::SaveTreeDestroyed()
+{
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			auto chunkLocation = GetOwner()->GetActorLocation();
+			bool didExist = true;
+			auto addedTreeLocation = FVector2D(GetActorLocation());
+			FChunkSaveInfo* thisChunk = single->GameInfo->ChunkInfo.Find(chunkLocation);
+			if (thisChunk == nullptr) {
+				thisChunk = new FChunkSaveInfo(); // create new object to store tree data for this tree's chunk
+				didExist = false;
+			}
+			thisChunk->DestroyedTreePositions.Add(FVector2D(GetActorLocation())); // store this tree's XY position
+			
+			if (!didExist) {
+				single->GameInfo->ChunkInfo.Add(chunkLocation, *thisChunk);
+			}
+			thisChunk = single->GameInfo->ChunkInfo.Find(chunkLocation);
+		}
+	}
 }
 
 double AGenericTree::InitStruct(FTreeComponentInit& init, FTreeComponentRender& render)

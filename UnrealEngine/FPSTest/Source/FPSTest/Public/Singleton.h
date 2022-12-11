@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GUI/GameSaveInfo.h"
 #include "GameFramework/Actor.h"
 #include "Singleton.generated.h"
 
@@ -32,4 +33,9 @@ public:
 		TSubclassOf<class UBuildingMenu> BuildingClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Seed;
+	UPROPERTY(VisibleAnywhere)
+		UGameSaveInfo* GameInfo;
+
+	bool SaveGameToMemory(int saveSlotIndex, FString saveSlotName);
+	bool LoadGameFromMemory(int saveSlotIndex, FString saveSlotName);
 };

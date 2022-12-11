@@ -21,6 +21,9 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	UFUNCTION()
+	virtual void OnKilled();
+	virtual void OnDamageTaken();
 
 public:
 	virtual void Tick(float DeltaTime) override;
@@ -30,5 +33,7 @@ public:
 	bool BeingDamaged;
 	float DamageTime;
 	UFUNCTION()
-		void OnSelectedDamage(AActor* Target, FKey ButtonPressed);
+	void OnSelectedDamage(AActor* Target, FKey ButtonPressed);
+
+
 };
