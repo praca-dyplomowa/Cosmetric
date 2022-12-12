@@ -368,27 +368,6 @@ void AFPSTestCharacter::EAT()
 	}
 }
 
-void AFPSTestCharacter::ManageHunger(float dT)
-{
-	if (!EatTutorialViewed && Hunger <= 50.0)
-	{
-		EatTutorialViewed = true;
-		if (EatingTutorialClass)
-		{
-			APlayerController* ctr = GetWorld()->GetFirstPlayerController();
-			EatingGameTutorial = CreateWidget<UTutorial>(ctr, EatingTutorialClass);
-			check(EatingGameTutorial);
-			EatingGameTutorial->AddToPlayerScreen();
-			EatingGameTutorial->SetVisibility(ESlateVisibility::Visible);
-			ctr->bShowMouseCursor = true;
-			ctr->SetInputMode(FInputModeUIOnly());
-			ctr->SetPause(true);
-			if(HUD)
-				HUD->SetVisibility(ESlateVisibility::Hidden);
-		}
-	}
-}
-
 FCompactPlayerStats AFPSTestCharacter::GetStats()
 {
 	FCompactPlayerStats stats;
@@ -415,8 +394,26 @@ void AFPSTestCharacter::SetStats(FCompactPlayerStats& stats)
 	Temperature = stats.Temperature;
 }
 
-void AFPSTestCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
+void AFPSTestCharacter::ManageHunger(float dT)
 {
+	if (!EatTutorialViewed && Hunger <= 50.0)
+	{
+		EatTutorialViewed = true;
+		if (EatingTutorialClass)
+		{
+			APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+			EatingGameTutorial = CreateWidget<UTutorial>(ctr, EatingTutorialClass);
+			check(EatingGameTutorial);
+			EatingGameTutorial->AddToPlayerScreen();
+			EatingGameTutorial->SetVisibility(ESlateVisibility::Visible);
+			ctr->bShowMouseCursor = true;
+			ctr->SetInputMode(FInputModeUIOnly());
+			ctr->SetPause(true);
+			if(HUD)
+				HUD->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
+
 	if (HungerTimer >= 0)
 	{
 		HungerTimer -= dT;

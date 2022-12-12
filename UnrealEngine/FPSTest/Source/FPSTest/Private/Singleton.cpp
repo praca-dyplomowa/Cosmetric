@@ -27,7 +27,6 @@ void ASingleton::BeginPlay()
 	this->GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
 	
 	auto character = ((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()));
-	character->menuing = false;
 	if (GameInfo) {
 		character->SetActorTransform(GameInfo->PlayerTransform);
 		character->SetStats(GameInfo->PlayerStats);
