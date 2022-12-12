@@ -83,7 +83,7 @@
     <Filter Include="Source\FPSTest\Private">
       <UniqueIdentifier>{8EDE2DCE-0F4E-3AA1-9E11-018204DF3801}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\FPSTest\Private\BuildingBase.cpp">
+    <ClCompile Include="..\..\Source\FPSTest\Private\AnimalBase.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
@@ -167,7 +167,7 @@
     <Filter Include="Source\FPSTest\Public">
       <UniqueIdentifier>{37D9D157-5106-3C45-ADFB-C7D787FD581C}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\FPSTest\Public\BuildingBase.h">
+    <ClInclude Include="..\..\Source\FPSTest\Public\AnimalBase.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">
