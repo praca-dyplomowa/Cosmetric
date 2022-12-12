@@ -19,7 +19,7 @@ bool UMyGameInstance::LoadGameFromMemory(FString saveSlotName, int saveUserIndex
 		UE_LOG(LogTemp, Warning, TEXT("Failed to load SaveGame Data."));
 		return false;
 	}
-	UE_LOG(LogTemp, Log, TEXT("Loaded SaveGame Data with name %s"), &saveSlotName);
+	UE_LOG(LogTemp, Log, TEXT("Loaded  SaveGame Data with name %s"), &saveSlotName);
 
 	GameInfo->UserIndex = saveUserIndex;
 	GameInfo->SaveSlotName = saveSlotName;
