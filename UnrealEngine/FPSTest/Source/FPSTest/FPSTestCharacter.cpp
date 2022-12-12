@@ -49,6 +49,10 @@ AFPSTestCharacter::AFPSTestCharacter()
 	Wood = 100.0;
 	AnimalMaterial = 100.0;
 	Temperature = 0.0;
+	StartTutorialViewed = false;
+	EatTutorialViewed = false;
+	NightTutorialViewed = false;
+	HelathTutorialViewed = false;
 }
 
 void AFPSTestCharacter::BeginPlay()
@@ -67,6 +71,11 @@ void AFPSTestCharacter::BeginPlay()
 			HUDClass = single->HUDClass;
 			PauseClass = single->PauseClass;
 			BuildingClass = single->BuildingClass;
+			StartGameTutorialClass = single->StartGameTutorial;
+			EatingTutorialClass = single->EatingTutorial;
+			NightTutorialClass = single->NightTutorial;
+			HealthTutorialClass = single->HealthTutorial;
+			RepetableTutorialClass = single->RepetableTutorial;
 		}
 	}
 	if (HUDClass)
@@ -78,7 +87,7 @@ void AFPSTestCharacter::BeginPlay()
 		HUD->SetHealth(100.0);
 		HUD->SetHunger(100.0);
 		HUD->SetHunger(100.0);
-		HUD->SetVisibility(ESlateVisibility::Visible);
+		HUD->SetVisibility(ESlateVisibility::Hidden);
 	}
 	if (PauseClass)
 	{
@@ -93,6 +102,37 @@ void AFPSTestCharacter::BeginPlay()
 		check(BuildingMenu);
 		BuildingMenu->AddToPlayerScreen();
 		BuildingMenu->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if (HealthTutorialClass)
+	{
+		HealthGameTutorial = CreateWidget<UTutorial>(ctr, HealthTutorialClass);
+		check(HealthGameTutorial);
+		HealthGameTutorial->AddToPlayerScreen();
+		HealthGameTutorial->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if (RepetableTutorialClass)
+	{
+		RepetableGameTutorial = CreateWidget<UTutorial>(ctr, RepetableTutorialClass);
+		check(RepetableGameTutorial);
+		RepetableGameTutorial->AddToPlayerScreen();
+		RepetableGameTutorial->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if (!StartTutorialViewed && StartGameTutorialClass)
+	{
+		StartGameTutorial = CreateWidget<UTutorial>(ctr, StartGameTutorialClass);
+		check(StartGameTutorial);
+		StartGameTutorial->AddToPlayerScreen();
+		StartGameTutorial->SetVisibility(ESlateVisibility::Visible);
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(true);
+	}
+	else
+	{
+		if (HUD)
+		{
+			HUD->SetVisibility(ESlateVisibility::Visible);
+		}
 	}
 }
 
@@ -253,11 +293,17 @@ bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerI
 
 void AFPSTestCharacter::EnterMenu()
 {
-	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
-	if (PauseMenu)
+	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+	if (PauseClass)
+	{
+		PauseMenu = CreateWidget<UInGameMenu>(ctr, PauseClass);
+		check(PauseMenu);
+		PauseMenu->AddToPlayerScreen();
 		PauseMenu->SetVisibility(ESlateVisibility::Visible);
-	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
-	GetWorld()->GetFirstPlayerController()->SetPause(true);
+		ctr->bShowMouseCursor = true;
+		ctr->SetInputMode(FInputModeUIOnly());
+		ctr->SetPause(true);
+	}
 }
 
 void AFPSTestCharacter::EnterBuildMenu()
@@ -313,6 +359,23 @@ void AFPSTestCharacter::EAT()
 
 void AFPSTestCharacter::ManageHunger(float dT)
 {
+	if (!EatTutorialViewed && Hunger <= 50.0)
+	{
+		EatTutorialViewed = true;
+		if (EatingTutorialClass)
+		{
+			APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+			EatingGameTutorial = CreateWidget<UTutorial>(ctr, EatingTutorialClass);
+			check(EatingGameTutorial);
+			EatingGameTutorial->AddToPlayerScreen();
+			EatingGameTutorial->SetVisibility(ESlateVisibility::Visible);
+			ctr->bShowMouseCursor = true;
+			ctr->SetInputMode(FInputModeUIOnly());
+			ctr->SetPause(true);
+			if(HUD)
+				HUD->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
 	if (HungerTimer >= 0)
 	{
 		HungerTimer -= dT;

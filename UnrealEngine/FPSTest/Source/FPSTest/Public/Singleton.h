@@ -36,6 +36,17 @@ public:
 	UPROPERTY(VisibleAnywhere)
 		UGameSaveInfo* GameInfo;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		TSubclassOf<class UTutorial> StartGameTutorial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		TSubclassOf<class UTutorial> EatingTutorial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		TSubclassOf<class UTutorial> NightTutorial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		TSubclassOf<class UTutorial> HealthTutorial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		TSubclassOf<class UTutorial> RepetableTutorial;
+
 	bool SaveGameToMemory(int saveSlotIndex, FString saveSlotName);
 	bool LoadGameFromMemory(int saveSlotIndex, FString saveSlotName);
 };

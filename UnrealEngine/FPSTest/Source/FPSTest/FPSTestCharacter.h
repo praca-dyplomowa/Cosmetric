@@ -8,6 +8,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Public/GUI/InGameMenu.h"
 #include "Public/GUI/BuildingMenu.h"
+#include "Public/Tutorial.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;
@@ -104,6 +105,7 @@ public:
 
 protected:
 	TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UPlayer_HUD_Widget* HUD;
 
 	TSubclassOf<class UInGameMenu> PauseClass;
@@ -126,5 +128,31 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TemperatureChange;
 	void ManageTemperature(float dT);
+
+//Tutorials
+
+	TSubclassOf<class UTutorial> StartGameTutorialClass;
+	class UTutorial* StartGameTutorial;
+	TSubclassOf<class UTutorial> EatingTutorialClass;
+	class UTutorial* EatingGameTutorial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+	TSubclassOf<class UTutorial> NightTutorialClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+	class UTutorial* NightGameTutorial;
+	TSubclassOf<class UTutorial> HealthTutorialClass;
+	class UTutorial* HealthGameTutorial;
+	TSubclassOf<class UTutorial> RepetableTutorialClass;
+	class UTutorial* RepetableGameTutorial;
+
+
+//tutorial flags
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool StartTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool EatTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool NightTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool HelathTutorialViewed;
 };
 

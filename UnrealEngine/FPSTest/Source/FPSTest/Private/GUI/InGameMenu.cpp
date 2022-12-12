@@ -17,4 +17,5 @@ void UInGameMenu::OnContinueButtonClicked()
 	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
 	GetWorld()->GetFirstPlayerController()->SetPause(false);
 	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
+	this->RemoveFromParent();
 }
