@@ -8,6 +8,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Public/GUI/InGameMenu.h"
 #include "Public/GUI/BuildingMenu.h"
+#include "Public/Tutorial.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;
@@ -82,12 +83,11 @@ protected:
 	void AddControllerPitchInput(float Val) override;
 	void Jump() override;
 	void StopJumping() override;
-	void Tick(float DeltaTime);
 
-
+//touch pack
 	struct TouchData
 	{
-		TouchData() { bIsPressed = false;Location=FVector::ZeroVector;}
+		TouchData() { bIsPressed = false; Location = FVector::ZeroVector; }
 		bool bIsPressed;
 		ETouchIndex::Type FingerIndex;
 		FVector Location;
@@ -97,6 +97,9 @@ protected:
 	void EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location);
 	void TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location);
 	TouchData	TouchItem;
+
+//Tick Event
+	void Tick(float DeltaTime);
 	
 protected:
 	// APawn interface
@@ -109,9 +112,10 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 	bool Movement_Flag;
-	//Catalog
+//Catalog
 	UPROPERTY(BlueprintReadWrite)
-	TArray<FString> Catalog;
+		TArray<FString> Catalog;
+//Equipment
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Food;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -119,34 +123,59 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float AnimalMaterial;
 
+protected:
 	TSubclassOf<class UPlayer_HUD_Widget> HUDClass;
-	TSubclassOf<class UInGameMenu> PauseClass;
-	TSubclassOf<class UBuildingMenu> BuildingClass;
-
-	UPROPERTY()
-		class UPlayer_HUD_Widget* HUD;
-
-	UPROPERTY()
-		class UInGameMenu* PauseMenu;
-	UPROPERTY()
-		class UBuildingMenu* BuildingMenu;
-
-	//Stats
-	float Health;
-	float Hunger;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float Temperature;
+	class UPlayer_HUD_Widget* HUD;
+
+	TSubclassOf<class UInGameMenu> PauseClass;
+	class UInGameMenu* PauseMenu;
+	void EnterMenu();
+
+	TSubclassOf<class UBuildingMenu> BuildingClass;
+	class UBuildingMenu* BuildingMenu;
+	void EnterBuildMenu();
+public:
+//Stats
+	float Health;
+	void ManageHealth(float dT);
+	float Hunger;
+	float HungerTimer;
+	void EAT();
+	void ManageHunger(float dT);
+	float Temperature;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TemperatureChange;
 
-	void EAT();
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool menuing;
-
-	void EnterMenu();
-	void EnterBuildMenu();
 	FCompactPlayerStats GetStats();
 	void SetStats(FCompactPlayerStats& stats);
+	void ManageTemperature(float dT);
+
+//Tutorials
+
+	TSubclassOf<class UTutorial> StartGameTutorialClass;
+	class UTutorial* StartGameTutorial;
+	TSubclassOf<class UTutorial> EatingTutorialClass;
+	class UTutorial* EatingGameTutorial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+	TSubclassOf<class UTutorial> NightTutorialClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+	class UTutorial* NightGameTutorial;
+	TSubclassOf<class UTutorial> HealthTutorialClass;
+	class UTutorial* HealthGameTutorial;
+	TSubclassOf<class UTutorial> RepetableTutorialClass;
+	class UTutorial* RepetableGameTutorial;
+
+
+//tutorial flags
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool StartTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool EatTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool NightTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool HelathTutorialViewed;
 };
 

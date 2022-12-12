@@ -95,6 +95,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\TestObject.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Tutorial.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSTest\Private\GUI">
       <UniqueIdentifier>{08ACD07F-F1AA-3E8F-80FC-FCE7265BD02B}</UniqueIdentifier>
     </Filter>
@@ -174,6 +177,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\TestObject.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Tutorial.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <Filter Include="Source\FPSTest\Public\GUI">

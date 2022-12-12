@@ -44,10 +44,15 @@ AFPSTestCharacter::AFPSTestCharacter()
 	//PauseMenu = nullptr;
 	Health = 100.0;
 	Hunger = 100.0;
+	HungerTimer = 20.0;
 	Food = 100.0;
 	Wood = 100.0;
 	AnimalMaterial = 100.0;
 	Temperature = 0.0;
+	StartTutorialViewed = false;
+	EatTutorialViewed = false;
+	NightTutorialViewed = false;
+	HelathTutorialViewed = false;
 }
 
 void AFPSTestCharacter::BeginPlay()
@@ -66,6 +71,11 @@ void AFPSTestCharacter::BeginPlay()
 			HUDClass = single->HUDClass;
 			PauseClass = single->PauseClass;
 			BuildingClass = single->BuildingClass;
+			StartGameTutorialClass = single->StartGameTutorial;
+			EatingTutorialClass = single->EatingTutorial;
+			NightTutorialClass = single->NightTutorial;
+			HealthTutorialClass = single->HealthTutorial;
+			RepetableTutorialClass = single->RepetableTutorial;
 		}
 	}
 	if (HUDClass)
@@ -77,7 +87,7 @@ void AFPSTestCharacter::BeginPlay()
 		HUD->SetHealth(100.0);
 		HUD->SetHunger(100.0);
 		HUD->SetHunger(100.0);
-		HUD->SetVisibility(ESlateVisibility::Visible);
+		HUD->SetVisibility(ESlateVisibility::Hidden);
 	}
 	if (PauseClass)
 	{
@@ -93,9 +103,134 @@ void AFPSTestCharacter::BeginPlay()
 		BuildingMenu->AddToPlayerScreen();
 		BuildingMenu->SetVisibility(ESlateVisibility::Hidden);
 	}
+	if (RepetableTutorialClass)
+	{
+		RepetableGameTutorial = CreateWidget<UTutorial>(ctr, RepetableTutorialClass);
+		check(RepetableGameTutorial);
+		RepetableGameTutorial->AddToPlayerScreen();
+		RepetableGameTutorial->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if (!StartTutorialViewed && StartGameTutorialClass)
+	{
+		StartGameTutorial = CreateWidget<UTutorial>(ctr, StartGameTutorialClass);
+		check(StartGameTutorial);
+		StartGameTutorial->AddToPlayerScreen();
+		StartGameTutorial->SetVisibility(ESlateVisibility::Visible);
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+		GetWorld()->GetFirstPlayerController()->SetPause(true);
+	}
+	else
+	{
+		if (HUD)
+		{
+			HUD->SetVisibility(ESlateVisibility::Visible);
+		}
+	}
 }
 
-//////////////////////////////////////////////////////////////////////////// Input
+void AFPSTestCharacter::OnPrimaryAction()
+{
+	// Trigger the OnItemUsed Event
+	OnUseItem.Broadcast();
+}
+
+void AFPSTestCharacter::MoveForward(float Value)
+{
+	if (Movement_Flag && Value != 0.0f)
+	{
+		// add movement in that direction
+		AddMovementInput(GetActorForwardVector(), Value);
+	}
+}
+
+void AFPSTestCharacter::MoveRight(float Value)
+{
+	if (Movement_Flag && Value != 0.0f)
+	{
+		// add movement in that direction
+		AddMovementInput(GetActorRightVector(), Value);
+	}
+}
+
+void AFPSTestCharacter::TurnAtRate(float Rate)
+{
+	if (Movement_Flag)
+		Super::AddControllerYawInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+}
+
+void AFPSTestCharacter::LookUpAtRate(float Rate)
+{
+	if (Movement_Flag)
+		Super::AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+}
+
+void AFPSTestCharacter::AddControllerYawInput(float Val)
+{
+	if (Movement_Flag)
+		Super::AddControllerYawInput(Val);
+}
+
+void AFPSTestCharacter::AddControllerPitchInput(float Val)
+{
+	if (Movement_Flag)
+		Super::AddControllerPitchInput(Val);
+}
+
+void AFPSTestCharacter::Jump()
+{
+	if (Movement_Flag)
+		Super::Jump();
+}
+
+void AFPSTestCharacter::StopJumping()
+{
+	if (Movement_Flag)
+		Super::StopJumping();
+}
+
+void AFPSTestCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
+{
+	if (TouchItem.bIsPressed == true)
+	{
+		return;
+	}
+	if ((FingerIndex == TouchItem.FingerIndex) && (TouchItem.bMoved == false))
+	{
+		OnPrimaryAction();
+	}
+	TouchItem.bIsPressed = true;
+	TouchItem.FingerIndex = FingerIndex;
+	TouchItem.Location = Location;
+	TouchItem.bMoved = false;
+}
+
+void AFPSTestCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
+{
+	if (TouchItem.bIsPressed == false)
+	{
+		return;
+	}
+	TouchItem.bIsPressed = false;
+}
+
+void AFPSTestCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	int32 x, y;
+	ManageTemperature(DeltaTime);
+	GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
+	GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
+	ManageHunger(DeltaTime);
+	ManageHealth(DeltaTime);
+	if (HUD)
+	{
+		HUD->SetHealth(Health);
+		HUD->SetHunger(Hunger);
+		HUD->SetFood(Food);
+		HUD->SetTemp(Temperature);
+	}
+}
 
 void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
@@ -135,13 +270,71 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	GetWorld()->GetFirstPlayerController()->bEnableClickEvents = true;
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::RightMouseButton);
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::LeftMouseButton);
-	menuing = true;
 }
 
-void AFPSTestCharacter::OnPrimaryAction()
+bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)
 {
-	// Trigger the OnItemUsed Event
-	OnUseItem.Broadcast();
+	if (FPlatformMisc::SupportsTouchInput() || GetDefault<UInputSettings>()->bUseMouseForTouch)
+	{
+		PlayerInputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AFPSTestCharacter::BeginTouch);
+		PlayerInputComponent->BindTouch(EInputEvent::IE_Released, this, &AFPSTestCharacter::EndTouch);
+
+		return true;
+	}
+	
+	return false;
+}
+
+void AFPSTestCharacter::EnterMenu()
+{
+	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+	if (PauseClass)
+	{
+		PauseMenu = CreateWidget<UInGameMenu>(ctr, PauseClass);
+		check(PauseMenu);
+		PauseMenu->AddToPlayerScreen();
+		PauseMenu->SetVisibility(ESlateVisibility::Visible);
+		ctr->bShowMouseCursor = true;
+		ctr->SetInputMode(FInputModeUIOnly());
+		ctr->SetPause(true);
+	}
+}
+
+void AFPSTestCharacter::EnterBuildMenu()
+{
+	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+	if (BuildingMenu)
+	{
+		BuildingMenu->SetVisibility(ESlateVisibility::Visible);
+		BuildingMenu->SetEQ();
+	}
+	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+	GetWorld()->GetFirstPlayerController()->SetPause(true);
+}
+
+void AFPSTestCharacter::ManageHealth(float dT)
+{
+	if (!HelathTutorialViewed && Health <= 50.0)
+	{
+		HelathTutorialViewed = true;
+		if (HealthTutorialClass)
+		{
+			APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+			HealthGameTutorial = CreateWidget<UTutorial>(ctr, HealthTutorialClass);
+			check(HealthGameTutorial);
+			HealthGameTutorial->AddToPlayerScreen();
+			HealthGameTutorial->SetVisibility(ESlateVisibility::Visible);
+			ctr->bShowMouseCursor = true;
+			ctr->SetInputMode(FInputModeUIOnly());
+			ctr->SetPause(true);
+			if (HUD)
+				HUD->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
+	if (Temperature > 0.0 && Hunger >= 80.0)
+	{
+		Health += dT;
+	}
 }
 
 void AFPSTestCharacter::EAT()
@@ -155,11 +348,8 @@ void AFPSTestCharacter::EAT()
 		}
 		else
 		{
-			if (0.0 <= Food)
-			{
-				Hunger += Food;
-				Food = 0.0;
-			}
+			Hunger += Food;
+			Food = 0.0;
 		}
 	}
 	else
@@ -168,6 +358,7 @@ void AFPSTestCharacter::EAT()
 		{
 			Food -= 100 - Hunger;
 			Hunger = 100.0;
+			HungerTimer = 20.0;
 		}
 		else
 		{
@@ -177,50 +368,24 @@ void AFPSTestCharacter::EAT()
 	}
 }
 
-void AFPSTestCharacter::EnterMenu()
+void AFPSTestCharacter::ManageHunger(float dT)
 {
-	if (!menuing)
+	if (!EatTutorialViewed && Hunger <= 50.0)
 	{
-		this->menuing = true;
-		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
-		if (PauseMenu)
-			PauseMenu->SetVisibility(ESlateVisibility::Visible);
-		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
-		GetWorld()->GetFirstPlayerController()->SetPause(true);
-	}
-	else
-	{
-		this->menuing = false;
-		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
-		if (PauseMenu)
-			PauseMenu->SetVisibility(ESlateVisibility::Hidden);
-		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
-		GetWorld()->GetFirstPlayerController()->SetPause(false);
-	}
-}
-
-void AFPSTestCharacter::EnterBuildMenu()
-{
-	if (!menuing)
-	{
-		this->menuing = true;
-		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
-		if (BuildingMenu)
+		EatTutorialViewed = true;
+		if (EatingTutorialClass)
 		{
-			BuildingMenu->SetVisibility(ESlateVisibility::Visible);
-			BuildingMenu->SetEQ();
+			APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+			EatingGameTutorial = CreateWidget<UTutorial>(ctr, EatingTutorialClass);
+			check(EatingGameTutorial);
+			EatingGameTutorial->AddToPlayerScreen();
+			EatingGameTutorial->SetVisibility(ESlateVisibility::Visible);
+			ctr->bShowMouseCursor = true;
+			ctr->SetInputMode(FInputModeUIOnly());
+			ctr->SetPause(true);
+			if(HUD)
+				HUD->SetVisibility(ESlateVisibility::Hidden);
 		}
-		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
-		GetWorld()->GetFirstPlayerController()->SetPause(true);
-	}
-	else
-	{
-		this->menuing = false;
-		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
-		if (BuildingMenu)
-			BuildingMenu->SetVisibility(ESlateVisibility::Hidden);
-		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeGameOnly());
-		GetWorld()->GetFirstPlayerController()->SetPause(false);
 	}
 }
 
@@ -252,122 +417,24 @@ void AFPSTestCharacter::SetStats(FCompactPlayerStats& stats)
 
 void AFPSTestCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
-	if (TouchItem.bIsPressed == true)
+	if (HungerTimer >= 0)
 	{
-		return;
+		HungerTimer -= dT;
 	}
-	if ((FingerIndex == TouchItem.FingerIndex) && (TouchItem.bMoved == false))
+	else if (0.0 >= Hunger)
 	{
-		OnPrimaryAction();
+		Health -= dT;
 	}
-	TouchItem.bIsPressed = true;
-	TouchItem.FingerIndex = FingerIndex;
-	TouchItem.Location = Location;
-	TouchItem.bMoved = false;
-}
-
-void AFPSTestCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
-{
-	if (TouchItem.bIsPressed == false)
+	else
 	{
-		return;
-	}
-	TouchItem.bIsPressed = false;
-}
-
-void AFPSTestCharacter::MoveForward(float Value)
-{
-	if (Movement_Flag && Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorForwardVector(), Value);
+		Hunger -= dT;
 	}
 }
 
-void AFPSTestCharacter::MoveRight(float Value)
+void AFPSTestCharacter::ManageTemperature(float dT)
 {
-	if (Movement_Flag && Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorRightVector(), Value);
-	}
-}
-
-void AFPSTestCharacter::AddControllerYawInput(float Val)
-{
-	if (Movement_Flag)
-		Super::AddControllerYawInput(Val);
-}
-
-void AFPSTestCharacter::AddControllerPitchInput(float Val)
-{
-	if (Movement_Flag)
-		Super::AddControllerPitchInput(Val);
-}
-
-void AFPSTestCharacter::Jump()
-{
-	if (Movement_Flag)
-		Super::Jump();
-}
-
-void AFPSTestCharacter::StopJumping()
-{
-	if (Movement_Flag)
-		Super::StopJumping();
-}
-
-void AFPSTestCharacter::TurnAtRate(float Rate)
-{
-	if(Movement_Flag)
-		Super::AddControllerYawInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
-}
-
-void AFPSTestCharacter::LookUpAtRate(float Rate)
-{
-	if (Movement_Flag)
-		Super::AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
-}
-
-void AFPSTestCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-	int32 x, y;
 	if (TemperatureChange > 0.0 && Temperature < 40.0 || TemperatureChange<0.0 && Temperature > -20.0)
-		Temperature += TemperatureChange * DeltaTime;
+		Temperature += TemperatureChange * dT;
 	if (Temperature <= -1.0)
-		Health -= DeltaTime;
-	if (!menuing)
-	{
-		GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
-		GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
-		if (0.0 >= Hunger)
-		{
-			Health -= DeltaTime;
-		}
-		else
-		{
-			Hunger -= DeltaTime;
-		}
-		if (HUD)
-		{
-			HUD->SetHealth(Health);
-			HUD->SetHunger(Hunger);
-			HUD->SetFood(Food);
-			HUD->SetTemp(Temperature);
-		}
-	}
-}
-
-bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)
-{
-	if (FPlatformMisc::SupportsTouchInput() || GetDefault<UInputSettings>()->bUseMouseForTouch)
-	{
-		PlayerInputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AFPSTestCharacter::BeginTouch);
-		PlayerInputComponent->BindTouch(EInputEvent::IE_Released, this, &AFPSTestCharacter::EndTouch);
-
-		return true;
-	}
-	
-	return false;
+		Health -= dT;
 }
