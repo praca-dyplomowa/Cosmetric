@@ -103,13 +103,6 @@ void AFPSTestCharacter::BeginPlay()
 		BuildingMenu->AddToPlayerScreen();
 		BuildingMenu->SetVisibility(ESlateVisibility::Hidden);
 	}
-	if (HealthTutorialClass)
-	{
-		HealthGameTutorial = CreateWidget<UTutorial>(ctr, HealthTutorialClass);
-		check(HealthGameTutorial);
-		HealthGameTutorial->AddToPlayerScreen();
-		HealthGameTutorial->SetVisibility(ESlateVisibility::Hidden);
-	}
 	if (RepetableTutorialClass)
 	{
 		RepetableGameTutorial = CreateWidget<UTutorial>(ctr, RepetableTutorialClass);
@@ -229,6 +222,7 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 	GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
 	GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
 	ManageHunger(DeltaTime);
+	ManageHealth(DeltaTime);
 	if (HUD)
 	{
 		HUD->SetHealth(Health);
@@ -320,7 +314,24 @@ void AFPSTestCharacter::EnterBuildMenu()
 
 void AFPSTestCharacter::ManageHealth(float dT)
 {
-	if (Temperature > 0.0 && HungerTimer >= 0.0)
+	if (!HelathTutorialViewed && Health <= 50.0)
+	{
+		HelathTutorialViewed = true;
+		if (HealthTutorialClass)
+		{
+			APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+			HealthGameTutorial = CreateWidget<UTutorial>(ctr, HealthTutorialClass);
+			check(HealthGameTutorial);
+			HealthGameTutorial->AddToPlayerScreen();
+			HealthGameTutorial->SetVisibility(ESlateVisibility::Visible);
+			ctr->bShowMouseCursor = true;
+			ctr->SetInputMode(FInputModeUIOnly());
+			ctr->SetPause(true);
+			if (HUD)
+				HUD->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
+	if (Temperature > 0.0 && Hunger >= 80.0)
 	{
 		Health += dT;
 	}
@@ -382,7 +393,7 @@ void AFPSTestCharacter::ManageHunger(float dT)
 	}
 	else if (0.0 >= Hunger)
 	{
-		Health -= dT / 6.0;
+		Health -= dT;
 	}
 	else
 	{
