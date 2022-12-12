@@ -116,6 +116,7 @@ protected:
 public:
 //Stats
 	float Health;
+	void ManageHealth(float dT);
 	float Hunger;
 	float HungerTimer;
 	void EAT();
@@ -124,5 +125,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TemperatureChange;
+	void ManageTemperature(float dT);
 };
 

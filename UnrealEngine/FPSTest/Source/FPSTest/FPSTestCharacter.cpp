@@ -185,10 +185,7 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	int32 x, y;
-	if (TemperatureChange > 0.0 && Temperature < 40.0 || TemperatureChange<0.0 && Temperature > -20.0)
-		Temperature += TemperatureChange * DeltaTime;
-	if (Temperature <= -1.0)
-		Health -= DeltaTime;
+	ManageTemperature(DeltaTime);
 	GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
 	GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
 	ManageHunger(DeltaTime);
@@ -275,6 +272,14 @@ void AFPSTestCharacter::EnterBuildMenu()
 	GetWorld()->GetFirstPlayerController()->SetPause(true);
 }
 
+void AFPSTestCharacter::ManageHealth(float dT)
+{
+	if (Temperature > 0.0 && HungerTimer >= 0.0)
+	{
+		Health += dT;
+	}
+}
+
 void AFPSTestCharacter::EAT()
 {
 	if (90.0 >= Hunger)
@@ -320,4 +325,12 @@ void AFPSTestCharacter::ManageHunger(float dT)
 	{
 		Hunger -= dT;
 	}
+}
+
+void AFPSTestCharacter::ManageTemperature(float dT)
+{
+	if (TemperatureChange > 0.0 && Temperature < 40.0 || TemperatureChange<0.0 && Temperature > -20.0)
+		Temperature += TemperatureChange * dT;
+	if (Temperature <= -1.0)
+		Health -= dT;
 }
