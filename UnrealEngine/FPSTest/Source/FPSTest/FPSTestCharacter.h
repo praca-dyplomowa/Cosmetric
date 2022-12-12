@@ -21,6 +21,26 @@ class USoundBase;
 // It is declared as dynamic so it can be accessed also in Blueprints
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnUseItem);
 
+USTRUCT(BlueprintType)
+struct FCompactPlayerStats {
+
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite)
+		TArray<FString> Catalog;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Food;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Wood;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float AnimalMaterial;
+
+	float Health;
+	float Hunger;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Temperature;
+};
+
 UCLASS(config=Game)
 class AFPSTestCharacter : public ACharacter
 {
@@ -126,5 +146,7 @@ public:
 
 	void EnterMenu();
 	void EnterBuildMenu();
+	FCompactPlayerStats GetStats();
+	void SetStats(FCompactPlayerStats& stats);
 };
 

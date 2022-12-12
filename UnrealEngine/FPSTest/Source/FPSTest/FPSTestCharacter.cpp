@@ -224,6 +224,32 @@ void AFPSTestCharacter::EnterBuildMenu()
 	}
 }
 
+FCompactPlayerStats AFPSTestCharacter::GetStats()
+{
+	FCompactPlayerStats stats;
+	stats.Catalog = Catalog;
+	stats.Food = Food;
+	stats.Wood = Wood;
+	stats.AnimalMaterial = AnimalMaterial;
+
+	stats.Health = Health;
+	stats.Hunger = Hunger;
+	stats.Temperature = Temperature;
+	return stats;
+}
+
+void AFPSTestCharacter::SetStats(FCompactPlayerStats& stats)
+{
+	Catalog = stats.Catalog;
+	Food = stats.Food;
+	Wood = stats.Wood;
+	AnimalMaterial = stats.AnimalMaterial;
+
+	Health = stats.Health;
+	Hunger = stats.Hunger;
+	Temperature = stats.Temperature;
+}
+
 void AFPSTestCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	if (TouchItem.bIsPressed == true)

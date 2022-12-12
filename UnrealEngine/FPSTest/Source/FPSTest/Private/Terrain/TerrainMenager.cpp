@@ -104,6 +104,16 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 void ATerrainMenager::BeginPlay()
 {
 	Super::BeginPlay();
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single && single->GameInfo)
+		{
+			Seed = single->GameInfo->Seed;
+		}
+	}
 }
 
 // Called every frame

@@ -75,9 +75,9 @@ void ATerrain::InitializeTrees()
 	for (AActor* Singleton : ActorsToFind)
 	{
 		ASingleton* single = Cast<ASingleton>(Singleton);
-		if (single)
+		if (single && single->GameInfo)
 		{
-			seed = single->Seed;
+			seed = single->GameInfo->Seed;
 			auto thisChunkInfo = single->GameInfo->ChunkInfo.Find(GetActorLocation());
 			if (thisChunkInfo != nullptr) {
 				DestroyedTrees = thisChunkInfo->DestroyedTreePositions; // all destroyed trees positions 

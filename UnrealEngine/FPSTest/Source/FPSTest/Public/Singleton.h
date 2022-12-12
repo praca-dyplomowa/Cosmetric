@@ -36,6 +36,4 @@ public:
 	UPROPERTY(VisibleAnywhere)
 		UGameSaveInfo* GameInfo;
 
-	bool SaveGameToMemory(int saveSlotIndex, FString saveSlotName);
-	bool LoadGameFromMemory(int saveSlotIndex, FString saveSlotName);
 };
