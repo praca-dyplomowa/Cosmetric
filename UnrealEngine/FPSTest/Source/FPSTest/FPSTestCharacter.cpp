@@ -87,14 +87,7 @@ void AFPSTestCharacter::BeginPlay()
 		HUD->SetHealth(100.0);
 		HUD->SetHunger(100.0);
 		HUD->SetHunger(100.0);
-		HUD->SetVisibility(ESlateVisibility::Hidden);
-	}
-	if (PauseClass)
-	{
-		PauseMenu = CreateWidget<UInGameMenu>(ctr, PauseClass);
-		check(PauseMenu);
-		PauseMenu->AddToPlayerScreen();
-		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		HUD->SetVisibility(ESlateVisibility::Visible);
 	}
 	if (BuildingClass)
 	{
@@ -302,14 +295,18 @@ void AFPSTestCharacter::EnterMenu()
 
 void AFPSTestCharacter::EnterBuildMenu()
 {
-	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
-	if (BuildingMenu)
+	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+	if (BuildingClass)
 	{
-		BuildingMenu->SetVisibility(ESlateVisibility::Visible);
+		BuildingMenu = CreateWidget<UBuildingMenu>(ctr, BuildingClass);
+		check(BuildingMenu);
+		BuildingMenu->AddToPlayerScreen();
 		BuildingMenu->SetEQ();
+		BuildingMenu->SetVisibility(ESlateVisibility::Visible);
+		ctr->bShowMouseCursor = true;
+		ctr->SetInputMode(FInputModeUIOnly());
+		ctr->SetPause(true);
 	}
-	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
-	GetWorld()->GetFirstPlayerController()->SetPause(true);
 }
 
 void AFPSTestCharacter::ManageHealth(float dT)
@@ -327,8 +324,6 @@ void AFPSTestCharacter::ManageHealth(float dT)
 			ctr->bShowMouseCursor = true;
 			ctr->SetInputMode(FInputModeUIOnly());
 			ctr->SetPause(true);
-			if (HUD)
-				HUD->SetVisibility(ESlateVisibility::Hidden);
 		}
 	}
 	if (Temperature > 0.0 && Hunger >= 80.0)
@@ -383,8 +378,6 @@ void AFPSTestCharacter::ManageHunger(float dT)
 			ctr->bShowMouseCursor = true;
 			ctr->SetInputMode(FInputModeUIOnly());
 			ctr->SetPause(true);
-			if(HUD)
-				HUD->SetVisibility(ESlateVisibility::Hidden);
 		}
 	}
 	if (HungerTimer >= 0)
