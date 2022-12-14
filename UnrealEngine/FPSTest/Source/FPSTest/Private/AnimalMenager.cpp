@@ -25,3 +25,25 @@ void AAnimalMenager::Tick(float DeltaTime)
 
 }
 
+void AAnimalMenager::init(int Seed)
+{
+	for (int i = 0; i < 50; i++)
+	{
+		auto Stream = FRandomStream(Seed + i * i);
+		FSpecies spc;
+		spc.bodyflag = 1 + floor(Stream.GetFraction() * _bodytypes);
+		spc.headflag = 1 + floor(Stream.GetFraction() * _headtypes);
+		spc.tailflag = 1 + floor(Stream.GetFraction() * _tailtypes);
+		spc.legsflag = 1 + floor(Stream.GetFraction() * _legstypes);
+		spc.red = floor(Stream.GetFraction() * 256);
+		spc.green = floor(Stream.GetFraction() * 256);
+		spc.blue = floor(Stream.GetFraction() * 256);
+		spc.animalscale = 0.5 + Stream.GetFraction();
+		spc.bodyscale = 0.5 + Stream.GetFraction();
+		spc.headscale = 0.5 + Stream.GetFraction();
+		spc.tailscale = 0.5 + Stream.GetFraction();
+		spc.legsscale = 0.5 + Stream.GetFraction();
+		Species.Add(spc);
+	}
+}
+
