@@ -143,6 +143,7 @@ public:
 	class UTutorial* HealthGameTutorial;
 	TSubclassOf<class UTutorial> RepetableTutorialClass;
 	class UTutorial* RepetableGameTutorial;
+	void ShowRepetableTutorial();
 
 
 //tutorial flags

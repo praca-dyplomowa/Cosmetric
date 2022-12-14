@@ -244,6 +244,7 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAction("Build", IE_Pressed, this, &AFPSTestCharacter::EnterBuildMenu);
 
 	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &AFPSTestCharacter::EnterMenu);
+	PlayerInputComponent->BindAction("TUTO", IE_Pressed, this, &AFPSTestCharacter::ShowRepetableTutorial);
 
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
@@ -400,4 +401,19 @@ void AFPSTestCharacter::ManageTemperature(float dT)
 		Temperature += TemperatureChange * dT;
 	if (Temperature <= -1.0)
 		Health -= dT;
+}
+
+void AFPSTestCharacter::ShowRepetableTutorial()
+{
+	if (RepetableTutorialClass)
+	{
+		APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+		RepetableGameTutorial = CreateWidget<UTutorial>(ctr, RepetableTutorialClass);
+		check(RepetableGameTutorial);
+		RepetableGameTutorial->AddToPlayerScreen();
+		RepetableGameTutorial->SetVisibility(ESlateVisibility::Visible);
+		ctr->bShowMouseCursor = true;
+		ctr->SetInputMode(FInputModeUIOnly());
+		ctr->SetPause(true);
+	}
 }
