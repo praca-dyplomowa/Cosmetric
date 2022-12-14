@@ -43,7 +43,8 @@ class FPSTEST_API UGameSaveInfo : public USaveGame
 	UGameSaveInfo();
 	GENERATED_BODY()
 public:
-	int Seed;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
+		int Seed;
 	UPROPERTY(VisibleAnywhere, Category = Basic)
 		FString SaveSlotName;
 
