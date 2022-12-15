@@ -86,7 +86,7 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\AnimalBase.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FPSTest\Private\BuildingBase.cpp">
+    <ClCompile Include="..\..\Source\FPSTest\Private\AnimalMenager.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
@@ -170,7 +170,7 @@
     <ClInclude Include="..\..\Source\FPSTest\Public\AnimalBase.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\FPSTest\Public\BuildingBase.h">
+    <ClInclude Include="..\..\Source\FPSTest\Public\AnimalMenager.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">

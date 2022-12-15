@@ -87,14 +87,7 @@ void AFPSTestCharacter::BeginPlay()
 		HUD->SetHealth(100.0);
 		HUD->SetHunger(100.0);
 		HUD->SetHunger(100.0);
-		HUD->SetVisibility(ESlateVisibility::Hidden);
-	}
-	if (PauseClass)
-	{
-		PauseMenu = CreateWidget<UInGameMenu>(ctr, PauseClass);
-		check(PauseMenu);
-		PauseMenu->AddToPlayerScreen();
-		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		HUD->SetVisibility(ESlateVisibility::Visible);
 	}
 	if (BuildingClass)
 	{
@@ -251,6 +244,7 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAction("Build", IE_Pressed, this, &AFPSTestCharacter::EnterBuildMenu);
 
 	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &AFPSTestCharacter::EnterMenu);
+	PlayerInputComponent->BindAction("TUTO", IE_Pressed, this, &AFPSTestCharacter::ShowRepetableTutorial);
 
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
@@ -302,14 +296,18 @@ void AFPSTestCharacter::EnterMenu()
 
 void AFPSTestCharacter::EnterBuildMenu()
 {
-	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
-	if (BuildingMenu)
+	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+	if (BuildingClass)
 	{
-		BuildingMenu->SetVisibility(ESlateVisibility::Visible);
+		BuildingMenu = CreateWidget<UBuildingMenu>(ctr, BuildingClass);
+		check(BuildingMenu);
+		BuildingMenu->AddToPlayerScreen();
 		BuildingMenu->SetEQ();
+		BuildingMenu->SetVisibility(ESlateVisibility::Visible);
+		ctr->bShowMouseCursor = true;
+		ctr->SetInputMode(FInputModeUIOnly());
+		ctr->SetPause(true);
 	}
-	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
-	GetWorld()->GetFirstPlayerController()->SetPause(true);
 }
 
 void AFPSTestCharacter::ManageHealth(float dT)
@@ -327,8 +325,6 @@ void AFPSTestCharacter::ManageHealth(float dT)
 			ctr->bShowMouseCursor = true;
 			ctr->SetInputMode(FInputModeUIOnly());
 			ctr->SetPause(true);
-			if (HUD)
-				HUD->SetVisibility(ESlateVisibility::Hidden);
 		}
 	}
 	if (Temperature > 0.0 && Hunger >= 80.0)
@@ -409,8 +405,6 @@ void AFPSTestCharacter::ManageHunger(float dT)
 			ctr->bShowMouseCursor = true;
 			ctr->SetInputMode(FInputModeUIOnly());
 			ctr->SetPause(true);
-			if(HUD)
-				HUD->SetVisibility(ESlateVisibility::Hidden);
 		}
 	}
 
@@ -445,4 +439,19 @@ FString FCompactPlayerStats::ToString()
 		returnString.Append(thing);
 	}
 	return returnString;
+}
+
+void AFPSTestCharacter::ShowRepetableTutorial()
+{
+	if (RepetableTutorialClass)
+	{
+		APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+		RepetableGameTutorial = CreateWidget<UTutorial>(ctr, RepetableTutorialClass);
+		check(RepetableGameTutorial);
+		RepetableGameTutorial->AddToPlayerScreen();
+		RepetableGameTutorial->SetVisibility(ESlateVisibility::Visible);
+		ctr->bShowMouseCursor = true;
+		ctr->SetInputMode(FInputModeUIOnly());
+		ctr->SetPause(true);
+	}
 }

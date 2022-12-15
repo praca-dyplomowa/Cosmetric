@@ -30,6 +30,37 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	//Values
+	//shape
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int FlagHead = 2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int FlagBody = 2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int FlagLegs = 2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int FlagTail = 1;
+
+	//size
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		float ScaleAnimal = 1.0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		float ScaleHead = 1.0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		float ScaleBody = 1.0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		float ScaleLegs = 1.0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		float ScaleTail = 1.0;
+
+	//color
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int Red;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int Green;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int Blue;
+
 public:
 	//AIsActionable
 	bool Action;
