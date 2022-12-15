@@ -46,7 +46,7 @@ bool UMyGameInstance::CreateNewSaveInstance(FString saveSlotName, int saveUserIn
 	UE_LOG(LogTemp, Warning, TEXT("Created New SaveGame Data with name %s"), *saveSlotName);
 	// set initial player stats
 	GameInfo->PlayerTransform = FTransform(
-		FRotator(0, 0, 90),
+		FRotator(0, 0, 0),
 		FVector(610, 1520, 280),
 		FVector(1)
 	);
