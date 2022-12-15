@@ -89,6 +89,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\AnimalMenager.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\BuildingBase.cpp">
+      <Filter>Source\FPSTest\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\PerlinNoise.cpp">
       <Filter>Source\FPSTest\Private</Filter>
     </ClCompile>
@@ -161,6 +164,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\Tree\OakLikeTree.cpp">
       <Filter>Source\FPSTest\Private\Tree</Filter>
     </ClCompile>
+    <ClInclude Include="..\..\Source\FPSTest\Private\Tree\OakLikeTree.h">
+      <Filter>Source\FPSTest\Private\Tree</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\FPSTest\Private\Tree\SpruceLikeTree.cpp">
       <Filter>Source\FPSTest\Private\Tree</Filter>
     </ClCompile>
@@ -171,6 +177,9 @@
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\AnimalMenager.h">
+      <Filter>Source\FPSTest\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\BuildingBase.h">
       <Filter>Source\FPSTest\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\PerlinNoise.h">
@@ -243,11 +252,6 @@
       <Filter>Source\FPSTest\Public\Tree</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\Tree\SpruceLikeTree.h">
-      <Filter>Source\FPSTest\Public\Tree</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\FPSTest\Private\Tree\OakLikeTree.h">
       <Filter>Source\FPSTest\Public\Tree</Filter>
     </ClInclude>
   </ItemGroup>
