@@ -39,10 +39,10 @@ void AAnimalMenager::init(int Seed)
 		spc.green = floor(Stream.GetFraction() * 256);
 		spc.blue = floor(Stream.GetFraction() * 256);
 		spc.animalscale = 0.5 + Stream.GetFraction();
-		spc.bodyscale = 0.5 + Stream.GetFraction();
-		spc.headscale = 0.5 + Stream.GetFraction();
-		spc.tailscale = 0.5 + Stream.GetFraction();
-		spc.legsscale = 0.5 + Stream.GetFraction();
+		spc.bodyscale = 1.0 + Stream.GetFraction();
+		spc.headscale = 1.0 + Stream.GetFraction();
+		spc.tailscale = 1.0 + Stream.GetFraction();
+		spc.legsscale = 1.0 + Stream.GetFraction();
 		Species.Add(spc);
 	}
 }
