@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "GameSaveInfo.h"
 #include "MyGameInstance.generated.h"
 
 /**
@@ -16,6 +17,18 @@ class FPSTEST_API UMyGameInstance : public UGameInstance
 
 public:
 
-	int Seed;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UGameSaveInfo* GameInfo;
+
+	UFUNCTION(BlueprintCallable)
+	bool SaveGameToMemory(FString saveSlotName, int saveUserIndex);
+	UFUNCTION(BlueprintCallable)
+	bool LoadGameFromMemory(FString saveSlotName, int saveUserIndex);
+
+	UFUNCTION(BlueprintCallable)
+		void SetSeed(int seed);
+
+	UFUNCTION(BlueprintCallable)
+		bool CreateNewSaveInstance(FString saveSlotName, int saveUserIndex);
 	
 };

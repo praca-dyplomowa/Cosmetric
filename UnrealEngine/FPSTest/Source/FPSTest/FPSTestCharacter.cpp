@@ -364,6 +364,32 @@ void AFPSTestCharacter::EAT()
 	}
 }
 
+FCompactPlayerStats AFPSTestCharacter::GetStats()
+{
+	FCompactPlayerStats stats;
+	stats.Catalog = Catalog;
+	stats.Food = Food;
+	stats.Wood = Wood;
+	stats.AnimalMaterial = AnimalMaterial;
+
+	stats.Health = Health;
+	stats.Hunger = Hunger;
+	stats.Temperature = Temperature;
+	return stats;
+}
+
+void AFPSTestCharacter::SetStats(FCompactPlayerStats& stats)
+{
+	Catalog = stats.Catalog;
+	Food = stats.Food;
+	Wood = stats.Wood;
+	AnimalMaterial = stats.AnimalMaterial;
+
+	Health = stats.Health;
+	Hunger = stats.Hunger;
+	Temperature = stats.Temperature;
+}
+
 void AFPSTestCharacter::ManageHunger(float dT)
 {
 	if (!EatTutorialViewed && Hunger <= 50.0)
@@ -381,6 +407,7 @@ void AFPSTestCharacter::ManageHunger(float dT)
 			ctr->SetPause(true);
 		}
 	}
+
 	if (HungerTimer >= 0)
 	{
 		HungerTimer -= dT;
@@ -401,6 +428,17 @@ void AFPSTestCharacter::ManageTemperature(float dT)
 		Temperature += TemperatureChange * dT;
 	if (Temperature <= -1.0)
 		Health -= dT;
+}
+
+FString FCompactPlayerStats::ToString()
+{
+	auto returnString = FString::Printf(TEXT("Health: %f\nFood: %f\nWood: %f\nAnimalMaterial: %f\nHunger: %f\nTemperature: %f\nCatalog:\n"),
+		Health, Food, Wood, AnimalMaterial, Hunger, Temperature);
+	for (FString thing : Catalog) {
+		returnString.Append(TEXT("\n  "));
+		returnString.Append(thing);
+	}
+	return returnString;
 }
 
 void AFPSTestCharacter::ShowRepetableTutorial()

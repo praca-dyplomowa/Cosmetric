@@ -1,17 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Terrain/TerrainMenager.h"
-#include "Singleton.h"
-
-#include "Kismet/GameplayStatics.h"
+#include "GUI/MyGameInstance.h"
 
 ATerrainMenager::ATerrainMenager()
 {
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void ATerrainMenager::init()
+void ATerrainMenager::OnConstruction(const FTransform& transform)
 {
+	Super::OnConstruction(transform);
 	for (int i = 0; i < 256; i++)
 	{
 		Permutation[i] = i;
@@ -104,6 +103,11 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 void ATerrainMenager::BeginPlay()
 {
 	Super::BeginPlay();
+	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
+	if (GameInfo) {
+		Seed = GameInfo->Seed;
+	}
+	
 }
 
 // Called every frame
