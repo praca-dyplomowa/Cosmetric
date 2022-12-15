@@ -6,12 +6,11 @@
 #include <random>
 #include <algorithm>
 #include <cmath>
-#include "Singleton.h"
+#include "GUI/MyGameInstance.h"
 #include "Math/RandomStream.h"
 #include "Tree/SpruceLikeTree.h"
 #include "Tree/OakLikeTree.h"
 #include "Terrain/TerrainMenager.h"
-#include "Kismet/GameplayStatics.h"
 #include "PerlinNoise.h"
 
 ATerrain::ATerrain()
@@ -70,20 +69,20 @@ void ATerrain::InitializeTrees()
 {
 	int seed = 0;
 	TSet<FVector2D> DestroyedTrees;
-	TArray<AActor*> ActorsToFind;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	for (AActor* Singleton : ActorsToFind)
-	{
-		ASingleton* single = Cast<ASingleton>(Singleton);
-		if (single && single->GameInfo)
+	auto GameInstance = Cast<UMyGameInstance>(GetWorld()->GetGameInstance());
+	if (GameInstance) {
+		auto GameInfo = GameInstance->GameInfo;
+		if (GameInfo)
 		{
-			seed = single->GameInfo->Seed;
-			auto thisChunkInfo = single->GameInfo->ChunkInfo.Find(GetActorLocation());
+			seed = GameInfo->Seed;
+			auto thisChunkInfo = GameInfo->ChunkInfo.Find(GetActorLocation());
 			if (thisChunkInfo != nullptr) {
 				DestroyedTrees = thisChunkInfo->DestroyedTreePositions; // all destroyed trees positions 
 			}
 		}
 	}
+	
+
 	auto terrainPosition = GetActorLocation();
 	auto terrainSize = Scale * Size;
 	auto stream = FRandomStream(

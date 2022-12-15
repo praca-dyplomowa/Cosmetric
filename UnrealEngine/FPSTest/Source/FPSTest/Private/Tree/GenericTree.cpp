@@ -2,7 +2,7 @@
 
 
 #include "Tree/GenericTree.h"
-#include "Singleton.h"
+#include "GUI/MyGameInstance.h"
 
 #include "Math/RandomStream.h"
 #include "Kismet/GameplayStatics.h"
@@ -97,15 +97,10 @@ double AGenericTree::GetMeshOffset(UStaticMesh* staticMesh, double size)
 void AGenericTree::BeginPlay()
 {
 	Super::BeginPlay();
-	TArray<AActor*> ActorsToFind;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	for (AActor* Singleton : ActorsToFind)
+	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
+	if (GameInfo)
 	{
-		ASingleton* single = Cast<ASingleton>(Singleton);
-		if (single)
-		{
-			Seed = single->Seed;
-		}
+		Seed = GameInfo->Seed;
 	}
 }
 
@@ -205,28 +200,19 @@ void AGenericTree::OnCollected()
 
 void AGenericTree::SaveTreeDestroyed()
 {
-	TArray<AActor*> ActorsToFind;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	for (AActor* Singleton : ActorsToFind)
-	{
-		ASingleton* single = Cast<ASingleton>(Singleton);
-		if (single)
-		{
-			auto chunkLocation = GetOwner()->GetActorLocation();
-			bool didExist = true;
-			auto addedTreeLocation = FVector2D(GetActorLocation());
-			FChunkSaveInfo* thisChunk = single->GameInfo->ChunkInfo.Find(chunkLocation);
-			if (thisChunk == nullptr) {
-				thisChunk = new FChunkSaveInfo(); // create new object to store tree data for this tree's chunk
-				didExist = false;
-			}
-			thisChunk->DestroyedTreePositions.Add(FVector2D(GetActorLocation())); // store this tree's XY position
+	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
+	auto chunkLocation = GetOwner()->GetActorLocation();
+	bool didExist = true;
+	auto addedTreeLocation = FVector2D(GetActorLocation());
+	FChunkSaveInfo* thisChunk = GameInfo->ChunkInfo.Find(chunkLocation);
+	if (thisChunk == nullptr) {
+		thisChunk = new FChunkSaveInfo(); // create new object to store tree data for this tree's chunk
+		didExist = false;
+	}
+	thisChunk->DestroyedTreePositions.Add(FVector2D(GetActorLocation())); // store this tree's XY position
 			
-			if (!didExist) {
-				single->GameInfo->ChunkInfo.Add(chunkLocation, *thisChunk);
-			}
-			thisChunk = single->GameInfo->ChunkInfo.Find(chunkLocation);
-		}
+	if (!didExist) {
+		GameInfo->ChunkInfo.Add(chunkLocation, *thisChunk);
 	}
 }
 

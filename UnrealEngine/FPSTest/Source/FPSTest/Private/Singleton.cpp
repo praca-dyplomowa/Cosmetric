@@ -22,16 +22,18 @@ ASingleton::ASingleton()
 void ASingleton::BeginPlay()
 {
 	Super::BeginPlay();
-	int saveGameIndex = 0;
-	FString saveGameName = TEXT("New Game Save");
-	this->GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
-	
 	auto character = ((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()));
+	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
 	if (GameInfo) {
+		FString stats = GameInfo->PlayerStats.ToString();
+		UE_LOG(LogTemp, Warning, TEXT("Loaded Player Stats\n%s\nfrom save slot %s"), *stats, *GameInfo->SaveSlotName);
 		character->SetActorTransform(GameInfo->PlayerTransform);
 		character->SetStats(GameInfo->PlayerStats);
+		for (auto& Building : GameInfo->BuildingInfo)
+		{
+			GetWorld()->SpawnActor<ABuildingBase>(Building.Class, Building.Transform);
+		}
 	}
-
 }
 
 // Called every frame

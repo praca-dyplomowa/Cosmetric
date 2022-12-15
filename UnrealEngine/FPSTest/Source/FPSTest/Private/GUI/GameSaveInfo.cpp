@@ -15,4 +15,5 @@ FBuildingInfo::FBuildingInfo() {
 UGameSaveInfo::UGameSaveInfo() {
 	SaveSlotName = TEXT("New Save Slot");
 	UserIndex = 0;
+	Seed = 0;
 }

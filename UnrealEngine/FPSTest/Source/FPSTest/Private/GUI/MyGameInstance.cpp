@@ -9,6 +9,9 @@ bool UMyGameInstance::SaveGameToMemory(FString saveSlotName, int saveUserIndex)
 	auto character = ((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()));
 	GameInfo->PlayerTransform = FTransform(character->GetActorTransform());
 	GameInfo->PlayerStats = character->GetStats();
+	UE_LOG(LogTemp, Warning, TEXT("Saved SaveGame Data with name %s"), *saveSlotName);
+	auto stats = GameInfo->PlayerStats.ToString();
+	UE_LOG(LogTemp, Warning, TEXT("Saved Player Stats\n%s"), *stats);
 	return UGameplayStatics::SaveGameToSlot(GameInfo, saveSlotName, saveUserIndex);
 }
 
@@ -19,15 +22,11 @@ bool UMyGameInstance::LoadGameFromMemory(FString saveSlotName, int saveUserIndex
 		UE_LOG(LogTemp, Warning, TEXT("Failed to load SaveGame Data."));
 		return false;
 	}
-	UE_LOG(LogTemp, Log, TEXT("Loaded  SaveGame Data with name %s"), &saveSlotName);
-
+	UE_LOG(LogTemp, Warning, TEXT("Loaded SaveGame Data with name %s"), *saveSlotName);
+	auto stats = GameInfo->PlayerStats.ToString();
+	UE_LOG(LogTemp, Warning, TEXT("Loaded Player Stats\n%s"), *stats);
 	GameInfo->UserIndex = saveUserIndex;
 	GameInfo->SaveSlotName = saveSlotName;
-
-	for (auto& Building : GameInfo->BuildingInfo)
-	{
-		GetWorld()->SpawnActor<ABuildingBase>(Building.Class, Building.Transform);
-	}
 
 	return true;
 
@@ -42,26 +41,25 @@ void UMyGameInstance::SetSeed(int seed)
 
 bool UMyGameInstance::CreateNewSaveInstance(FString saveSlotName, int saveUserIndex)
 {
-	if (!UGameplayStatics::DoesSaveGameExist(saveSlotName, saveUserIndex)) {
-		GameInfo = Cast<UGameSaveInfo>(UGameplayStatics::CreateSaveGameObject(UGameSaveInfo::StaticClass()));
-		UE_LOG(LogTemp, Log, TEXT("Created New SaveGame Data with name %s"), &saveSlotName);
-		// set initial player stats
-		GameInfo->PlayerTransform = FTransform(
-			FRotator(),
-			FVector(0, 0, 100),
-			FVector(1)
-		);
+	GameInfo = Cast<UGameSaveInfo>(UGameplayStatics::CreateSaveGameObject(UGameSaveInfo::StaticClass()));
+	if (GameInfo == nullptr) return false;
+	UE_LOG(LogTemp, Warning, TEXT("Created New SaveGame Data with name %s"), *saveSlotName);
+	// set initial player stats
+	GameInfo->PlayerTransform = FTransform(
+		FRotator(0, 0, 90),
+		FVector(610, 1520, 280),
+		FVector(1)
+	);
 
-		FCompactPlayerStats stats;
-		stats.Health = 100.0;
-		stats.Hunger = 100.0;
-		stats.Food = 100.0;
-		stats.Wood = 100.0;
-		stats.AnimalMaterial = 100.0;
-		stats.Temperature = 0.0;
-		GameInfo->PlayerStats = stats;
-
-		return true;
-	}
-	return false;
+	FCompactPlayerStats stats;
+	stats.Health = 100.0;
+	stats.Hunger = 100.0;
+	stats.Food = 100.0;
+	stats.Wood = 100.0;
+	stats.AnimalMaterial = 100.0;
+	stats.Temperature = 0.0;
+	GameInfo->PlayerStats = stats;
+	GameInfo->SaveSlotName = saveSlotName;
+	GameInfo->UserIndex = saveUserIndex;
+	return true;
 }

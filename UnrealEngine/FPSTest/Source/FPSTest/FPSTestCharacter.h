@@ -27,6 +27,8 @@ struct FCompactPlayerStats {
 
 	GENERATED_BODY()
 
+		FString ToString();
+
 	UPROPERTY(BlueprintReadWrite)
 		TArray<FString> Catalog;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

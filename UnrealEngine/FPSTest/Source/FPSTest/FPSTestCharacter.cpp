@@ -435,3 +435,14 @@ void AFPSTestCharacter::ManageTemperature(float dT)
 	if (Temperature <= -1.0)
 		Health -= dT;
 }
+
+FString FCompactPlayerStats::ToString()
+{
+	auto returnString = FString::Printf(TEXT("Health: %f\nFood: %f\nWood: %f\nAnimalMaterial: %f\nHunger: %f\nTemperature: %f\nCatalog:\n"),
+		Health, Food, Wood, AnimalMaterial, Hunger, Temperature);
+	for (FString thing : Catalog) {
+		returnString.Append(TEXT("\n  "));
+		returnString.Append(thing);
+	}
+	return returnString;
+}

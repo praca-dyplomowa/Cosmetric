@@ -3,7 +3,7 @@
 
 #include "BuildingBase.h"
 #include "Kismet/GameplayStatics.h"
-#include "Singleton.h"
+#include "GUI/MyGameInstance.h"
 
 // Sets default values
 ABuildingBase::ABuildingBase()
@@ -21,21 +21,13 @@ void ABuildingBase::BeginPlay()
 
 void ABuildingBase::RegisterToSaveInfo()
 {
-	TArray<AActor*> ActorsToFind;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	for (AActor* Singleton : ActorsToFind)
+	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
+	if (GameInfo)
 	{
-		ASingleton* single = Cast<ASingleton>(Singleton);
-		if (single)
-		{
-			FBuildingInfo buildingInfo;
-			buildingInfo.Transform = GetActorTransform();
-			buildingInfo.Class = GetClass();
-			if (single->GameInfo != nullptr) {
-				single->GameInfo->BuildingInfo.Add(buildingInfo);
-			}
-			
-		}
+		FBuildingInfo buildingInfo;
+		buildingInfo.Transform = GetActorTransform();
+		buildingInfo.Class = GetClass();
+		GameInfo->BuildingInfo.Add(buildingInfo);
 	}
 }
 
@@ -43,6 +35,5 @@ void ABuildingBase::RegisterToSaveInfo()
 void ABuildingBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 

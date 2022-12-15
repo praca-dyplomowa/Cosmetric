@@ -25,8 +25,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Seed;
-	UFUNCTION(BlueprintCallable)
-		void init();
+
+		void OnConstruction(const FTransform &transform) override;
 
 	UFUNCTION(BlueprintCallable)
 		float Noise(float x, float y);

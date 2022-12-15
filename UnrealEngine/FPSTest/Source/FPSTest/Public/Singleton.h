@@ -31,10 +31,6 @@ public:
 		TSubclassOf<class UInGameMenu> PauseClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UBuildingMenu> BuildingClass;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int Seed;
-	UPROPERTY(VisibleAnywhere)
-		UGameSaveInfo* GameInfo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
 		TSubclassOf<class UTutorial> StartGameTutorial;
