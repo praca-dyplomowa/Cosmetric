@@ -45,21 +45,21 @@ class FPSTEST_API UGameSaveInfo : public USaveGame
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
 		int Seed;
-	UPROPERTY(VisibleAnywhere, Category = Basic)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
 		FString SaveSlotName;
 
-	UPROPERTY(VisibleAnywhere, Category = Basic)
-		uint32 UserIndex;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Basic)
+		int UserIndex;
 
-	UPROPERTY(VisibleAnywhere, Category = Basic)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Player)
 		FTransform PlayerTransform;
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Player)
 	FCompactPlayerStats PlayerStats;
 
-	UPROPERTY(VisibleAnywhere, Category = Basic)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Chunks)
 		TMap<FVector, FChunkSaveInfo> ChunkInfo;
 
-	UPROPERTY(VisibleAnywhere, Category = Basic)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Buildings)
 		TArray<FBuildingInfo> BuildingInfo;
 
 };

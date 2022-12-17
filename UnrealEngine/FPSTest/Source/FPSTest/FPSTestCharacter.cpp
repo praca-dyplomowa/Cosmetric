@@ -375,6 +375,10 @@ FCompactPlayerStats AFPSTestCharacter::GetStats()
 	stats.Health = Health;
 	stats.Hunger = Hunger;
 	stats.Temperature = Temperature;
+	stats.StartTutorialViewed = StartTutorialViewed;
+	stats.EatTutorialViewed = EatTutorialViewed;
+	stats.NightTutorialViewed = NightTutorialViewed;
+	stats.HelathTutorialViewed = HelathTutorialViewed;
 	return stats;
 }
 
@@ -388,7 +392,11 @@ void AFPSTestCharacter::SetStats(FCompactPlayerStats& stats)
 	Health = stats.Health;
 	Hunger = stats.Hunger;
 	Temperature = stats.Temperature;
-}
+	StartTutorialViewed = stats.StartTutorialViewed;
+	EatTutorialViewed = stats.EatTutorialViewed;
+	NightTutorialViewed = stats.NightTutorialViewed;
+	HelathTutorialViewed = stats.HelathTutorialViewed;
+};
 
 void AFPSTestCharacter::ManageHunger(float dT)
 {

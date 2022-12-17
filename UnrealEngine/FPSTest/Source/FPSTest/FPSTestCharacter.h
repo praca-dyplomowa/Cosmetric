@@ -37,11 +37,20 @@ struct FCompactPlayerStats {
 		float Wood;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float AnimalMaterial;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Health;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Hunger;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Temperature;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool StartTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool EatTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool NightTutorialViewed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
+		bool HelathTutorialViewed;
 };
 
 UCLASS(config=Game)
@@ -149,8 +158,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TemperatureChange;
-
+	UFUNCTION(BlueprintCallable)
 	FCompactPlayerStats GetStats();
+	UFUNCTION(BlueprintCallable)
 	void SetStats(FCompactPlayerStats& stats);
 	void ManageTemperature(float dT);
 
