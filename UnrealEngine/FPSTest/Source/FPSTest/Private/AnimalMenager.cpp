@@ -37,16 +37,16 @@ void AAnimalMenager::BeginPlay()
 void AAnimalMenager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	/*if (Animals.Num() < 1)
+	if (Animals.Num() < 1)
 	{
 		FTransform pos = FTransform(FVector(
 			100,
 			100,
 			1000)
 		);
-		AAnimalBase* ani = GetWorld()->SpawnActorDeferred<AAnimalBase>(AnimalClass, pos);
+		AAnimalBase* ani = GetWorld()->SpawnActor<AAnimalBase>(AnimalClass, pos);
 		Animals.Add(ani);
-	}*/
+	}
 }
 
 void AAnimalMenager::init(int Seed)
