@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "AnimalBase.h"
 #include "AnimalMenager.generated.h"
 
 USTRUCT(BlueprintType)
@@ -84,5 +85,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void init(int Seed);
+
+	UPROPERTY()
+		TSubclassOf<class AAnimalBase> AnimalClass;
+
+	UPROPERTY()
+		TArray<AAnimalBase *> Animals;
 
 };

@@ -18,7 +18,7 @@ class FPSTEST_API UMyGameInstance : public UGameInstance
 public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	UGameSaveInfo* GameInfo;
+		UGameSaveInfo* GameInfo;
 
 	UFUNCTION(BlueprintCallable)
 	bool SaveGameToMemory(FString saveSlotName, int saveUserIndex);

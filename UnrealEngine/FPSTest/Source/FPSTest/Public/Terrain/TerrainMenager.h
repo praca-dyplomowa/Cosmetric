@@ -32,6 +32,7 @@ public:
 		float Noise(float x, float y);
 
 
+
 	void Move(FVector2D NewCenter);
 
 protected:

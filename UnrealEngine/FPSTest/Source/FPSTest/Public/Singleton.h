@@ -42,4 +42,7 @@ public:
 		TSubclassOf<class UTutorial> HealthTutorial;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
 		TSubclassOf<class UTutorial> RepetableTutorial;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animals")
+		TSubclassOf<class AAnimalBase> AnimalClass;
 };

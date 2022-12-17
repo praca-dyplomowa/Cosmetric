@@ -2,6 +2,11 @@
 
 
 #include "AnimalMenager.h"
+#include "../Public/Singleton.h"
+#include "UObject/ConstructorHelpers.h"
+#include "UObject/UObjectGlobals.h"
+#include "Kismet/GameplayStatics.h"
+
 
 // Sets default values
 AAnimalMenager::AAnimalMenager()
@@ -15,6 +20,16 @@ AAnimalMenager::AAnimalMenager()
 void AAnimalMenager::BeginPlay()
 {
 	Super::BeginPlay();
+	TArray<AActor*> ActorsToFind;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	for (AActor* Singleton : ActorsToFind)
+	{
+		ASingleton* single = Cast<ASingleton>(Singleton);
+		if (single)
+		{
+			AnimalClass = single->AnimalClass;
+		}
+	}
 	
 }
 
@@ -22,7 +37,16 @@ void AAnimalMenager::BeginPlay()
 void AAnimalMenager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	/*if (Animals.Num() < 1)
+	{
+		FTransform pos = FTransform(FVector(
+			100,
+			100,
+			1000)
+		);
+		AAnimalBase* ani = GetWorld()->SpawnActorDeferred<AAnimalBase>(AnimalClass, pos);
+		Animals.Add(ani);
+	}*/
 }
 
 void AAnimalMenager::init(int Seed)
