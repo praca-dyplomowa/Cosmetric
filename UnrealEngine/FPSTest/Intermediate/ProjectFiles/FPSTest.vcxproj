@@ -174,7 +174,6 @@
     <None Include="..\..\Source\FPSTestEditor.Target.cs"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini"/>
-    <None Include="..\..\Config\DefaultEngine.ini"/>
     <None Include="..\..\Config\DefaultGame.ini"/>
     <None Include="..\..\Config\DefaultInput.ini"/>
     <None Include="..\..\Config\DefaultNiagara.ini"/>

@@ -20,9 +20,6 @@
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
       <Filter>Config</Filter>
     </None>
-    <None Include="..\..\Config\DefaultEngine.ini">
-      <Filter>Config</Filter>
-    </None>
     <None Include="..\..\Config\DefaultGame.ini">
       <Filter>Config</Filter>
     </None>
