@@ -71,9 +71,9 @@ public:
 	bool Collectable;
 	static const inline float MaxCollectTime = 3.0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Boop")
-		int Food;
+		float Food;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boop")
-		int Material;
+		float Material;
 	UAllPurposeProgressBarWidget* CollectProgressBar;
 
 	UFUNCTION()

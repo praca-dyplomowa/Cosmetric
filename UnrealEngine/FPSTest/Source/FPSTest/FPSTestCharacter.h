@@ -38,9 +38,9 @@ struct FCompactPlayerStats {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float AnimalMaterial;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Health;
+		float Health;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Hunger;
+		float Hunger;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Temperature;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")

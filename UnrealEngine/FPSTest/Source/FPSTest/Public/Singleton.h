@@ -45,4 +45,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animals")
 		TSubclassOf<class AAnimalBase> AnimalClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Clock")
+		bool IsNight;
 };

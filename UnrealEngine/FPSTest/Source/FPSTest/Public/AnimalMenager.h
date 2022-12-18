@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "AnimalBase.h"
+#include <random>
 #include "AnimalMenager.generated.h"
 
 USTRUCT(BlueprintType)
@@ -57,6 +58,15 @@ public:
 		int blue;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int green;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float food;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float material;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float life;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString name;
 };
 
 UCLASS()
@@ -90,6 +100,9 @@ public:
 		TSubclassOf<class AAnimalBase> AnimalClass;
 
 	UPROPERTY()
-		TArray<AAnimalBase *> Animals;
+		float AnimalSpawnTimer;
+
+	std::default_random_engine generator;
+	std::uniform_real_distribution<float> distribution;
 
 };
