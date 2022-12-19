@@ -243,6 +243,8 @@ void AAnimalBase::OnKilled()
 
 void AAnimalBase::OnDamageTaken()
 {
+	FVector loc(0.0, 0.0, 20.0);
+	AddActorLocalOffset(loc);
 }
 
 void AAnimalBase::OnCollected() { }
