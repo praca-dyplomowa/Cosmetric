@@ -92,8 +92,10 @@ public:
 	UFUNCTION()
 		void OnSelectedDamage(AActor* Target, FKey ButtonPressed);
 	//AIsScannable
-	float ScanTime;
-	bool BeingScanned;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Boop")
+		float ScanTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Boop")
+		bool BeingScanned;
 	static const inline float MaxScanTime = 5.0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boop")
 		FString Name;
