@@ -82,6 +82,8 @@ public:
 		void OnSelectedCollect(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
 		void OnUnselectedCollect(AActor* Target, FKey ButtonPressed);
+	UFUNCTION()
+		void OnEndCursorOverCollect(AActor* Target);
 	//AIsDamagable
 	UFUNCTION()
 		virtual void OnKilled();
@@ -115,4 +117,6 @@ public:
 		void OnSelectedScan(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
 		void OnUnselectedScan(AActor* Target, FKey ButtonPressed);
+	UFUNCTION()
+		void OnEndCursorOverScan(AActor* Target);
 };

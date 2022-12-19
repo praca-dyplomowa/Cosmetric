@@ -9,6 +9,7 @@
 #include "Public/GUI/InGameMenu.h"
 #include "Public/GUI/BuildingMenu.h"
 #include "Public/Tutorial.h"
+#include "Containers/Map.h"
 #include "FPSTestCharacter.generated.h"
 
 class UInputComponent;
@@ -30,7 +31,11 @@ struct FCompactPlayerStats {
 		FString ToString();
 
 	UPROPERTY(BlueprintReadWrite)
-		TArray<FString> Catalog;
+		TMap<FString, int> AnimalCatalog;
+	UPROPERTY(BlueprintReadWrite)
+		TMap<FString, UClass*> TreeCatalogClass;
+	UPROPERTY(BlueprintReadWrite)
+		TMap<FString, FVector> TreeCatalogLocation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Food;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -125,7 +130,11 @@ public:
 	bool Movement_Flag;
 //Catalog
 	UPROPERTY(BlueprintReadWrite)
-		TArray<FString> Catalog;
+		TMap<FString, int> AnimalCatalog;
+	UPROPERTY(BlueprintReadWrite)
+		TMap<FString, UClass*> TreeCatalogClass;
+	UPROPERTY(BlueprintReadWrite)
+		TMap<FString, FVector> TreeCatalogLocation;
 //Equipment
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Food;
@@ -148,6 +157,7 @@ protected:
 	void EnterBuildMenu();
 public:
 //Stats
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Health;
 	void ManageHealth(float dT);
 	float Hunger;

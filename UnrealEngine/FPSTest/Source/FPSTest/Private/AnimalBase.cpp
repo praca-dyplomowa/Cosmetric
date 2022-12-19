@@ -17,6 +17,7 @@ AAnimalBase::AAnimalBase()
 	Action = false;
 	OnClicked.AddUniqueDynamic(this, &AAnimalBase::OnSelectedScan);
 	OnReleased.AddUniqueDynamic(this, &AAnimalBase::OnUnselectedScan);
+	OnEndCursorOver.AddUniqueDynamic(this, &AAnimalBase::OnEndCursorOverScan);
 	ScanProgressBar = nullptr;
 	BeingScanned = false;
 	ProgressBarWidgetClass = nullptr;
@@ -25,6 +26,7 @@ AAnimalBase::AAnimalBase()
 	BeingDamaged = false;
 	OnClicked.AddUniqueDynamic(this, &AAnimalBase::OnSelectedCollect);
 	OnReleased.AddUniqueDynamic(this, &AAnimalBase::OnUnselectedCollect);
+	OnEndCursorOver.AddUniqueDynamic(this, &AAnimalBase::OnEndCursorOverCollect);
 	CollectProgressBar = nullptr;
 	BeingCollected = false;
 	Collectable = true;
@@ -96,7 +98,7 @@ void AAnimalBase::Tick(float DeltaTime)
 			{
 				ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
 			}
-			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Add(Name);
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalCatalog.Add(Name, SpeciesNumber);
 			Action = false;
 		}
 		ScanProgressBar->SetValue(ScanTime, MaxScanTime);
@@ -147,7 +149,7 @@ void AAnimalBase::OnSelectedScan(AActor* Target, FKey ButtonPressed)
 	{
 		if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 		{
-			if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Contains(Name)))
+			if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalCatalog.Contains(Name)))
 			{
 				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
 				if (ScanProgressBar)
@@ -174,6 +176,17 @@ void AAnimalBase::OnUnselectedScan(AActor* Target, FKey ButtonPressed)
 		BeingScanned = false;
 		Action = false;
 	}
+}
+
+void AAnimalBase::OnEndCursorOverScan(AActor* Target)
+{
+	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
+	if (ScanProgressBar)
+	{
+		ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+	}
+	BeingScanned = false;
+	Action = false;
 }
 
 void AAnimalBase::OnSelectedDamage(AActor* Target, FKey ButtonPressed)
@@ -236,6 +249,17 @@ void AAnimalBase::OnUnselectedCollect(AActor* Target, FKey ButtonPressed)
 	}
 }
 
+void AAnimalBase::OnEndCursorOverCollect(AActor* Target)
+{
+	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
+	if (CollectProgressBar)
+	{
+		CollectProgressBar->SetVisibility(ESlateVisibility::Hidden);
+	}
+	BeingCollected = false;
+	Action = false;
+}
+
 void AAnimalBase::OnKilled()
 {
 	Alive = false;
@@ -243,7 +267,7 @@ void AAnimalBase::OnKilled()
 
 void AAnimalBase::OnDamageTaken()
 {
-	FVector loc(0.0, 0.0, 20.0);
+	FVector loc(0.0, 0.0, 100.0);
 	AddActorLocalOffset(loc);
 }
 

@@ -39,4 +39,6 @@ public:
 		void OnSelectedCollect(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
 		void OnUnselectedCollect(AActor* Target, FKey ButtonPressed);
+	UFUNCTION()
+		void OnEndCursorOverCollect(AActor* Target);
 };

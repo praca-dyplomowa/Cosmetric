@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Utilities">
       <UniqueIdentifier>{fb3e47ae-fc12-4319-ad14-7e7779e63bd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Terrain">
+      <UniqueIdentifier>{96810b23-887f-4eac-bb99-280928c71a3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UnitTesting.cpp">
@@ -33,6 +36,18 @@
     <ClCompile Include="FVector2D.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="FVector.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="FTransform.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="TArray.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -42,6 +57,18 @@
       <Filter>Source Files\PerlinNoise</Filter>
     </ClInclude>
     <ClInclude Include="FVector2D.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Source Files\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="FVector.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="FTransform.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TArray.h">
       <Filter>Source Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>

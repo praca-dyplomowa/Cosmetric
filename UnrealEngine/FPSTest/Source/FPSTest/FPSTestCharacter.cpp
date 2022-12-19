@@ -18,6 +18,7 @@
 AFPSTestCharacter::AFPSTestCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 
@@ -40,8 +41,6 @@ AFPSTestCharacter::AFPSTestCharacter()
 	Mesh1P->SetRelativeLocation(FVector(-0.5f, -4.4f, -155.7f));
 	HUD = nullptr;
 	HUDClass = nullptr;
-	//PauseClass = nullptr;
-	//PauseMenu = nullptr;
 	Health = 100.0;
 	Hunger = 100.0;
 	HungerTimer = 20.0;
@@ -63,6 +62,7 @@ void AFPSTestCharacter::BeginPlay()
 	check(ctr);
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
+	GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
 	for (AActor* Singleton : ActorsToFind)
 	{
 		ASingleton* single = Cast<ASingleton>(Singleton);
@@ -117,7 +117,7 @@ void AFPSTestCharacter::BeginPlay()
 	{
 		if (HUD)
 		{
-			HUD->SetVisibility(ESlateVisibility::Visible);
+			HUD->SetVisibility(ESlateVisibility::HitTestInvisible);
 		}
 	}
 }
@@ -367,7 +367,9 @@ void AFPSTestCharacter::EAT()
 FCompactPlayerStats AFPSTestCharacter::GetStats()
 {
 	FCompactPlayerStats stats;
-	stats.Catalog = Catalog;
+	stats.TreeCatalogClass = TreeCatalogClass;
+	stats.TreeCatalogLocation = TreeCatalogLocation;
+	stats.AnimalCatalog = AnimalCatalog;
 	stats.Food = Food;
 	stats.Wood = Wood;
 	stats.AnimalMaterial = AnimalMaterial;
@@ -384,7 +386,9 @@ FCompactPlayerStats AFPSTestCharacter::GetStats()
 
 void AFPSTestCharacter::SetStats(FCompactPlayerStats& stats)
 {
-	Catalog = stats.Catalog;
+	TreeCatalogClass = stats.TreeCatalogClass;
+	TreeCatalogLocation = stats.TreeCatalogLocation;
+	AnimalCatalog = stats.AnimalCatalog;
 	Food = stats.Food;
 	Wood = stats.Wood;
 	AnimalMaterial = stats.AnimalMaterial;
@@ -442,10 +446,10 @@ FString FCompactPlayerStats::ToString()
 {
 	auto returnString = FString::Printf(TEXT("Health: %f\nFood: %f\nWood: %f\nAnimalMaterial: %f\nHunger: %f\nTemperature: %f\nCatalog:\n"),
 		Health, Food, Wood, AnimalMaterial, Hunger, Temperature);
-	for (FString thing : Catalog) {
+	/*for (FString thing : AnimalCatalog) {
 		returnString.Append(TEXT("\n  "));
 		returnString.Append(thing);
-	}
+	}*/
 	return returnString;
 }
 

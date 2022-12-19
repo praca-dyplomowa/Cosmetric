@@ -16,6 +16,7 @@ AIsScannable::AIsScannable()
 	PrimaryActorTick.bCanEverTick = true;
 	OnClicked.AddUniqueDynamic(this, &AIsScannable::OnSelectedScan);
 	OnReleased.AddUniqueDynamic(this, &AIsScannable::OnUnselectedScan);
+	OnEndCursorOver.AddUniqueDynamic(this, &AIsScannable::OnEndCursorOverScan);
 	ScanProgressBar = nullptr;
 	BeingScanned = false;
 	ProgressBarWidgetClass = nullptr;
@@ -72,7 +73,8 @@ void AIsScannable::Tick(float DeltaTime)
 			{
 				ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
 			}
-			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Add(Name);
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->TreeCatalogClass.Add(Name, this->GetClass());
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->TreeCatalogLocation.Add(Name, GetActorLocation());
 			Action = false;
 		}
 		ScanProgressBar->SetValue(ScanTime, MaxScanTime);
@@ -86,12 +88,12 @@ void AIsScannable::OnSelectedScan(AActor* Target, FKey ButtonPressed)
 	{
 		if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 		{
-			if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Catalog.Contains(Name)))
+			if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->TreeCatalogClass.Contains(Name)))
 			{
 				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
 				if (ScanProgressBar)
 				{
-					ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
+					ScanProgressBar->SetVisibility(ESlateVisibility::HitTestInvisible);
 				}
 				BeingScanned = true;
 				ScanTime = MaxScanTime;
@@ -113,4 +115,15 @@ void AIsScannable::OnUnselectedScan(AActor* Target, FKey ButtonPressed)
 		BeingScanned = false;
 		Action = false;
 	}
+}
+
+void AIsScannable::OnEndCursorOverScan(AActor* Target)
+{
+	((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = true;
+	if (ScanProgressBar)
+	{
+		ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
+	}
+	BeingScanned = false;
+	Action = false;
 }

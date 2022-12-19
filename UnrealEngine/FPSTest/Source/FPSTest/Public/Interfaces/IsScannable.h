@@ -41,4 +41,6 @@ public:
 		void OnSelectedScan(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
 		void OnUnselectedScan(AActor* Target, FKey ButtonPressed);
+	UFUNCTION()
+		void OnEndCursorOverScan(AActor* Target);
 };
