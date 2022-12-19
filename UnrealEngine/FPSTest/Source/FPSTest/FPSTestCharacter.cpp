@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "FPSTestCharacter.h"
+#include "GUI/MyGameInstance.h"
 #include "FPSTestProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
@@ -60,6 +61,13 @@ void AFPSTestCharacter::BeginPlay()
 	Super::BeginPlay();
 	APlayerController* ctr = GetWorld()->GetFirstPlayerController();
 	check(ctr);
+
+	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
+	if (GameInfo) {
+		SetActorTransform(GameInfo->PlayerTransform);
+		SetStats(GameInfo->PlayerStats);
+	}
+	
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
 	GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
@@ -83,10 +91,10 @@ void AFPSTestCharacter::BeginPlay()
 		HUD = CreateWidget<UPlayer_HUD_Widget>(ctr, HUDClass);
 		check(HUD);
 		HUD->AddToPlayerScreen();
-		HUD->SetTemp(0.0);
-		HUD->SetHealth(100.0);
-		HUD->SetHunger(100.0);
-		HUD->SetHunger(100.0);
+		HUD->SetTemp(Temperature);
+		HUD->SetHealth(Health);
+		HUD->SetHunger(Hunger);
+		HUD->SetFood(Food);
 		HUD->SetVisibility(ESlateVisibility::Visible);
 	}
 	if (BuildingClass)
