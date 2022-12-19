@@ -67,12 +67,14 @@ public:
 	//AIsCollectable
 	virtual void OnCollected();
 	float CollectTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collect")
 	bool BeingCollected;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collect")
 	bool Collectable;
 	static const inline float MaxCollectTime = 3.0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Boop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collect")
 		float Food;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collect")
 		float Material;
 	UAllPurposeProgressBarWidget* CollectProgressBar;
 
@@ -84,21 +86,25 @@ public:
 	UFUNCTION()
 		virtual void OnKilled();
 	virtual void OnDamageTaken();
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float Health;
-	bool Alive;
-	bool BeingDamaged;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		bool Alive;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		bool BeingDamaged;
 	float DamageTime;
 	UFUNCTION()
 		void OnSelectedDamage(AActor* Target, FKey ButtonPressed);
 	//AIsScannable
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Boop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Scan")
 		float ScanTime;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Boop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Scan")
 		bool BeingScanned;
 	static const inline float MaxScanTime = 5.0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scan")
 		FString Name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Scan")
+		int SpeciesNumber;
 
 	TSubclassOf<class UAllPurposeProgressBarWidget> ProgressBarWidgetClass;
 

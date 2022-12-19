@@ -1,0 +1,10 @@
+﻿  UnitTesting.cpp
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.h(14,2): warning C4091: 'static ': ignored on left of 'PerlinNoise' when no variable is declared
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(101,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(102,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(116,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(117,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(131,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(132,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+     Creating library D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\x64\Debug\UnitTesting.lib and object D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\x64\Debug\UnitTesting.exp
+  UnitTesting.vcxproj -> D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\x64\Debug\UnitTesting.dll

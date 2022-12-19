@@ -30,6 +30,8 @@ public:
 		red = 0;
 		blue = 0;
 		green = 0;
+
+		agresive = false;
 	}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -67,6 +69,9 @@ public:
 		float life;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FString name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool agresive;
 };
 
 UCLASS()
