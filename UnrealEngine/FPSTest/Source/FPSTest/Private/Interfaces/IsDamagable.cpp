@@ -63,6 +63,9 @@ void AIsDamagable::OnSelectedDamage(AActor* Target, FKey ButtonPressed)
 void AIsDamagable::OnKilled()
 {
 	Alive = false;
+	Action = true;
+	BeingDamaged = true;
+	DamageTime = 0.1;
 }
 
 void AIsDamagable::OnDamageTaken()

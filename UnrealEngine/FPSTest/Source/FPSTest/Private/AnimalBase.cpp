@@ -207,6 +207,9 @@ void AAnimalBase::OnSelectedDamage(AActor* Target, FKey ButtonPressed)
 				}
 				else
 				{
+					BeingDamaged = true;
+					DamageTime = 0.1;
+					Action = true;
 					OnKilled();
 				}
 			}
