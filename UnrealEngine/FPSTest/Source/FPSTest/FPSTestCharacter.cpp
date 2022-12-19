@@ -70,7 +70,7 @@ void AFPSTestCharacter::BeginPlay()
 	
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
+	// GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
 	for (AActor* Singleton : ActorsToFind)
 	{
 		ASingleton* single = Cast<ASingleton>(Singleton);
@@ -125,7 +125,7 @@ void AFPSTestCharacter::BeginPlay()
 	{
 		if (HUD)
 		{
-			HUD->SetVisibility(ESlateVisibility::HitTestInvisible);
+			HUD->SetVisibility(ESlateVisibility::Visible);
 		}
 	}
 }

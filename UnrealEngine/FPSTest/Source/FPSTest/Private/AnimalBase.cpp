@@ -17,7 +17,7 @@ AAnimalBase::AAnimalBase()
 	Action = false;
 	OnClicked.AddUniqueDynamic(this, &AAnimalBase::OnSelectedScan);
 	OnReleased.AddUniqueDynamic(this, &AAnimalBase::OnUnselectedScan);
-	OnEndCursorOver.AddUniqueDynamic(this, &AAnimalBase::OnEndCursorOverScan);
+	// OnEndCursorOver.AddUniqueDynamic(this, &AAnimalBase::OnEndCursorOverScan);
 	ScanProgressBar = nullptr;
 	BeingScanned = false;
 	ProgressBarWidgetClass = nullptr;
@@ -26,7 +26,7 @@ AAnimalBase::AAnimalBase()
 	BeingDamaged = false;
 	OnClicked.AddUniqueDynamic(this, &AAnimalBase::OnSelectedCollect);
 	OnReleased.AddUniqueDynamic(this, &AAnimalBase::OnUnselectedCollect);
-	OnEndCursorOver.AddUniqueDynamic(this, &AAnimalBase::OnEndCursorOverCollect);
+	// OnEndCursorOver.AddUniqueDynamic(this, &AAnimalBase::OnEndCursorOverCollect);
 	CollectProgressBar = nullptr;
 	BeingCollected = false;
 	Collectable = true;

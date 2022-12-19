@@ -13,7 +13,7 @@ AIsCollectable::AIsCollectable()
 	PrimaryActorTick.bCanEverTick = true;
 	OnClicked.AddUniqueDynamic(this, &AIsCollectable::OnSelectedCollect);
 	OnReleased.AddUniqueDynamic(this, &AIsCollectable::OnUnselectedCollect);
-	OnEndCursorOver.AddUniqueDynamic(this, &AIsCollectable::OnEndCursorOverCollect);
+	// OnEndCursorOver.AddUniqueDynamic(this, &AIsCollectable::OnEndCursorOverCollect);
 	CollectProgressBar = nullptr;
 	BeingCollected = false;
 	Collectable = true;
@@ -88,7 +88,7 @@ void AIsCollectable::OnSelectedCollect(AActor* Target, FKey ButtonPressed)
 				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
 				if (CollectProgressBar)
 				{
-					CollectProgressBar->SetVisibility(ESlateVisibility::HitTestInvisible);
+					CollectProgressBar->SetVisibility(ESlateVisibility::Visible);
 				}
 				BeingCollected = true;
 				CollectTime = MaxCollectTime;

@@ -16,7 +16,7 @@ AIsScannable::AIsScannable()
 	PrimaryActorTick.bCanEverTick = true;
 	OnClicked.AddUniqueDynamic(this, &AIsScannable::OnSelectedScan);
 	OnReleased.AddUniqueDynamic(this, &AIsScannable::OnUnselectedScan);
-	OnEndCursorOver.AddUniqueDynamic(this, &AIsScannable::OnEndCursorOverScan);
+	//OnEndCursorOver.AddUniqueDynamic(this, &AIsScannable::OnEndCursorOverScan);
 	ScanProgressBar = nullptr;
 	BeingScanned = false;
 	ProgressBarWidgetClass = nullptr;
@@ -93,7 +93,7 @@ void AIsScannable::OnSelectedScan(AActor* Target, FKey ButtonPressed)
 				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
 				if (ScanProgressBar)
 				{
-					ScanProgressBar->SetVisibility(ESlateVisibility::HitTestInvisible);
+					ScanProgressBar->SetVisibility(ESlateVisibility::Visible);
 				}
 				BeingScanned = true;
 				ScanTime = MaxScanTime;
