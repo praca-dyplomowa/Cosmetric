@@ -61,9 +61,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
 		int Blue;
 
+	//behaviour
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "behaviour")
+		bool isNight;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		bool isAgresive;
+
 public:
 	//AIsActionable
 	bool Action;
+
 	//AIsCollectable
 	virtual void OnCollected();
 	float CollectTime;
@@ -72,7 +79,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collect")
 	bool Collectable;
 	static const inline float MaxCollectTime = 3.0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collect")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collect")
 		float Food;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collect")
 		float Material;
@@ -84,6 +91,7 @@ public:
 		void OnUnselectedCollect(AActor* Target, FKey ButtonPressed);
 	UFUNCTION()
 		void OnEndCursorOverCollect(AActor* Target);
+
 	//AIsDamagable
 	UFUNCTION()
 		virtual void OnKilled();
@@ -94,9 +102,11 @@ public:
 		bool Alive;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		bool BeingDamaged;
-	float DamageTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float DamageTime;
 	UFUNCTION()
 		void OnSelectedDamage(AActor* Target, FKey ButtonPressed);
+
 	//AIsScannable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Scan")
 		float ScanTime;
