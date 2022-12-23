@@ -98,7 +98,7 @@ void AAnimalBase::Tick(float DeltaTime)
 			{
 				ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
 			}
-			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalCatalog.Add(Name, SpeciesNumber);
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalCatalog.Add(Name, spcNum);
 			Action = false;
 		}
 		ScanProgressBar->SetValue(ScanTime, MaxScanTime);

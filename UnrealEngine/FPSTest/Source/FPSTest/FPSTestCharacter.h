@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
 #include "GameFramework/Character.h"
 #include "Public/HUD/Player_HUD_Widget.h"
 #include "Blueprint/UserWidget.h"
@@ -91,6 +92,8 @@ protected:
 	/** Fires a projectile. */
 	void OnPrimaryAction();
 //Movement Package
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Camera)
+		bool CameraLock;
 	void MoveForward(float Val);
 	void MoveRight(float Val);
 	void TurnAtRate(float Rate);
@@ -129,12 +132,19 @@ public:
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 	bool Movement_Flag;
 //Catalog
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TMap<FString, int> AnimalCatalog;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TMap<FString, UClass*> TreeCatalogClass;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TMap<FString, FVector> TreeCatalogLocation;
+	UFUNCTION()
+		void ShowCatalog();
+	UPROPERTY(BlueprintReadWrite)
+		TSubclassOf<class AActor> CatalogViewClass;
+	UPROPERTY(BlueprintReadWrite)
+		AActor* CatalogView;
+
 //Equipment
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Food;

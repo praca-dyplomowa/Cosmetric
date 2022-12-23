@@ -67,6 +67,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
 		bool isAgresive;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int spcNum;
+
 public:
 	//AIsActionable
 	bool Action;

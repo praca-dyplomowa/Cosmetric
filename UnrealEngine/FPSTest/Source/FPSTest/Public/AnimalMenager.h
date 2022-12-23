@@ -72,6 +72,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool agresive;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int speciesNumber;
 };
 
 UCLASS()

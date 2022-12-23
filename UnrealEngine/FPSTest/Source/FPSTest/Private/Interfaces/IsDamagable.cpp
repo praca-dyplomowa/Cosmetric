@@ -7,7 +7,7 @@
 AIsDamagable::AIsDamagable()
 {
 	OnClicked.AddUniqueDynamic(this, &AIsDamagable::OnSelectedDamage);
-	Alive = true;
+	Alive = false;
 	BeingDamaged = false;
 }
 

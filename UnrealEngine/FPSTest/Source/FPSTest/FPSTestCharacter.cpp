@@ -53,6 +53,7 @@ AFPSTestCharacter::AFPSTestCharacter()
 	EatTutorialViewed = false;
 	NightTutorialViewed = false;
 	HelathTutorialViewed = false;
+	CameraLock = true;
 }
 
 void AFPSTestCharacter::BeginPlay()
@@ -84,6 +85,7 @@ void AFPSTestCharacter::BeginPlay()
 			NightTutorialClass = single->NightTutorial;
 			HealthTutorialClass = single->HealthTutorial;
 			RepetableTutorialClass = single->RepetableTutorial;
+			CatalogViewClass = single->CatalogViewClass;
 		}
 	}
 	if (HUDClass)
@@ -220,8 +222,11 @@ void AFPSTestCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	int32 x, y;
 	ManageTemperature(DeltaTime);
-	GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
-	GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
+	if (CameraLock)
+	{
+		GetWorld()->GetFirstPlayerController()->GetViewportSize(x, y);
+		GetWorld()->GetFirstPlayerController()->SetMouseLocation(x / 2, y / 2);
+	}
 	ManageHunger(DeltaTime);
 	ManageHealth(DeltaTime);
 	if (HUD)
@@ -253,6 +258,7 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 
 	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &AFPSTestCharacter::EnterMenu);
 	PlayerInputComponent->BindAction("TUTO", IE_Pressed, this, &AFPSTestCharacter::ShowRepetableTutorial);
+	PlayerInputComponent->BindAction("Catalog", IE_Pressed, this, &AFPSTestCharacter::ShowCatalog);
 
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
@@ -285,6 +291,18 @@ bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerI
 	}
 	
 	return false;
+}
+
+void AFPSTestCharacter::ShowCatalog()
+{
+	if (CatalogViewClass)
+	{
+		FTransform pos = GetActorTransform();
+		CatalogView = GetWorld()->SpawnActor<AActor>(CatalogViewClass, pos);
+		FRotator tmpR = GetWorld()->GetFirstPlayerController()->GetControlRotation();
+		CatalogView->AddActorLocalRotation(FRotator(tmpR.Pitch, 0, 180.0));
+		CatalogView->AddActorLocalOffset(FVector(200,0,0));
+	}
 }
 
 void AFPSTestCharacter::EnterMenu()
@@ -335,7 +353,7 @@ void AFPSTestCharacter::ManageHealth(float dT)
 			ctr->SetPause(true);
 		}
 	}
-	if (Temperature > 0.0 && Hunger >= 80.0)
+	if (Temperature > 0.0 && Hunger >= 80.0 && Health <= 100.0)
 	{
 		Health += dT;
 	}
@@ -381,7 +399,6 @@ FCompactPlayerStats AFPSTestCharacter::GetStats()
 	stats.Food = Food;
 	stats.Wood = Wood;
 	stats.AnimalMaterial = AnimalMaterial;
-
 	stats.Health = Health;
 	stats.Hunger = Hunger;
 	stats.Temperature = Temperature;
@@ -400,7 +417,6 @@ void AFPSTestCharacter::SetStats(FCompactPlayerStats& stats)
 	Food = stats.Food;
 	Wood = stats.Wood;
 	AnimalMaterial = stats.AnimalMaterial;
-
 	Health = stats.Health;
 	Hunger = stats.Hunger;
 	Temperature = stats.Temperature;

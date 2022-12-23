@@ -116,12 +116,12 @@ void AAnimalMenager::Tick(float DeltaTime)
 		TArray<AActor*> ActorsToFind;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AAnimalBase::StaticClass(), ActorsToFind);
 		FVector loc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-		for (int i = ActorsToFind.Num(); i < 20; i++)
+		for (int i = ActorsToFind.Num(); i < 1; i++)
 		{
 			float x = distribution(generator);
-			x += x - 0.5 < 0.0 ? loc.X + (x - 0.5) * 15000 - 500 : loc.X + (x - 0.5) * 15000 + 500;
+			x += loc.X; // x - 0.5 < 0.0 ? loc.X + (x - 0.5) * 15000 - 500 : loc.X + (x - 0.5) * 15000 + 500;
 			float y = distribution(generator);
-			y += y - 0.5 < 0.0 ? loc.Y + (y - 0.5) * 15000 - 500 : loc.Y + (y - 0.5) * 15000 + 500;
+			y += loc.Y; // y - 0.5 < 0.0 ? loc.Y + (y - 0.5) * 15000 - 500 : loc.Y + (y - 0.5) * 15000 + 500;
 			FTransform pos = FTransform(FVector(
 				x,
 				y,
@@ -158,6 +158,7 @@ void AAnimalMenager::init(int Seed)
 		spc.name = FirstName[floor(Stream.GetFraction() * FirstName.Num())] + " "
 			+ SecondName[floor(Stream.GetFraction() * SecondName.Num())] + " "
 			+ ThirdName[floor(Stream.GetFraction() * ThirdName.Num())];
+		spc.speciesNumber = i;
 		Species.Add(spc);
 	}
 }
