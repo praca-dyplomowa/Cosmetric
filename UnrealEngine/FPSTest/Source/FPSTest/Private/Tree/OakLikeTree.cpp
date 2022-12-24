@@ -6,7 +6,7 @@
 AOakLikeTree::AOakLikeTree()
 {
 	Name = TEXT("OakLike tree");
-	TrunkInit.HeightBounds = FVector2D(200, 300);
+	TrunkInit.HeightBounds = FVector2D(600, 800);
 	TrunkInit.InitialSegmentSize = 60;
 
 	TrunkInit.Material = LoadObject<UMaterial>(
@@ -38,61 +38,12 @@ AOakLikeTree::AOakLikeTree()
 	TreetopRender.HorizontalScalingVariance = 0.3;
 }
 
-void AOakLikeTree::RenderTreetop(double offset)
+double AOakLikeTree::RenderTreetop(double offset)
 {
-	auto translation = FVector(0, 0, TrunkRender.Height + GetMeshOffset(TrunkInit.StaticMesh, TrunkRender.SegmentSize));
-	if (TreetopRender.Instanced &&
-		TreetopRender.Instanced->GetStaticMesh() &&
-		TreetopRender.Instanced->GetMaterial(0)) {
-		auto meshSize = TreetopRender.Instanced->GetStaticMesh()->GetBoundingBox().GetSize();
-
-		auto rotation =  360 / PartsOfCircle;
-		auto ZAxis = FVector(0, 0, 1);
-		auto radius = InitialTreetopRadius;
-
-		auto segmentHeight = TreetopRender.SegmentSize * offset;
-		auto segmentNumber = round((TreetopRender.Height - TreetopRender.SegmentSize) / segmentHeight) + 1;
-		auto segmentScale = TreetopRender.SegmentSize / meshSize.Z;
-
-
-		TArray<FTransform> transforms;
-		transforms.Empty(segmentNumber * PartsOfCircle + 1);
-		TreetopRender.Instanced->ClearInstances();
-
-		// base of the treetop
-		transforms.Add(
-			FTransform(
-				FRotator(0, 0, 0),
-				translation,
-				FVector(
-					radius * 2 / meshSize.X,
-					radius * 2 / meshSize.Y,
-					10 / meshSize.Z
-				)
-			)
-		);
-		for (int i = 0; i < segmentNumber; i++) {
-			for (int rot = 0; rot < 360; rot += rotation) {
-				auto thisTranslation = translation + FVector(radius, 0, 0).RotateAngleAxis(rot, ZAxis);
-				auto rotator = FRotator(
-					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
-					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
-					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance)
-				);
-				auto scale = FVector(
-					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
-					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
-					1
-				) * segmentScale;
-				transforms.Add(FTransform(
-					rotator,
-					thisTranslation,
-					scale
-				));
-			}
-			radius *= (1 - ShrinkFactor);
-			translation += FVector(0, 0, segmentHeight);
-		}
-		TreetopRender.Instanced->AddInstances(transforms, false);
-	}
+	TreetopRender.Instanced->SetRelativeLocation(FVector(
+		0,
+		0,
+		TrunkRender.Height - TreetopRender.Height + TreetopRender.SegmentSize + GetMeshOffset(TreetopInit.StaticMesh, TreetopRender.SegmentSize)
+	));
+	return RenderConeTreetop(offset, InitialTreetopRadius, PartsOfCircle);
 }

@@ -8,6 +8,12 @@
 #include "Interfaces/IsCollectable.h"
 #include "GenericTree.generated.h"
 
+UENUM(BlueprintType)
+enum class ShrinkType : uint8 {
+	Linear = 0 UMETA(DisplayName = "Linear"),
+	Geometric = 1  UMETA(DisplayName = "Geometric"),
+};
+
 USTRUCT(BlueprintType)
 struct FTreeComponentInit
 {
@@ -101,12 +107,15 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	virtual void Tick(float DeltaTime) override;
-	virtual void RenderUp(FTreeComponentRender &generatedStruct, FVector from = FVector(0,0,0), double Offset = 1);
-	virtual void RenderTrunk(double offset);
-	virtual void RenderTreetop(double offset);
+	virtual double RenderUp(FTreeComponentRender &generatedStruct, double Offset = 1);
+	virtual double RenderTrunk(double offset);
+	virtual double RenderTreetop(double offset);
 	virtual void OnConstruction(const FTransform& transform) override;
 	virtual void OnCollected() override;
 	virtual void SaveTreeDestroyed();
+	double RenderConeTreetop(double Offset, double InitialTreetopRadius, int PartsOfCircle, ShrinkType type = ShrinkType::Geometric);
+	double RenderSpiralTrunk(double Offset, double SpiralRadius, double RotationDegree, ShrinkType type = ShrinkType::Geometric);
+	TArray<FVector> PrepareSunsetVectors(FVector beginning, FVector end, int number);
 	UPROPERTY(EditAnywhere, Category = "Trunk")
 	FTreeComponentInit TrunkInit;
 	UPROPERTY(EditAnywhere, Category = "Treetop")

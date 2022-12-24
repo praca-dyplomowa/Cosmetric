@@ -10,6 +10,7 @@
 #include "Math/RandomStream.h"
 #include "Tree/SpruceLikeTree.h"
 #include "Tree/OakLikeTree.h"
+#include "Tree/SpiralConeTree.h"
 #include "Terrain/TerrainMenager.h"
 #include "PerlinNoise.h"
 
@@ -97,8 +98,11 @@ void ATerrain::InitializeTrees()
 	}
 	for (int i = 0; i < TreesLeft; i++) {
 		FVector position = stream.GetUnitVector();
-		position.X *= terrainSize;
-		position.Y *= terrainSize;
+		if (position.X < 0) position.X *= -terrainSize;
+		else position.X *= terrainSize;
+		if (position.Y < 0) position.Y *= -terrainSize;
+		else position.Y *= terrainSize;
+		
 		position += terrainPosition;
 		if (!DestroyedTrees.Contains(FVector2D(position))) {
 			position.Z = PerlinNoise::Noise(position.X / terrainSize, position.Y / terrainSize, Permutation) * 500;
@@ -152,13 +156,15 @@ UClass* ATerrain::GetTreeClass(int seed)
 		seed
 	);
 
-	int i = stream.RandRange(0, 1);
+	int i = stream.RandRange(0, 2);
 	switch (i)
 	{
 	case 0:
 		return ASpruceLikeTree::StaticClass();
 	case 1:
 		return AOakLikeTree::StaticClass();
+	case 2:
+		return ASpiralConeTree::StaticClass();
 	default:
 		break;
 	}

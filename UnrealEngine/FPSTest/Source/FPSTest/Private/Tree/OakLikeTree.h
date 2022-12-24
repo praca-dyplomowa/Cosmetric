@@ -16,7 +16,7 @@ class AOakLikeTree : public AGenericTree
 public: 
 	AOakLikeTree();
 protected:
-	virtual void RenderTreetop(double offset) override;
+	virtual double RenderTreetop(double offset) override;
 	double ShrinkFactor = 0.15;
 	double InitialTreetopRadius = 300;
 	int PartsOfCircle = 7;

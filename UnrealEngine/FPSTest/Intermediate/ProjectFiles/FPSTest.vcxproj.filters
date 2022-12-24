@@ -167,6 +167,9 @@
     <ClInclude Include="..\..\Source\FPSTest\Private\Tree\OakLikeTree.h">
       <Filter>Source\FPSTest\Private\Tree</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\FPSTest\Private\Tree\SpiralConeTree.cpp">
+      <Filter>Source\FPSTest\Private\Tree</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\FPSTest\Private\Tree\SpruceLikeTree.cpp">
       <Filter>Source\FPSTest\Private\Tree</Filter>
     </ClCompile>
@@ -249,6 +252,9 @@
       <UniqueIdentifier>{EE8CAAC6-28F2-3E21-8340-FD277785D0BC}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\FPSTest\Public\Tree\GenericTree.h">
+      <Filter>Source\FPSTest\Public\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\Tree\SpiralConeTree.h">
       <Filter>Source\FPSTest\Public\Tree</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\Tree\SpruceLikeTree.h">
