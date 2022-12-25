@@ -116,12 +116,12 @@ void AAnimalMenager::Tick(float DeltaTime)
 		TArray<AActor*> ActorsToFind;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AAnimalBase::StaticClass(), ActorsToFind);
 		FVector loc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-		for (int i = ActorsToFind.Num(); i < 1; i++)
+		for (int i = ActorsToFind.Num(); i < 50; i++)
 		{
 			float x = distribution(generator);
-			x += loc.X; // x - 0.5 < 0.0 ? loc.X + (x - 0.5) * 15000 - 500 : loc.X + (x - 0.5) * 15000 + 500;
+			x += x - 0.5 < 0.0 ? loc.X + (x - 0.5) * 15000 - 500 : loc.X + (x - 0.5) * 15000 + 500;
 			float y = distribution(generator);
-			y += loc.Y; // y - 0.5 < 0.0 ? loc.Y + (y - 0.5) * 15000 - 500 : loc.Y + (y - 0.5) * 15000 + 500;
+			y += y - 0.5 < 0.0 ? loc.Y + (y - 0.5) * 15000 - 500 : loc.Y + (y - 0.5) * 15000 + 500;
 			FTransform pos = FTransform(FVector(
 				x,
 				y,
