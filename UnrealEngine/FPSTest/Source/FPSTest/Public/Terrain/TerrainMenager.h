@@ -49,4 +49,7 @@ private:
 
 	int Permutation[256];
 	int Size;
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Terrain")
+		UMaterial* TerrainMaterial;
 };

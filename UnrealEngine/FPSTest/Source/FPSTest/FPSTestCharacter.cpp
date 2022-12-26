@@ -71,7 +71,6 @@ void AFPSTestCharacter::BeginPlay()
 	
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	// GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
 	for (AActor* Singleton : ActorsToFind)
 	{
 		ASingleton* single = Cast<ASingleton>(Singleton);

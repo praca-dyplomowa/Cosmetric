@@ -20,7 +20,7 @@ ATerrain::ATerrain()
 
 	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
 
-	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Ground_Moss"));
+	UMaterial* mt = LoadObject<UMaterial>(nullptr, TEXT("/Game/Terrain/MTerrainSimple"));
 	ProceduralMesh->SetMaterial(0, mt);
 	SetRootComponent(ProceduralMesh);
 }
