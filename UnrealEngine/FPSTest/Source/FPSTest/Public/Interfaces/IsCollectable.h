@@ -10,7 +10,7 @@
 #include "IsCollectable.generated.h"
 
 UCLASS()
-class FPSTEST_API AIsCollectable : public AIsDamagable
+class FPSTEST_API AIsCollectable : public AIsScannable
 {
 	GENERATED_BODY()
 	
