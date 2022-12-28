@@ -19,14 +19,14 @@ public:
 	float CollectTime;
 	bool BeingCollected;
 	bool Collectable;
-	static const inline float MaxCollectTime = 3.0;
-		int Materials[3];
+	//static const inline float MaxCollectTime = 3.0;
+	//	int Materials[3];
 
-	UAllPurposeProgressBarWidget* CollectProgressBar;
+	//UAllPurposeProgressBarWidget* CollectProgressBar;
 
-		void OnSelectedCollect(AActor* Target, FKey ButtonPressed);
-		void OnUnselectedCollect(AActor* Target, FKey ButtonPressed);
-		void OnEndCursorOverCollect(AActor* Target);
+	//	void OnSelectedCollect(AActor* Target, FKey ButtonPressed);
+	//	void OnUnselectedCollect(AActor* Target, FKey ButtonPressed);
+	//	void OnEndCursorOverCollect(AActor* Target);
 
 };
 

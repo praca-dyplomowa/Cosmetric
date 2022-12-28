@@ -116,7 +116,7 @@ void AAnimalMenager::Tick(float DeltaTime)
 		TArray<AActor*> ActorsToFind;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AAnimalBase::StaticClass(), ActorsToFind);
 		FVector loc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-		for (int i = ActorsToFind.Num(); i < 50; i++)
+		for (int i = ActorsToFind.Num(); i < 32; i++)
 		{
 			float x = distribution(generator);
 			x += x - 0.5 < 0.0 ? loc.X + (x - 0.5) * 15000 - 500 : loc.X + (x - 0.5) * 15000 + 500;
@@ -139,10 +139,11 @@ void AAnimalMenager::init(int Seed)
 	{
 		auto Stream = FRandomStream(Seed + i * i);
 		FSpecies spc;
-		spc.bodyflag = 1 + floor(Stream.GetFraction() * _bodytypes);
-		spc.headflag = 1 + floor(Stream.GetFraction() * _headtypes);
-		spc.tailflag = 1 + floor(Stream.GetFraction() * _tailtypes);
-		spc.legsflag = 1 + floor(Stream.GetFraction() * _legstypes);
+		spc.bodyflag = 1 + floor(Stream.GetFraction() * 3);
+		spc.headflag = 1 + floor(Stream.GetFraction() * 5);
+		spc.tailflag = 1 + floor(Stream.GetFraction() * 2);
+		spc.lowerlegsflag = 1 + floor(Stream.GetFraction() * 2);
+		spc.upperlegsflag = 1 + floor(Stream.GetFraction() * 2);
 		spc.red = floor(Stream.GetFraction() * 256);
 		spc.green = floor(Stream.GetFraction() * 256);
 		spc.blue = floor(Stream.GetFraction() * 256);

@@ -18,7 +18,8 @@ public:
 	{
 		bodyflag = 1;
 		headflag = 1;
-		legsflag = 1;
+		lowerlegsflag = 1;
+		upperlegsflag = 1;
 		tailflag = 1;
 
 		animalscale = 1.0;
@@ -39,7 +40,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int headflag;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int legsflag;
+		int lowerlegsflag;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int upperlegsflag;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int tailflag;
 
@@ -90,10 +93,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	static inline int _headtypes = 2;
-	static inline int _bodytypes = 2;
-	static inline int _tailtypes = 2;
-	static inline int _legstypes = 2;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
