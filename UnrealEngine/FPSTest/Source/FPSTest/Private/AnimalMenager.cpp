@@ -139,10 +139,10 @@ void AAnimalMenager::init(int Seed)
 	{
 		auto Stream = FRandomStream(Seed + i * i);
 		FSpecies spc;
-		spc.bodyflag = 1 + floor(Stream.GetFraction() * 3);
+		spc.bodyflag = 1 + floor(Stream.GetFraction() * 5);
 		spc.headflag = 1 + floor(Stream.GetFraction() * 5);
 		spc.tailflag = 1 + floor(Stream.GetFraction() * 2);
-		spc.lowerlegsflag = 1 + floor(Stream.GetFraction() * 2);
+		spc.lowerlegsflag = 1 + floor(Stream.GetFraction() * 3);
 		spc.upperlegsflag = 1 + floor(Stream.GetFraction() * 2);
 		spc.red = floor(Stream.GetFraction() * 256);
 		spc.green = floor(Stream.GetFraction() * 256);
