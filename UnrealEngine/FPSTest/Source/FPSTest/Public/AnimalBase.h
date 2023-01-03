@@ -37,7 +37,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
 		int FlagBody = 2;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
-		int FlagLegs = 2;
+		int FlagLowerLegs = 2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
+		int FlagUpperLegs = 2;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visuals")
 		int FlagTail = 1;
 

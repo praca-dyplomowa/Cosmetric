@@ -165,6 +165,8 @@ protected:
 	TSubclassOf<class UBuildingMenu> BuildingClass;
 	class UBuildingMenu* BuildingMenu;
 	void EnterBuildMenu();
+
+	TSubclassOf<class UUserWidget> EndGame;
 public:
 //Stats
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

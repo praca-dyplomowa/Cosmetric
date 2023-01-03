@@ -23,7 +23,24 @@ void UPlayer_HUD_Widget::SetTemp(float val)
 {
 	if (Temperature)
 	{
-		Temperature->SetText(FText::FromString(FString::SanitizeFloat(floor(val))));
+		Temperature->SetText(FText::FromString(FString::FromInt((int)floor(val))));
+	}
+	if (TemperatureBar)
+	{
+		TemperatureBar->SetPercent((val + 25.0) / 70.0);
+		TemperatureBar->FillColorAndOpacity.A = 1.0;
+		if (val < 0)
+		{
+			TemperatureBar->FillColorAndOpacity.R = 0.0;
+			TemperatureBar->FillColorAndOpacity.G = 0.5;
+			TemperatureBar->FillColorAndOpacity.B = 1.0;
+		}
+		else
+		{
+			TemperatureBar->FillColorAndOpacity.R = 1.0;
+			TemperatureBar->FillColorAndOpacity.G = 0.0;
+			TemperatureBar->FillColorAndOpacity.B = 0.0;
+		}
 	}
 }
 

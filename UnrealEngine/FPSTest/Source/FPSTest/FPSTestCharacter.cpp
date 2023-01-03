@@ -71,7 +71,6 @@ void AFPSTestCharacter::BeginPlay()
 	
 	TArray<AActor*> ActorsToFind;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASingleton::StaticClass(), ActorsToFind);
-	// GetWorld()->GetFirstPlayerController()->bEnableMouseOverEvents = true;
 	for (AActor* Singleton : ActorsToFind)
 	{
 		ASingleton* single = Cast<ASingleton>(Singleton);
@@ -86,6 +85,7 @@ void AFPSTestCharacter::BeginPlay()
 			HealthTutorialClass = single->HealthTutorial;
 			RepetableTutorialClass = single->RepetableTutorial;
 			CatalogViewClass = single->CatalogViewClass;
+			EndGame = single->EndGame;
 		}
 	}
 	if (HUDClass)
@@ -356,6 +356,20 @@ void AFPSTestCharacter::ManageHealth(float dT)
 	if (Temperature > 0.0 && Hunger >= 80.0 && Health <= 100.0)
 	{
 		Health += dT;
+	}
+	if (Health <= 0.0)
+	{
+		if (EndGame)
+		{
+			APlayerController* ctr = GetWorld()->GetFirstPlayerController();
+			UUserWidget * endWidget = CreateWidget<UUserWidget>(ctr, EndGame);
+			check(endWidget);
+			endWidget->AddToPlayerScreen();
+			endWidget->SetVisibility(ESlateVisibility::Visible);
+			GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+			GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+			GetWorld()->GetFirstPlayerController()->SetPause(true);
+		}
 	}
 }
 

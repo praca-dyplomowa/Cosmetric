@@ -156,9 +156,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimalBase.cpp" />
+    <ClCompile Include="FPSTestCharacter.cpp" />
+    <ClCompile Include="IsActionable.cpp" />
+    <ClCompile Include="IsCollectable.cpp" />
     <ClCompile Include="FTransform.cpp" />
     <ClCompile Include="FVector.cpp" />
     <ClCompile Include="FVector2D.cpp" />
+    <ClCompile Include="IsScannable.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -171,9 +176,14 @@
     <ClCompile Include="UnitTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimalBase.h" />
+    <ClInclude Include="FPSTestCharacter.h" />
+    <ClInclude Include="IsActionable.h" />
+    <ClInclude Include="IsCollectable.h" />
     <ClInclude Include="FTransform.h" />
     <ClInclude Include="FVector.h" />
     <ClInclude Include="FVector2D.h" />
+    <ClInclude Include="IsScannable.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="TArray.h" />

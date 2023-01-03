@@ -20,6 +20,7 @@ private:
 	static double Fade(double t);	
 
 	static FVector2D ConstVector(int h);
+
 };
 
 //https://mrl.cs.nyu.edu/~perlin/paper445.pdf <- Ken Perlin article

@@ -33,4 +33,6 @@ public:
 
 	UPROPERTY(meta = (BindWidget))
 		UTextBlock* Temperature;
+	UPROPERTY(meta = (BindWidget))
+		UProgressBar* TemperatureBar;
 };
