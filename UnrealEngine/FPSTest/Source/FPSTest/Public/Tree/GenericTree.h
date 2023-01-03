@@ -115,7 +115,9 @@ protected:
 	virtual void SaveTreeDestroyed();
 	double RenderConeTreetop(double Offset, double InitialTreetopRadius, int PartsOfCircle, ShrinkType type = ShrinkType::Geometric);
 	double RenderSpiralTrunk(double Offset, double SpiralRadius, double RotationDegree, ShrinkType type = ShrinkType::Geometric);
+	double RenderRoundTreetop(double Offset);
 	TArray<FVector> PrepareSunsetVectors(FVector beginning, FVector end, int number);
+	
 	UPROPERTY(EditAnywhere, Category = "Trunk")
 	FTreeComponentInit TrunkInit;
 	UPROPERTY(EditAnywhere, Category = "Treetop")

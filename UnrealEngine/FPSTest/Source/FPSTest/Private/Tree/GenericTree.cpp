@@ -248,11 +248,7 @@ double AGenericTree::RenderConeTreetop(double Offset, double InitialTreetopRadiu
 		for (int i = 1; i < PartsOfCircle; i++) {
 			angles[i] = rotation * i;
 		}
-		auto scale = FVector(
-			TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
-			TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
-			1
-		) * segmentScale;
+		
 
 		auto bonusAngle = 0.0f;
 		for (int i = 0; i < segmentNumber - 1; i++) {
@@ -263,7 +259,11 @@ double AGenericTree::RenderConeTreetop(double Offset, double InitialTreetopRadiu
 					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
 					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance)
 				);
-				
+				auto scale = FVector(
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					1
+				) * segmentScale;
 				transforms.Add(FTransform(
 					rotator,
 					thisTranslation,
@@ -359,6 +359,79 @@ double AGenericTree::RenderSpiralTrunk(double Offset, double SpiralRadius, doubl
 		);
 
 		TrunkRender.Instanced->AddInstances(transforms, false);
+		return segmentNumber;
+	}
+	return 0;
+}
+
+double AGenericTree::RenderRoundTreetop(double Offset , int PartsOfCircle)
+{
+	auto translation = FVector(0);
+	if (TreetopRender.Instanced &&
+		TreetopRender.Instanced->GetStaticMesh() &&
+		TreetopRender.Instanced->GetMaterial(0)) {
+		auto meshSize = TreetopRender.Instanced->GetStaticMesh()->GetBoundingBox().GetSize();
+
+		auto rotation = 360 / PartsOfCircle;
+		auto radius = TreetopRender.Height / 2;
+
+		auto segmentHeight = TreetopRender.SegmentSize * Offset;
+		auto segmentNumber = round((TreetopRender.Height - TreetopRender.SegmentSize) / segmentHeight) + 1;
+		auto segmentScale = TreetopRender.SegmentSize / meshSize.Z;
+		TArray<FTransform> transforms;
+		transforms.Empty(segmentNumber * PartsOfCircle + 1);
+		TreetopRender.Instanced->ClearInstances();
+		TArray<double> angles;
+		angles.Init(0, PartsOfCircle);
+		for (int i = 1; i < PartsOfCircle; i++) {
+			angles[i] = rotation * i;
+		}
+		auto bonusAngle = 0.0f;
+		transforms.Add(
+			FTransform(
+				FRotator(0, 0, 0),
+				translation,
+				FVector(
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					1
+				) * segmentScale
+			)
+		);
+		for (int i = 0; i < segmentNumber - 1; i++) {
+			for (int rot = 0; rot < PartsOfCircle; rot++) {
+				auto thisTranslation = translation + FVector(radius, 0, 0).RotateAngleAxis(angles[rot] + bonusAngle + Stream.RandRange(-4, 4), FVector::ZAxisVector);
+				auto rotator = FRotator(
+					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
+					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
+					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance)
+				);
+				auto scale = FVector(
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					1
+				) * segmentScale;
+				transforms.Add(FTransform(
+					rotator,
+					thisTranslation,
+					scale
+				));
+			}
+			bonusAngle += GOLDEN_RATIO_ANGLE;
+			translation += FVector(0, 0, segmentHeight);
+		}
+		transforms.Add(
+			FTransform(
+				FRotator(0, 0, 0),
+				translation,
+				FVector(
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					1
+				) * segmentScale
+			)
+		);
+		TreetopRender.Instanced->AddInstances(transforms, false);
 		return segmentNumber;
 	}
 	return 0;
