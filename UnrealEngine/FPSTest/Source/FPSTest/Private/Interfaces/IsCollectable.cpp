@@ -30,7 +30,7 @@ void AIsCollectable::BeginPlay()
 		CollectProgressBar = CreateWidget<UAllPurposeProgressBarWidget>(ctr, ProgressBarWidgetClass);
 		check(CollectProgressBar);
 		CollectProgressBar->AddToPlayerScreen();
-		CollectProgressBar->SetText("Collecting");
+		CollectProgressBar->SetText("Zbieranie");
 		CollectProgressBar->SetVisibility(ESlateVisibility::Hidden);
 	}
 }

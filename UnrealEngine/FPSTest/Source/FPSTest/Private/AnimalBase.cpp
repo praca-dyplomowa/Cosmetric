@@ -53,7 +53,7 @@ void AAnimalBase::BeginPlay()
 		ScanProgressBar = CreateWidget<UAllPurposeProgressBarWidget>(ctr, ProgressBarWidgetClass);
 		check(ScanProgressBar);
 		ScanProgressBar->AddToPlayerScreen();
-		ScanProgressBar->SetText("Scanning");
+		ScanProgressBar->SetText("Skanowanie");
 		ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
 	}
 	if (ProgressBarWidgetClass)
@@ -63,7 +63,7 @@ void AAnimalBase::BeginPlay()
 		CollectProgressBar = CreateWidget<UAllPurposeProgressBarWidget>(ctr, ProgressBarWidgetClass);
 		check(CollectProgressBar);
 		CollectProgressBar->AddToPlayerScreen();
-		CollectProgressBar->SetText("Collecting");
+		CollectProgressBar->SetText("Zbieranie");
 		CollectProgressBar->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
