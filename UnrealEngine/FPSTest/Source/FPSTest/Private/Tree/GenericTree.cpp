@@ -49,7 +49,7 @@ AGenericTree::AGenericTree()
 
 	TrunkRender.Instanced->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	TreetopRender.Instanced->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
+	TreetopRender.Instanced->NumCustomDataFloats = 3;
 }
 
 void AGenericTree::Initialize(FTreetopInit treetopInit, FTrunkInit trunkInit) {
@@ -152,22 +152,6 @@ double AGenericTree::RenderUp(FTreeComponentRender& generatedStruct, double Offs
 	return 0;
 }
 
-double AGenericTree::RenderTrunk(double offset)
-{
-	return RenderUp(
-		TrunkRender,
-		offset
-	);
-}
-
-double AGenericTree::RenderTreetop(double offset)
-{
-	return RenderUp(
-		TreetopRender,
-		offset
-	);
-}
-
 void AGenericTree::OnConstruction(const FTransform& transform)
 {
 
@@ -182,7 +166,6 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 	
 	double treetopOffset = InitStruct(TreetopInit, TreetopRender);
 	double trunkOffset = InitStruct(TrunkInit, TrunkRender);
-
 	auto spawnOffset = FVector(0, 0, GetMeshOffset(TrunkInit.StaticMesh, TrunkRender.SegmentSize));
 	TrunkRender.Instanced->SetRelativeLocation(spawnOffset);
 
@@ -190,7 +173,23 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 	TreetopRender.Instanced->SetRelativeLocation(spawnOffset);
 
 	RenderTrunk(trunkOffset);
-	RenderTreetop(treetopOffset);
+	int treetopNum = RenderTreetop(treetopOffset);
+	SetActorRelativeScale3D(FVector(RandomizeScale()));
+
+	if (!CustomizedColors) {
+		TArray<float> color;
+		FLinearColor myColor;
+		TreetopRender.Instanced->GetMaterial(0)->GetVectorParameterValue(TEXT("Base Color"), myColor);
+		color.Init(0,3);
+		color[0] = myColor.R + (float)Stream.FRandRange(-0.1, 0.1);
+		color[1] = myColor.G + (float)Stream.FRandRange(-0.1, 0.1);
+		color[2] = myColor.B + (float)Stream.FRandRange(-0.1, 0.1);
+
+		for (int i = 0; i < treetopNum; i++) {
+			TreetopRender.Instanced->SetCustomData(i, color, false);
+		}
+		TreetopRender.Instanced->MarkRenderStateDirty();
+	}
 }
 
 void AGenericTree::OnCollected()
@@ -219,77 +218,12 @@ void AGenericTree::SaveTreeDestroyed()
 	}
 }
 
-double AGenericTree::RenderConeTreetop(double Offset, double InitialTreetopRadius, int PartsOfCircle, ShrinkType type)
+double AGenericTree::RenderTrunk(double offset)
 {
-	auto translation = FVector(0);
-	if (TreetopRender.Instanced &&
-		TreetopRender.Instanced->GetStaticMesh() &&
-		TreetopRender.Instanced->GetMaterial(0)) {
-		auto meshSize = TreetopRender.Instanced->GetStaticMesh()->GetBoundingBox().GetSize();
-
-		auto rotation = 360 / PartsOfCircle;
-		auto radius = InitialTreetopRadius;
-
-		auto segmentHeight = TreetopRender.SegmentSize * Offset;
-		auto segmentNumber = round((TreetopRender.Height - TreetopRender.SegmentSize) / segmentHeight) + 1;
-		auto segmentScale = TreetopRender.SegmentSize / meshSize.Z;
-		double shrink;
-		if (type == ShrinkType::Linear) {
-			shrink = InitialTreetopRadius / (segmentNumber - 1);
-		}
-		else {
-			shrink = FMath::Pow( 0.05, 1 / FMath::Max((segmentNumber - 1), 1));
-		}
-		TArray<FTransform> transforms;
-		transforms.Empty(segmentNumber * PartsOfCircle + 1);
-		TreetopRender.Instanced->ClearInstances();
-		TArray<double> angles;
-		angles.Init(0, PartsOfCircle);
-		for (int i = 1; i < PartsOfCircle; i++) {
-			angles[i] = rotation * i;
-		}
-		
-
-		auto bonusAngle = 0.0f;
-		for (int i = 0; i < segmentNumber - 1; i++) {
-			for (int rot = 0; rot < PartsOfCircle; rot++) {
-				auto thisTranslation = translation + FVector(radius, 0, 0).RotateAngleAxis(angles[rot] + bonusAngle  + Stream.RandRange(-4, 4), FVector::ZAxisVector);
-				auto rotator = FRotator(
-					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
-					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
-					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance)
-				);
-				auto scale = FVector(
-					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
-					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
-					1
-				) * segmentScale;
-				transforms.Add(FTransform(
-					rotator,
-					thisTranslation,
-					scale
-				));
-			}
-			bonusAngle += GOLDEN_RATIO_ANGLE;
-			if (type == ShrinkType::Linear) {
-				radius -= shrink;
-			}
-			else {
-				radius *= shrink;
-			}
-			translation += FVector(0, 0, segmentHeight);
-		}
-		transforms.Add(
-			FTransform(
-				FRotator(0, 0, 0),
-				translation,
-				scale
-			)
-		);
-		TreetopRender.Instanced->AddInstances(transforms, false);
-		return segmentNumber;
-	}
-	return 0;
+	return RenderUp(
+		TrunkRender,
+		offset
+	);
 }
 
 double AGenericTree::RenderSpiralTrunk(double Offset, double SpiralRadius, double RotationDegree, ShrinkType type)
@@ -364,6 +298,91 @@ double AGenericTree::RenderSpiralTrunk(double Offset, double SpiralRadius, doubl
 	return 0;
 }
 
+double AGenericTree::RenderTreetop(double offset)
+{
+	return RenderUp(
+		TreetopRender,
+		offset
+	);
+}
+
+double AGenericTree::RenderConeTreetop(double Offset, double InitialTreetopRadius, int PartsOfCircle, ShrinkType type)
+{
+	auto translation = FVector(0);
+	if (TreetopRender.Instanced &&
+		TreetopRender.Instanced->GetStaticMesh() &&
+		TreetopRender.Instanced->GetMaterial(0)) {
+		auto meshSize = TreetopRender.Instanced->GetStaticMesh()->GetBoundingBox().GetSize();
+
+		auto rotation = 360 / PartsOfCircle;
+		auto radius = InitialTreetopRadius;
+
+		auto segmentHeight = TreetopRender.SegmentSize * Offset;
+		auto segmentNumber = round((TreetopRender.Height - TreetopRender.SegmentSize) / segmentHeight) + 1;
+		auto segmentScale = TreetopRender.SegmentSize / meshSize.Z;
+		double shrink;
+		if (type == ShrinkType::Linear) {
+			shrink = InitialTreetopRadius / (segmentNumber - 1);
+		}
+		else {
+			shrink = FMath::Pow( 0.05, 1 / FMath::Max((segmentNumber - 1), 1));
+		}
+		TArray<FTransform> transforms;
+		transforms.Empty(segmentNumber * PartsOfCircle + 1);
+		TreetopRender.Instanced->ClearInstances();
+		TArray<double> angles;
+		angles.Init(0, PartsOfCircle);
+		for (int i = 1; i < PartsOfCircle; i++) {
+			angles[i] = rotation * i;
+		}
+		
+
+		auto bonusAngle = 0.0f;
+		for (int i = 0; i < segmentNumber - 1; i++) {
+			for (int rot = 0; rot < PartsOfCircle; rot++) {
+				auto thisTranslation = translation + FVector(radius, 0, 0).RotateAngleAxis(angles[rot] + bonusAngle  + Stream.RandRange(-4, 4), FVector::ZAxisVector);
+				auto rotator = FRotator(
+					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
+					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
+					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance)
+				);
+				auto scale = FVector(
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					1
+				) * segmentScale;
+				transforms.Add(FTransform(
+					rotator,
+					thisTranslation,
+					scale
+				));
+			}
+			bonusAngle += GOLDEN_RATIO_ANGLE;
+			if (type == ShrinkType::Linear) {
+				radius -= shrink;
+			}
+			else {
+				radius *= shrink;
+			}
+			translation += FVector(0, 0, segmentHeight);
+		}
+		transforms.Add(
+			FTransform(
+				FRotator(0, 0, 0),
+				translation,
+				FVector(
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					TreetopRender.HorizontalStretch * Stream.FRandRange(1 - TreetopRender.HorizontalScalingVariance, 1 + TreetopRender.HorizontalScalingVariance),
+					1
+				) * segmentScale
+			)
+		);
+		TreetopRender.Instanced->AddInstances(transforms, false);
+		return (segmentNumber - 1) * PartsOfCircle + 1;
+	}
+	return 0;
+}
+
 double AGenericTree::RenderRoundTreetop(double Offset , int PartsOfCircle)
 {
 	auto translation = FVector(0);
@@ -398,9 +417,11 @@ double AGenericTree::RenderRoundTreetop(double Offset , int PartsOfCircle)
 				) * segmentScale
 			)
 		);
-		for (int i = 0; i < segmentNumber - 1; i++) {
+		translation += FVector(0, 0, segmentHeight);
+		for (int i = 0; i < segmentNumber; i++) {
+			auto Xtranslation = FMath::Sqrt(radius * radius - (translation.Z - radius) * (translation.Z - radius));
 			for (int rot = 0; rot < PartsOfCircle; rot++) {
-				auto thisTranslation = translation + FVector(radius, 0, 0).RotateAngleAxis(angles[rot] + bonusAngle + Stream.RandRange(-4, 4), FVector::ZAxisVector);
+				auto thisTranslation = translation + FVector(Xtranslation, 0, 0).RotateAngleAxis(angles[rot] + bonusAngle + Stream.RandRange(-4, 4), FVector::ZAxisVector);
 				auto rotator = FRotator(
 					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
 					Stream.FRandRange(-TreetopRender.RotationDegreesVariance, TreetopRender.RotationDegreesVariance),
@@ -432,7 +453,7 @@ double AGenericTree::RenderRoundTreetop(double Offset , int PartsOfCircle)
 			)
 		);
 		TreetopRender.Instanced->AddInstances(transforms, false);
-		return segmentNumber;
+		return segmentNumber * PartsOfCircle + 2;
 	}
 	return 0;
 }
@@ -475,6 +496,24 @@ double AGenericTree::InitStruct(FTreeComponentInit& init, FTreeComponentRender& 
 	}
 
 	return offset;
+}
+
+double AGenericTree::RandomizeScale()
+{
+	float random = Stream.FRand();
+	if (random < 0.5) {
+		return 1;
+	}
+	if (random < 0.75) {
+		Name += TEXT("_Small");
+		return 0.2;
+	}
+	if (random < 0.9) {
+		Name += TEXT("_Large");
+		return 1.75;
+	}
+	Name += TEXT("_Huge");
+	return 2.25;
 }
 
 

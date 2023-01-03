@@ -25,7 +25,7 @@ public:
 	void Initialize(int p[]);
 	virtual void OnConstruction(const FTransform& transform) override;
 	virtual void Destroyed() override;
-	void SpawnTree(UClass* treeClass, FVector position);
+	void SpawnTree(FVector position, double seed);
 
 protected:
 	virtual void BeginPlay() override;

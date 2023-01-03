@@ -11,6 +11,7 @@
 #include "Tree/SpruceLikeTree.h"
 #include "Tree/OakLikeTree.h"
 #include "Tree/SpiralConeTree.h"
+#include "Tree/RoundTopTree.h"
 #include "Terrain/TerrainMenager.h"
 #include "PerlinNoise.h"
 
@@ -57,8 +58,13 @@ void ATerrain::Destroyed()
 	Super::Destroyed();
 }
 
-void ATerrain::SpawnTree(UClass* treeClass, FVector position)
+void ATerrain::SpawnTree(FVector position, double seed)
 {
+	UClass* treeClass = GetTreeClass(seed +
+		position.X +
+		position.Y +
+		position.Z
+	);
 	auto tree = GetWorld()->SpawnActor<AGenericTree>(treeClass, FTransform(position));
 	if (tree) {
 		tree->SetOwner(this);
@@ -111,7 +117,7 @@ void ATerrain::InitializeTrees()
 				position.Y +
 				position.Z
 			);
-			SpawnTree(treeStaticClass, position);
+			SpawnTree(position, seed);
 		}
 	}
 }
@@ -156,7 +162,7 @@ UClass* ATerrain::GetTreeClass(int seed)
 		seed
 	);
 
-	int i = stream.RandRange(0, 2);
+	int i = stream.RandRange(0, 3);
 	switch (i)
 	{
 	case 0:
@@ -165,6 +171,8 @@ UClass* ATerrain::GetTreeClass(int seed)
 		return AOakLikeTree::StaticClass();
 	case 2:
 		return ASpiralConeTree::StaticClass();
+	case 3:
+		return ARoundTopTree::StaticClass();
 	default:
 		break;
 	}
