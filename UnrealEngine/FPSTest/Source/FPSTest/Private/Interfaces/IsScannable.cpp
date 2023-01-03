@@ -43,7 +43,7 @@ void AIsScannable::BeginPlay()
 		ScanProgressBar = CreateWidget<UAllPurposeProgressBarWidget>(ctr, ProgressBarWidgetClass);
 		check(ScanProgressBar);
 		ScanProgressBar->AddToPlayerScreen();
-		ScanProgressBar->SetText("Scanning");
+		ScanProgressBar->SetText("Skanowanie");
 		ScanProgressBar->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
