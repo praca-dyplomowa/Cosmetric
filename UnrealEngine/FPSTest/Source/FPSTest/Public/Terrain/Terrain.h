@@ -17,7 +17,7 @@ class FPSTEST_API ATerrain : public AActor
 	
 public:	
 	static const inline double Scale = 100.0;
-	static const inline double UVScale = 0.5;
+	static const inline double UVScale = 0.2;
 	static const inline double Size = 20.0;
 	int Permutation[256];
 
