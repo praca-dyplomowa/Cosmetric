@@ -17,6 +17,7 @@ public:
 	AOakLikeTree();
 protected:
 	virtual double RenderTreetop(double offset) override;
+	virtual void SunsetizeTreetop(double segmentNum) override;
 	double ShrinkFactor = 0.15;
 	double InitialTreetopRadius = 300;
 	int PartsOfCircle = 7;

@@ -17,7 +17,7 @@ class UInstancedStaticMeshComponent;
 // Sets default values
 AGenericTree::AGenericTree()
 {
-	Name = TEXT("Drzewo");
+	Species = TEXT("Drzewo");
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	Seed = 0;
 	PrimaryActorTick.bCanEverTick = true;
@@ -176,20 +176,47 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 	int treetopNum = RenderTreetop(treetopOffset);
 	SetActorRelativeScale3D(FVector(RandomizeScale()));
 
-	if (!CustomizedColors) {
-		TArray<float> color;
-		FLinearColor myColor;
-		TreetopRender.Instanced->GetMaterial(0)->GetVectorParameterValue(TEXT("Base Color"), myColor);
-		color.Init(0,3);
-		color[0] = myColor.R + (float)Stream.FRandRange(-0.1, 0.1);
-		color[1] = myColor.G + (float)Stream.FRandRange(-0.1, 0.1);
-		color[2] = myColor.B + (float)Stream.FRandRange(-0.1, 0.1);
-
-		for (int i = 0; i < treetopNum; i++) {
-			TreetopRender.Instanced->SetCustomData(i, color, false);
-		}
-		TreetopRender.Instanced->MarkRenderStateDirty();
+	double randColor = Stream.FRand();
+	FLinearColor myColor;
+	// choose a random colour for the tree
+	if (randColor < 0.1) {
+		Color = TEXT("Andunie");
+		Name = Species + Size + Color;
+		return SunsetizeTreetop(treetopNum);
 	}
+	if (randColor < 0.25) {
+		Color = TEXT("Carne");
+		myColor = FColor(252, 15, 3);
+	} else if (randColor < 0.40) {
+		Color = TEXT("Luine");
+		myColor = FColor(3, 102, 252);
+	} else if (randColor < 0.55) {
+		Color = TEXT("Laiqua");
+		myColor = FColor(0, 171, 20);
+	} else if (randColor < 0.70) {
+		Color = TEXT("Laure");
+		myColor = FColor(252, 173, 3);
+	} else if (randColor < 0.85) {
+		Color = TEXT("Helin");
+		myColor = FColor(54, 0, 166);
+	} else {
+		Color = TEXT("Culuina");
+		myColor = FColor(157, 28, 0);
+	}
+
+	// color all treetop instances
+	TArray<float> color;
+	color.Init(0,3);
+	color[0] = myColor.R + (float)Stream.FRandRange(-0.05, 0.05);
+	color[1] = myColor.G + (float)Stream.FRandRange(-0.05, 0.05);
+	color[2] = myColor.B + (float)Stream.FRandRange(-0.05, 0.05);
+	for (int i = 0; i < treetopNum; i++) {
+		TreetopRender.Instanced->SetCustomData(i, color, false);
+	}
+	TreetopRender.Instanced->MarkRenderStateDirty();
+	
+	// set species name 
+	Name = Species + Size + Color;
 }
 
 void AGenericTree::OnCollected()
@@ -502,18 +529,33 @@ double AGenericTree::RandomizeScale()
 {
 	float random = Stream.FRand();
 	if (random < 0.5) {
+		Size = TEXT(" Lung-");
 		return 1;
 	}
 	if (random < 0.75) {
-		Name += TEXT("_Small");
+		Size = TEXT(" Nica-");
 		return 0.2;
 	}
 	if (random < 0.9) {
-		Name += TEXT("_Large");
+		Size = TEXT(" Alta-");
 		return 1.75;
 	}
-	Name += TEXT("_Huge");
+	Size = TEXT(" Polda-");
 	return 2.25;
+}
+
+void AGenericTree::SunsetizeTreetop(double segmentNum) {
+	auto sunsetColors = PrepareSunsetVectors(FVector(0.209919, 0, 0.651), FVector(0.6146, 0.1105, 0), segmentNum);
+	TArray<float> data;
+	data.Init(0, 3);
+	for (int i = 0; i < segmentNum; i++) {
+		auto msg = sunsetColors[i].ToString();
+		data[0] = (float)sunsetColors[i].X;
+		data[1] = (float)sunsetColors[i].Y;
+		data[2] = (float)sunsetColors[i].Z;
+		TreetopRender.Instanced->SetCustomData(i, data, false);
+	}
+	TreetopRender.Instanced->MarkRenderStateDirty();
 }
 
 

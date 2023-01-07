@@ -18,4 +18,5 @@ public:
 protected:
 
 	virtual double RenderTreetop(double Offset) override;
+	virtual void SunsetizeTreetop(double segmentNum) override;
 };

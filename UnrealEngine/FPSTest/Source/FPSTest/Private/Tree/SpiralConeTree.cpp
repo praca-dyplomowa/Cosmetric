@@ -5,7 +5,8 @@
 
 ASpiralConeTree::ASpiralConeTree()
 {
-	Name = TEXT("SpiralCone tree");
+	Species = TEXT("Lore");
+	PartsOfCircle = 7;
 	TrunkInit.HeightBounds = FVector2D(800, 1200);
 	TrunkInit.InitialSegmentSize = 60;
 
@@ -48,32 +49,11 @@ double ASpiralConeTree::RenderTrunk(double Offset)
 
 double ASpiralConeTree::RenderTreetop(double Offset)
 {
-	int PartsOfCircle = 7;
-	auto segmentNumber = (RenderConeTreetop(Offset, 300, PartsOfCircle) - 1) / PartsOfCircle;
-	auto sunsetColors = PrepareSunsetVectors(FVector(0.209919, 0, 0.651), FVector(0.6146, 0.1105, 0), segmentNumber + 1);
-	TArray<float> data;
-	data.Init(0, 3);
-	for (int i = 0; i < segmentNumber; i++) {
-		auto msg = sunsetColors[i].ToString();
-		data[0] = (float)sunsetColors[i].X;
-		data[1] = (float)sunsetColors[i].Y;
-		data[2] = (float)sunsetColors[i].Z;
-		for (int j = 0; j < PartsOfCircle; j++) {
-			TreetopRender.Instanced->SetCustomData(i * PartsOfCircle + j, data, false);
-		}
-	}
-	data[0] = (float)sunsetColors[segmentNumber].X;
-	data[1] = (float)sunsetColors[segmentNumber].Y;
-	data[2] = (float)sunsetColors[segmentNumber].Z;
-
-	TreetopRender.Instanced->SetCustomData(segmentNumber * PartsOfCircle, data, false);
-	TreetopRender.Instanced->MarkRenderStateDirty();
+	auto num = Super::RenderTreetop(Offset);
 	TreetopRender.Instanced->SetRelativeLocation(FVector(
 		-150,
 		0,
 		TrunkRender.Height - TreetopRender.Height + TreetopRender.SegmentSize + GetMeshOffset(TreetopInit.StaticMesh, TreetopRender.SegmentSize)
 	));
-	CustomizedColors = true;
-	return segmentNumber * PartsOfCircle + 1;
-	
+	return num;
 }

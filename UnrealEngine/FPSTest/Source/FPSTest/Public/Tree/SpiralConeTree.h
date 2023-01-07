@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Tree/GenericTree.h"
+#include "Tree/OakLikeTree.h"
 #include "SpiralConeTree.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class FPSTEST_API ASpiralConeTree : public AGenericTree
+class FPSTEST_API ASpiralConeTree : public AOakLikeTree
 {
 	GENERATED_BODY()
 public:

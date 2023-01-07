@@ -5,7 +5,7 @@
 
 ASpruceLikeTree::ASpruceLikeTree()
 {
-	Name = TEXT("SpruceLike tree");
+	Species = TEXT("Indil");
 	TrunkInit.HeightBounds = FVector2D(400, 700);
 	TrunkInit.InitialSegmentSize = 35;
 	TrunkInit.Material = LoadObject<UMaterial>(

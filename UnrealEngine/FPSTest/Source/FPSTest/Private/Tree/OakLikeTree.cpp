@@ -5,7 +5,7 @@
 
 AOakLikeTree::AOakLikeTree()
 {
-	Name = TEXT("OakLike tree");
+	Species = TEXT("Alma");
 	TrunkInit.HeightBounds = FVector2D(600, 800);
 	TrunkInit.InitialSegmentSize = 60;
 
@@ -46,4 +46,27 @@ double AOakLikeTree::RenderTreetop(double offset)
 		TrunkRender.Height - TreetopRender.Height + TreetopRender.SegmentSize + GetMeshOffset(TreetopInit.StaticMesh, TreetopRender.SegmentSize)
 	));
 	return RenderConeTreetop(offset, InitialTreetopRadius, PartsOfCircle);
+}
+
+void AOakLikeTree::SunsetizeTreetop(double segmentNum)
+{
+	auto segmentNumber = (segmentNum - 1) / PartsOfCircle + 1;
+	auto sunsetColors = PrepareSunsetVectors(FVector(0.209919, 0, 0.651), FVector(0.6146, 0.1105, 0), segmentNumber + 1);
+	TArray<float> data;
+	data.Init(0, 3);
+	for (int i = 0; i < segmentNumber; i++) {
+		auto msg = sunsetColors[i].ToString();
+		data[0] = (float)sunsetColors[i].X;
+		data[1] = (float)sunsetColors[i].Y;
+		data[2] = (float)sunsetColors[i].Z;
+		for (int j = 0; j < PartsOfCircle; j++) {
+			TreetopRender.Instanced->SetCustomData(i * PartsOfCircle + j, data, false);
+		}
+	}
+	data[0] = (float)sunsetColors[segmentNumber].X;
+	data[1] = (float)sunsetColors[segmentNumber].Y;
+	data[2] = (float)sunsetColors[segmentNumber].Z;
+
+	TreetopRender.Instanced->SetCustomData(segmentNumber * PartsOfCircle, data, false);
+	TreetopRender.Instanced->MarkRenderStateDirty();
 }

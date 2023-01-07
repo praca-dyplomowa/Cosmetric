@@ -116,6 +116,7 @@ protected:
 	double RenderConeTreetop(double Offset, double InitialTreetopRadius, int PartsOfCircle, ShrinkType type = ShrinkType::Geometric);
 	double RenderSpiralTrunk(double Offset, double SpiralRadius, double RotationDegree, ShrinkType type = ShrinkType::Geometric);
 	double RenderRoundTreetop(double Offset, int PartsOfCircle);
+	virtual void SunsetizeTreetop(double treetopSegmentNum);
 	TArray<FVector> PrepareSunsetVectors(FVector beginning, FVector end, int number);
 	
 	UPROPERTY(EditAnywhere, Category = "Trunk")
@@ -129,7 +130,9 @@ protected:
 	FRandomStream Stream;
 	int Seed = 0;
 	bool CustomizedColors = false;
-
+	FString Species;
+	FString Color;
+	FString Size;
 private:
 	double InitStruct(FTreeComponentInit& init, FTreeComponentRender& render);
 	double RandomizeScale();

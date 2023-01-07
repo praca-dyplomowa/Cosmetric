@@ -5,7 +5,7 @@
 
 ARoundTopTree::ARoundTopTree()
 {
-	Name = TEXT("RoundTop tree");
+	Species = TEXT("Galad");
 	TrunkInit.HeightBounds = FVector2D(200, 300);
 	TrunkInit.InitialSegmentSize = 60;
 
@@ -41,4 +41,33 @@ ARoundTopTree::ARoundTopTree()
 double ARoundTopTree::RenderTreetop(double Offset)
 {
 	return RenderRoundTreetop(Offset, 7);
+}
+
+void ARoundTopTree::SunsetizeTreetop(double segmentNum)
+{
+	int PartsOfCircle = 7;
+	auto segmentNumber = (segmentNum - 2) / PartsOfCircle ;
+	auto sunsetColors = PrepareSunsetVectors(FVector(0.209919, 0, 0.651), FVector(0.6146, 0.1105, 0), segmentNumber + 2);
+	TArray<float> data;
+	data.Init(0, 3);
+	data[0] = (float)sunsetColors[0].X;
+	data[1] = (float)sunsetColors[0].Y;
+	data[2] = (float)sunsetColors[0].Z;
+	TreetopRender.Instanced->SetCustomData(0, data, false);
+
+	for (int i = 1; i <= segmentNumber; i++) {
+		auto msg = sunsetColors[i].ToString();
+		data[0] = (float)sunsetColors[i].X;
+		data[1] = (float)sunsetColors[i].Y;
+		data[2] = (float)sunsetColors[i].Z;
+		for (int j = 0; j < PartsOfCircle; j++) {
+			TreetopRender.Instanced->SetCustomData((i - 1) * PartsOfCircle + j, data, false);
+		}
+	}
+	data[0] = (float)sunsetColors[segmentNumber + 1].X;
+	data[1] = (float)sunsetColors[segmentNumber + 1].Y;
+	data[2] = (float)sunsetColors[segmentNumber + 1].Z;
+
+	TreetopRender.Instanced->SetCustomData(segmentNumber * PartsOfCircle + 1, data, false);
+	TreetopRender.Instanced->MarkRenderStateDirty();
 }
