@@ -260,6 +260,7 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAction("TUTO", IE_Pressed, this, &AFPSTestCharacter::ShowRepetableTutorial);
 	PlayerInputComponent->BindAction("Catalog", IE_Pressed, this, &AFPSTestCharacter::ShowCatalog);
 
+	PlayerInputComponent->BindAction("locker", IE_Pressed, this, &AFPSTestCharacter::locker);
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
 
@@ -278,6 +279,12 @@ void AFPSTestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	GetWorld()->GetFirstPlayerController()->bEnableClickEvents = true;
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::RightMouseButton);
 	GetWorld()->GetFirstPlayerController()->ClickEventKeys.Add(EKeys::LeftMouseButton);
+}
+
+void AFPSTestCharacter::locker()
+{
+	CameraLock = !CameraLock;
+	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = !CameraLock;
 }
 
 bool AFPSTestCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)

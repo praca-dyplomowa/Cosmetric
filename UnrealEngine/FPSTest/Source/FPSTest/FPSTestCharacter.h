@@ -212,5 +212,7 @@ public:
 		bool NightTutorialViewed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Tutorials")
 		bool HelathTutorialViewed;
+
+	void locker();
 };
 
