@@ -99,6 +99,8 @@ public:
 		FTrunkRenderVariables trunkRender = FTrunkRenderVariables(),
 		FTreetopRenderVariables treetopRender = FTreetopRenderVariables()
 	);
+	void InitializeSpecies(FString Color, FString Size);
+
 protected:
 	double GetRandomFromVector(FVector2D& bounds);
 
@@ -135,6 +137,23 @@ protected:
 	FString Size;
 private:
 	double InitStruct(FTreeComponentInit& init, FTreeComponentRender& render);
-	double RandomizeScale();
+	void RandomizeScale();
 
+};
+
+const TMap<FString, FColor> colorMap = {
+{TEXT("Andunie"), FColor()}, // sunset treetop, dummy FColor value
+{TEXT("Carne"), FColor(252, 15, 3) },
+{TEXT("Luine"), FColor(3, 102, 252) },
+{TEXT("Laiqua"), FColor(0, 171, 20)},
+{TEXT("Laure"), FColor(252, 173, 3)},
+{TEXT("Helin"), FColor(54, 0, 166)},
+{TEXT("Culuina"), FColor(157, 28, 0)},
+};
+
+const TMap<FString, double> sizeMap = {
+	{TEXT("Lung"), 1},
+	{TEXT("Nica"), 0.2},
+	{TEXT("Alta"), 1.75},
+	{TEXT("Polda"), 2.25},
 };
