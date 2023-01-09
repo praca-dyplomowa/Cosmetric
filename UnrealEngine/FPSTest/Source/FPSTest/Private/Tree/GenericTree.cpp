@@ -73,6 +73,12 @@ void AGenericTree::Initialize(FTrunkRenderVariables trunkRender, FTreetopRenderV
 	this->Initialize(treetopRender, trunkRender);
 }
 
+void AGenericTree::InitializeSpecies(FString sColor, FString sSize)
+{
+	Color = sColor;
+	Size = sSize;
+}
+
 void AGenericTree::Initialize(FTrunkInit trunkInit, FTreetopInit treetopInit, FTreetopRenderVariables treetopRender, FTrunkRenderVariables trunkRender) {
 	this->Initialize(treetopInit, trunkInit);
 	this->Initialize(treetopRender, trunkRender);
@@ -174,36 +180,42 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 
 	RenderTrunk(trunkOffset);
 	int treetopNum = RenderTreetop(treetopOffset);
-	SetActorRelativeScale3D(FVector(RandomizeScale()));
+	if(Size == "") RandomizeScale();
+	double scale = sizeMap[Size];
+	SetActorRelativeScale3D(FVector(scale));
 
-	double randColor = Stream.FRand();
+	
 	FLinearColor myColor;
 	// choose a random colour for the tree
-	if (randColor < 0.1) {
-		Color = TEXT("Andunie");
-		Name = Species + Size + Color;
+	double randColor = Stream.FRand();
+	if (Color == "") {
+		if (randColor < 0.1) {
+			Color = TEXT("Andunie");
+		}
+		else if (randColor < 0.25) {
+			Color = TEXT("Carne");
+		}
+		else if (randColor < 0.40) {
+			Color = TEXT("Luine");
+		}
+		else if (randColor < 0.55) {
+			Color = TEXT("Laiqua");
+		}
+		else if (randColor < 0.70) {
+			Color = TEXT("Laure");
+		}
+		else if (randColor < 0.85) {
+			Color = TEXT("Helin");
+		}
+		else {
+			Color = TEXT("Culuina");
+		}
+	};
+	Name = Species + " " + Size + "-" + Color;
+	if (Color == TEXT("Andunie")) {
 		return SunsetizeTreetop(treetopNum);
 	}
-	if (randColor < 0.25) {
-		Color = TEXT("Carne");
-		myColor = FColor(252, 15, 3);
-	} else if (randColor < 0.40) {
-		Color = TEXT("Luine");
-		myColor = FColor(3, 102, 252);
-	} else if (randColor < 0.55) {
-		Color = TEXT("Laiqua");
-		myColor = FColor(0, 171, 20);
-	} else if (randColor < 0.70) {
-		Color = TEXT("Laure");
-		myColor = FColor(252, 173, 3);
-	} else if (randColor < 0.85) {
-		Color = TEXT("Helin");
-		myColor = FColor(54, 0, 166);
-	} else {
-		Color = TEXT("Culuina");
-		myColor = FColor(157, 28, 0);
-	}
-
+	myColor = colorMap[Color];
 	// color all treetop instances
 	TArray<float> color;
 	color.Init(0,3);
@@ -216,7 +228,7 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 	TreetopRender.Instanced->MarkRenderStateDirty();
 	
 	// set species name 
-	Name = Species + Size + Color;
+	
 }
 
 void AGenericTree::OnCollected()
@@ -525,23 +537,23 @@ double AGenericTree::InitStruct(FTreeComponentInit& init, FTreeComponentRender& 
 	return offset;
 }
 
-double AGenericTree::RandomizeScale()
+void AGenericTree::RandomizeScale()
 {
 	float random = Stream.FRand();
 	if (random < 0.5) {
-		Size = TEXT(" Lung-");
-		return 1;
+		Size = TEXT("Lung");
+		return;
 	}
 	if (random < 0.75) {
-		Size = TEXT(" Nica-");
-		return 0.2;
+		Size = TEXT("Nica");
+		return;
 	}
 	if (random < 0.9) {
-		Size = TEXT(" Alta-");
-		return 1.75;
+		Size = TEXT("Alta");
+		return;
 	}
-	Size = TEXT(" Polda-");
-	return 2.25;
+	Size = TEXT("Polda");
+	return;
 }
 
 void AGenericTree::SunsetizeTreetop(double segmentNum) {
