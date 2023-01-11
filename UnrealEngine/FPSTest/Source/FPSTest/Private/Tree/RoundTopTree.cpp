@@ -26,8 +26,7 @@ ARoundTopTree::ARoundTopTree()
 	TreetopInit.InitialSegmentSize = 100;
 	TreetopInit.VerticalOffsetPercentClamp = FVector2D(0.5, 0.8);
 
-	auto treetopStaticMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
-	if (treetopStaticMesh.Succeeded())  TreetopInit.StaticMesh = treetopStaticMesh.Object;
+	TreetopInit.StaticMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/StarterContent/Shapes/Shape_Sphere"));
 	TreetopInit.Material = LoadObject<UMaterial>(
 		nullptr,
 		TEXT("/Game/Trees/Materials/M_Oak_Treetop")
@@ -60,7 +59,7 @@ void ARoundTopTree::SunsetizeTreetop(double segmentNum)
 		data[0] = (float)sunsetColors[i].X;
 		data[1] = (float)sunsetColors[i].Y;
 		data[2] = (float)sunsetColors[i].Z;
-		for (int j = 0; j < PartsOfCircle; j++) {
+		for (int j = 1; j <= PartsOfCircle; j++) {
 			TreetopRender.Instanced->SetCustomData((i - 1) * PartsOfCircle + j, data, false);
 		}
 	}

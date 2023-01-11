@@ -18,16 +18,13 @@ class UInstancedStaticMeshComponent;
 AGenericTree::AGenericTree()
 {
 	Species = TEXT("Drzewo");
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	Seed = 0;
-	PrimaryActorTick.bCanEverTick = true;
 	TrunkInit.InitialSegmentSize = 20.0;
 	TrunkRender.RotationDegreesVariance = 15;
 	TrunkRender.HorizontalScalingVariance = 0.05;
 	TrunkInit.HeightBounds = FVector2D(100, 200);
 
-	auto trunkStaticMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cube.Cube'"));
-	if (trunkStaticMesh.Succeeded())  TrunkInit.StaticMesh = trunkStaticMesh.Object;
+	TrunkInit.StaticMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/StarterContent/Shapes/Shape_Cube"));
 	TrunkInit.Material = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Wood_Walnut"));
 
 	TreetopInit.InitialSegmentSize = 100.0;
@@ -36,8 +33,7 @@ AGenericTree::AGenericTree()
 	TreetopRender.HorizontalScalingVariance = 0.1;
 	TreetopInit.HeightBounds = FVector2D(150, 300);
 
-	auto treetopStaticMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cone.Cone'"));
-	if (treetopStaticMesh.Succeeded())  TreetopInit.StaticMesh = treetopStaticMesh.Object;
+	TreetopInit.StaticMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/StarterContent/Shapes/Shape_Cone"));
 	TreetopInit.Material = LoadObject<UMaterial>(nullptr, TEXT("/Game/StarterContent/Materials/M_Tech_Hex_Tile"));
 
 

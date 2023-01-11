@@ -27,8 +27,7 @@ ASpiralConeTree::ASpiralConeTree()
 	TreetopInit.InitialSegmentSize = 70;
 	TreetopInit.VerticalOffsetPercentClamp = FVector2D(0.6, 0.8);
 
-	auto treetopStaticMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
-	if (treetopStaticMesh.Succeeded())  TreetopInit.StaticMesh = treetopStaticMesh.Object;
+	TreetopInit.StaticMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/StarterContent/Shapes/Shape_Sphere"));
 	TreetopInit.Material = LoadObject<UMaterial>(
 		nullptr,
 		TEXT("/Game/Trees/Materials/M_Oak_Treetop")
