@@ -130,6 +130,7 @@ public:
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool Movement_Flag;
 //Catalog
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

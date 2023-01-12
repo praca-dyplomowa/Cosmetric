@@ -11,32 +11,6 @@ ATerrainMenager::ATerrainMenager()
 void ATerrainMenager::OnConstruction(const FTransform& transform)
 {
 	Super::OnConstruction(transform);
-	for (int i = 0; i < 256; i++)
-	{
-		Permutation[i] = i;
-	}
-	std::shuffle(&Permutation[0], &Permutation[255], std::default_random_engine(Seed));
-
-	CenterRegion = FVector2D(0, 0);
-	Size = 2 * RenderDistance + 1;
-	RenderedTerrain = new ATerrain * *[Size];
-	for (int y = 0; y < Size; y++)
-	{
-		RenderedTerrain[y] = new ATerrain * [Size];
-		for (int x = 0; x < Size; x++)
-		{
-			FTransform pos = FTransform(FVector(
-				(x - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
-				(y - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
-				0)
-			);
-			RenderedTerrain[y][x] = GetWorld()->SpawnActorDeferred<ATerrain>(
-				ATerrain::StaticClass(),
-				pos);
-			RenderedTerrain[y][x]->Initialize(Permutation);
-			RenderedTerrain[y][x]->FinishSpawning(pos);
-		}
-	}
 }
 
 float ATerrainMenager::Noise(float x, float y)
@@ -107,7 +81,32 @@ void ATerrainMenager::BeginPlay()
 	if (GameInfo) {
 		Seed = GameInfo->Seed;
 	}
-	
+	for (int i = 0; i < 256; i++)
+	{
+		Permutation[i] = i;
+	}
+	std::shuffle(&Permutation[0], &Permutation[255], std::default_random_engine(Seed));
+
+	CenterRegion = FVector2D(0, 0);
+	Size = 2 * RenderDistance + 1;
+	RenderedTerrain = new ATerrain * *[Size];
+	for (int y = 0; y < Size; y++)
+	{
+		RenderedTerrain[y] = new ATerrain * [Size];
+		for (int x = 0; x < Size; x++)
+		{
+			FTransform pos = FTransform(FVector(
+				(x - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
+				(y - RenderDistance) * (ATerrain::Size * ATerrain::Scale),
+				0)
+			);
+			RenderedTerrain[y][x] = GetWorld()->SpawnActorDeferred<ATerrain>(
+				ATerrain::StaticClass(),
+				pos);
+			RenderedTerrain[y][x]->Initialize(Permutation);
+			RenderedTerrain[y][x]->FinishSpawning(pos);
+		}
+	}
 }
 
 // Called every frame

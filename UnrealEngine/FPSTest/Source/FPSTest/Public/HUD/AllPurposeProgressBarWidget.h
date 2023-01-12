@@ -17,7 +17,9 @@ class FPSTEST_API UAllPurposeProgressBarWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
+	UFUNCTION(BlueprintCallable)
 	void SetValue(float val, float max);
+	UFUNCTION(BlueprintCallable)
 	void SetText(FString txt);
 
 	UPROPERTY(meta = (BindWidget))

@@ -32,6 +32,11 @@ public:
 		blue = 0;
 		green = 0;
 
+		food = 0.0;
+		material = 0.0;
+		life = 1.0;
+		name = "";
+
 		agresive = false;
 	}
 
