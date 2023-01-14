@@ -98,7 +98,7 @@ void ATerrain::InitializeTrees()
 		+ terrainPosition.Y
 		+ terrainPosition.Z
 	);
-	TreesLeft = stream.RandRange(3, 7);
+	TreesLeft = stream.RandRange(1, 5);
 	if (DestroyedTrees.Num() == TreesLeft) {
 		return;
 	}

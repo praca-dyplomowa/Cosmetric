@@ -118,17 +118,10 @@ void AFPSTestCharacter::BeginPlay()
 		StartGameTutorial = CreateWidget<UTutorial>(ctr, StartGameTutorialClass);
 		check(StartGameTutorial);
 		StartGameTutorial->AddToPlayerScreen();
-		StartGameTutorial->SetVisibility(ESlateVisibility::Visible);
-		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
-		GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
-		GetWorld()->GetFirstPlayerController()->SetPause(true);
 	}
-	else
+	if (HUD)
 	{
-		if (HUD)
-		{
-			HUD->SetVisibility(ESlateVisibility::Visible);
-		}
+		HUD->SetVisibility(ESlateVisibility::Visible);
 	}
 }
 
@@ -401,7 +394,7 @@ void AFPSTestCharacter::EAT()
 		{
 			Food -= 100 - Hunger;
 			Hunger = 100.0;
-			HungerTimer = 20.0;
+			HungerTimer = HungerTimer > 0.0 ? HungerTimer : 20.0;
 		}
 		else
 		{
@@ -511,4 +504,12 @@ void AFPSTestCharacter::ShowRepetableTutorial()
 		ctr->SetInputMode(FInputModeUIOnly());
 		ctr->SetPause(true);
 	}
+}
+
+void AFPSTestCharacter::ShowStartTutorial()
+{
+	StartGameTutorial->SetVisibility(ESlateVisibility::Visible);
+	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+	GetWorld()->GetFirstPlayerController()->SetInputMode(FInputModeUIOnly());
+	GetWorld()->GetFirstPlayerController()->SetPause(true);
 }

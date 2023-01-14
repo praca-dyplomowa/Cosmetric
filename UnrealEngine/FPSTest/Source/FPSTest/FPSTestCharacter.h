@@ -202,6 +202,8 @@ public:
 	TSubclassOf<class UTutorial> RepetableTutorialClass;
 	class UTutorial* RepetableGameTutorial;
 	void ShowRepetableTutorial();
+	UFUNCTION(BlueprintCallable)
+		void ShowStartTutorial();
 
 
 //tutorial flags
