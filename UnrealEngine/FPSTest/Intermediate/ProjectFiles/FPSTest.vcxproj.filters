@@ -11,6 +11,7 @@
     <None Include="..\..\Source\FPSTestEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\FPSTest.png" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -119,6 +120,9 @@
     <ClCompile Include="..\..\Source\FPSTest\Private\GUI\MyGameInstance.cpp">
       <Filter>Source\FPSTest\Private\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\FPSTest\Private\GUI\SettingsInfo.cpp">
+      <Filter>Source\FPSTest\Private\GUI</Filter>
+    </ClCompile>
     <Filter Include="Source\FPSTest\Private\HUD">
       <UniqueIdentifier>{B19A6C8F-7406-3194-84F2-5944D0FE1EFC}</UniqueIdentifier>
     </Filter>
@@ -213,6 +217,9 @@
       <Filter>Source\FPSTest\Public\GUI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\FPSTest\Public\GUI\MyGameInstance.h">
+      <Filter>Source\FPSTest\Public\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FPSTest\Public\GUI\SettingsInfo.h">
       <Filter>Source\FPSTest\Public\GUI</Filter>
     </ClInclude>
     <Filter Include="Source\FPSTest\Public\HUD">

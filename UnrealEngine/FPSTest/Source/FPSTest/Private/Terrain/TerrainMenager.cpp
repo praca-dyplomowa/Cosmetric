@@ -77,9 +77,13 @@ void ATerrainMenager::Move(FVector2D NewCenter)
 void ATerrainMenager::BeginPlay()
 {
 	Super::BeginPlay();
+	auto GameInstance = ((UMyGameInstance*)(GetWorld()->GetGameInstance()));
 	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
 	if (GameInfo) {
 		Seed = GameInfo->Seed;
+	}
+	if (GameInstance) {
+		RenderDistance = GameInstance->RenderDistance;
 	}
 	for (int i = 0; i < 256; i++)
 	{

@@ -30,5 +30,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		bool CreateNewSaveInstance(FString saveSlotName, int saveUserIndex);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		int RenderDistance;
 	
 };
