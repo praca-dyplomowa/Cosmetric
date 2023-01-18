@@ -190,6 +190,7 @@ public:
 //Tutorials
 
 	TSubclassOf<class UTutorial> StartGameTutorialClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTutorial* StartGameTutorial;
 	TSubclassOf<class UTutorial> EatingTutorialClass;
 	class UTutorial* EatingGameTutorial;
