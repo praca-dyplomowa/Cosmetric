@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\Cosmetric.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Cosmetric.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\CosmetricEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\FPSTest.png" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultNiagara.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Config\HoloLens">
+      <UniqueIdentifier>{4C8DD267-CDE7-336F-8602-F5F485D22BAB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\HoloLens\HoloLensEngine.ini">
+      <Filter>Config\HoloLens</Filter>
+    </None>
+    <Filter Include="Source\Cosmetric">
+      <UniqueIdentifier>{4B3DF88D-7093-3F48-8981-C714917745B7}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Cosmetric\Cosmetric.Build.cs">
+      <Filter>Source\Cosmetric</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\Cosmetric\Cosmetric.cpp">
+      <Filter>Source\Cosmetric</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Cosmetric\Cosmetric.h">
+      <Filter>Source\Cosmetric</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Cosmetric\FPSTestCharacter.cpp">
+      <Filter>Source\Cosmetric</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Cosmetric\FPSTestCharacter.h">
+      <Filter>Source\Cosmetric</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Cosmetric\FPSTestGameMode.cpp">
+      <Filter>Source\Cosmetric</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Cosmetric\FPSTestGameMode.h">
+      <Filter>Source\Cosmetric</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Cosmetric\FPSTestProjectile.cpp">
+      <Filter>Source\Cosmetric</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Cosmetric\FPSTestProjectile.h">
+      <Filter>Source\Cosmetric</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Cosmetric\TP_PickUpComponent.cpp">
+      <Filter>Source\Cosmetric</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Cosmetric\TP_PickUpComponent.h">
+      <Filter>Source\Cosmetric</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Cosmetric\TP_WeaponComponent.cpp">
+      <Filter>Source\Cosmetric</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Cosmetric\TP_WeaponComponent.h">
+      <Filter>Source\Cosmetric</Filter>
+    </ClInclude>
+    <Filter Include="Source\Cosmetric\Private">
+      <UniqueIdentifier>{467E7DD9-32E0-3EB5-B5A9-AD1079AE7F5D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\AnimalBase.cpp">
+      <Filter>Source\Cosmetric\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\AnimalMenager.cpp">
+      <Filter>Source\Cosmetric\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\BuildingBase.cpp">
+      <Filter>Source\Cosmetric\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\PerlinNoise.cpp">
+      <Filter>Source\Cosmetric\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Singleton.cpp">
+      <Filter>Source\Cosmetric\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\TestObject.cpp">
+      <Filter>Source\Cosmetric\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Tutorial.cpp">
+      <Filter>Source\Cosmetric\Private</Filter>
+    </ClCompile>
+    <Filter Include="Source\Cosmetric\Private\GUI">
+      <UniqueIdentifier>{26B22788-28E5-352D-9429-C0367CE26638}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\GUI\BuildingMenu.cpp">
+      <Filter>Source\Cosmetric\Private\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\GUI\GameSaveInfo.cpp">
+      <Filter>Source\Cosmetric\Private\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\GUI\InGameMenu.cpp">
+      <Filter>Source\Cosmetric\Private\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\GUI\MyGameInstance.cpp">
+      <Filter>Source\Cosmetric\Private\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\GUI\SettingsInfo.cpp">
+      <Filter>Source\Cosmetric\Private\GUI</Filter>
+    </ClCompile>
+    <Filter Include="Source\Cosmetric\Private\HUD">
+      <UniqueIdentifier>{CD776735-C056-3713-B5A1-6716CACA4979}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\HUD\AllPurposeProgressBarWidget.cpp">
+      <Filter>Source\Cosmetric\Private\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\HUD\Player_HUD_Widget.cpp">
+      <Filter>Source\Cosmetric\Private\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\HUD\ProgressBarWidget.cpp">
+      <Filter>Source\Cosmetric\Private\HUD</Filter>
+    </ClCompile>
+    <Filter Include="Source\Cosmetric\Private\Interfaces">
+      <UniqueIdentifier>{45FEA608-3F75-3FAA-85A0-39C5DE68C5D4}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Interfaces\IsActionable.cpp">
+      <Filter>Source\Cosmetric\Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Interfaces\IsCollectable.cpp">
+      <Filter>Source\Cosmetric\Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Interfaces\IsDamagable.cpp">
+      <Filter>Source\Cosmetric\Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Interfaces\IsScannable.cpp">
+      <Filter>Source\Cosmetric\Private\Interfaces</Filter>
+    </ClCompile>
+    <Filter Include="Source\Cosmetric\Private\Terrain">
+      <UniqueIdentifier>{F3AA2537-0532-3856-8F32-C0078A3FCA8D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Terrain\Terrain.cpp">
+      <Filter>Source\Cosmetric\Private\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Terrain\TerrainMenager.cpp">
+      <Filter>Source\Cosmetric\Private\Terrain</Filter>
+    </ClCompile>
+    <Filter Include="Source\Cosmetric\Private\Tree">
+      <UniqueIdentifier>{F57C2E0A-07D8-3084-8536-109744BC12EC}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Tree\GenericTree.cpp">
+      <Filter>Source\Cosmetric\Private\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Tree\OakLikeTree.cpp">
+      <Filter>Source\Cosmetric\Private\Tree</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Cosmetric\Private\Tree\OakLikeTree.h">
+      <Filter>Source\Cosmetric\Private\Tree</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Tree\RoundTopTree.cpp">
+      <Filter>Source\Cosmetric\Private\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Tree\SpiralConeTree.cpp">
+      <Filter>Source\Cosmetric\Private\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Cosmetric\Private\Tree\SpruceLikeTree.cpp">
+      <Filter>Source\Cosmetric\Private\Tree</Filter>
+    </ClCompile>
+    <Filter Include="Source\Cosmetric\Public">
+      <UniqueIdentifier>{A4FC5475-ADD9-32D2-87DE-D76485A371A2}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\AnimalBase.h">
+      <Filter>Source\Cosmetric\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\AnimalMenager.h">
+      <Filter>Source\Cosmetric\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\BuildingBase.h">
+      <Filter>Source\Cosmetric\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\PerlinNoise.h">
+      <Filter>Source\Cosmetric\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Singleton.h">
+      <Filter>Source\Cosmetric\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\TestObject.h">
+      <Filter>Source\Cosmetric\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Tutorial.h">
+      <Filter>Source\Cosmetric\Public</Filter>
+    </ClInclude>
+    <Filter Include="Source\Cosmetric\Public\GUI">
+      <UniqueIdentifier>{82CAAB1B-C971-38A0-81CC-73A73053CCB8}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\GUI\BuildingMenu.h">
+      <Filter>Source\Cosmetric\Public\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\GUI\GameSaveInfo.h">
+      <Filter>Source\Cosmetric\Public\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\GUI\InGameMenu.h">
+      <Filter>Source\Cosmetric\Public\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\GUI\MyGameInstance.h">
+      <Filter>Source\Cosmetric\Public\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\GUI\SettingsInfo.h">
+      <Filter>Source\Cosmetric\Public\GUI</Filter>
+    </ClInclude>
+    <Filter Include="Source\Cosmetric\Public\HUD">
+      <UniqueIdentifier>{89D87B4E-6218-39AB-81A8-CE1817F44473}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\HUD\AllPurposeProgressBarWidget.h">
+      <Filter>Source\Cosmetric\Public\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\HUD\Player_HUD_Widget.h">
+      <Filter>Source\Cosmetric\Public\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\HUD\ProgressBarWidget.h">
+      <Filter>Source\Cosmetric\Public\HUD</Filter>
+    </ClInclude>
+    <Filter Include="Source\Cosmetric\Public\Interfaces">
+      <UniqueIdentifier>{174E0206-9A94-391B-8901-1252420DB56C}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Interfaces\IsActionable.h">
+      <Filter>Source\Cosmetric\Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Interfaces\IsCollectable.h">
+      <Filter>Source\Cosmetric\Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Interfaces\IsDamagable.h">
+      <Filter>Source\Cosmetric\Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Interfaces\IsScannable.h">
+      <Filter>Source\Cosmetric\Public\Interfaces</Filter>
+    </ClInclude>
+    <Filter Include="Source\Cosmetric\Public\Terrain">
+      <UniqueIdentifier>{2E1A854C-112D-375D-A27C-768008F4C164}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Terrain\Terrain.h">
+      <Filter>Source\Cosmetric\Public\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Terrain\TerrainMenager.h">
+      <Filter>Source\Cosmetric\Public\Terrain</Filter>
+    </ClInclude>
+    <Filter Include="Source\Cosmetric\Public\Tree">
+      <UniqueIdentifier>{5BBE6352-D28C-30DF-93CE-728BC930EADA}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Tree\GenericTree.h">
+      <Filter>Source\Cosmetric\Public\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Tree\RoundTopTree.h">
+      <Filter>Source\Cosmetric\Public\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Tree\SpiralConeTree.h">
+      <Filter>Source\Cosmetric\Public\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Cosmetric\Public\Tree\SpruceLikeTree.h">
+      <Filter>Source\Cosmetric\Public\Tree</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
