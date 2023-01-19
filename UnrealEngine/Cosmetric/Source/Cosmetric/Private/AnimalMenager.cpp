@@ -6,6 +6,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "UObject/UObjectGlobals.h"
 #include "Kismet/GameplayStatics.h"
+#include "../Public/GUI/MyGameInstance.h"
 
 TArray<FString> FirstName = {
 	FString("Equus"),
@@ -103,7 +104,19 @@ void AAnimalMenager::BeginPlay()
 			AnimalClass = single->AnimalClass;
 		}
 	}
-	
+	auto GameInstance = ((UMyGameInstance*)(GetWorld()->GetGameInstance()));
+	auto GameInfo = ((UMyGameInstance*)(GetWorld()->GetGameInstance()))->GameInfo;
+	if (GameInfo) {
+		Seed = GameInfo->Seed;
+	}
+	if (GameInstance) {
+		RenderDistance = GameInstance->RenderDistance;
+	}
+	for (int i = 0; i < 256; i++)
+	{
+		perm[i] = i;
+	}
+	std::shuffle(&perm[0], &perm[255], std::default_random_engine(Seed));
 }
 
 // Called every frame
@@ -116,16 +129,18 @@ void AAnimalMenager::Tick(float DeltaTime)
 		TArray<AActor*> ActorsToFind;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AAnimalBase::StaticClass(), ActorsToFind);
 		FVector loc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-		for (int i = ActorsToFind.Num(); i < 32; i++)
+		for (int i = ActorsToFind.Num(); i < 2 * RenderDistance * RenderDistance; i++)
 		{
 			float x = distribution(generator);
-			x += x - 0.5 < 0.0 ? loc.X + (x - 0.5) * 15000 - 500 : loc.X + (x - 0.5) * 15000 + 500;
+			float fx = (x - 0.5) * RenderDistance * 2000;
+			x += x - 0.5 < 0.0 ? loc.X + fx - 500 : loc.X + fx + 500;
 			float y = distribution(generator);
-			y += y - 0.5 < 0.0 ? loc.Y + (y - 0.5) * 15000 - 500 : loc.Y + (y - 0.5) * 15000 + 500;
+			float fy = (y - 0.5) * RenderDistance * 2000;
+			y += y - 0.5 < 0.0 ? loc.Y + fy - 500 : loc.Y + fy + 500;
 			FTransform pos = FTransform(FVector(
 				x,
 				y,
-				1000)
+				PerlinNoise::Noise(x / 2000, y / 2000, perm) + 100.0)
 			);
 			AAnimalBase* ani = GetWorld()->SpawnActor<AAnimalBase>(AnimalClass, pos);
 		}
@@ -133,11 +148,11 @@ void AAnimalMenager::Tick(float DeltaTime)
 	}
 }
 
-void AAnimalMenager::init(int Seed)
+void AAnimalMenager::init(int seed)
 {
 	for (int i = 0; i < 50; i++)
 	{
-		auto Stream = FRandomStream(Seed + i * i);
+		auto Stream = FRandomStream(seed + i * i);
 		FSpecies spc;
 		spc.bodyflag = 1 + floor(Stream.GetFraction() * 5);
 		spc.headflag = 1 + floor(Stream.GetFraction() * 5);

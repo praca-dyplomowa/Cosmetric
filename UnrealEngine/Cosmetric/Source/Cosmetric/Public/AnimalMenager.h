@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "AnimalBase.h"
 #include <random>
+#include "../Public/PerlinNoise.h"
 #include "AnimalMenager.generated.h"
 
 USTRUCT(BlueprintType)
@@ -101,6 +102,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	int Seed;
+	int RenderDistance;
+	int perm[256];
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TArray<FSpecies> Species;
 
@@ -115,5 +120,4 @@ public:
 
 	std::default_random_engine generator;
 	std::uniform_real_distribution<float> distribution;
-
 };
