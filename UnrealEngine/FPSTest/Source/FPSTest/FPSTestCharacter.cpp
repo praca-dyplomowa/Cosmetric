@@ -460,7 +460,7 @@ void AFPSTestCharacter::ManageHunger(float dT)
 
 	if (HungerTimer >= 0)
 	{
-		HungerTimer -= dT;
+		HungerTimer -= dT/3;
 	}
 	else if (0.0 >= Hunger)
 	{
