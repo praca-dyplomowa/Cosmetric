@@ -39,7 +39,7 @@ void AIsDamagable::OnSelectedDamage(AActor* Target, FKey ButtonPressed)
 {
 	if (EKeys::LeftMouseButton == ButtonPressed)
 	{
-		if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
+		if (700 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 		{
 			if (Alive && !BeingDamaged)
 			{

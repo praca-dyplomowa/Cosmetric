@@ -1,11 +1,30 @@
-﻿  Terrain.cpp
+﻿  pch.cpp
+  FTransform.cpp
+  FVector.cpp
+  FVector2D.cpp
+  PerlinNoise.cpp
 D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.h(14,2): warning C4091: 'static ': ignored on left of 'PerlinNoise' when no variable is declared
-D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\Terrain.cpp(110,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\Terrain.cpp(110,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\Terrain.cpp(110,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\Terrain.cpp(111,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\Terrain.cpp(111,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(41,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(41,36): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(42,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(42,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(43,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(43,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(44,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(44,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(51,48): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(52,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(53,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.cpp(54,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  TArray.cpp
+  UnitTesting.cpp
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\PerlinNoise.h(14,2): warning C4091: 'static ': ignored on left of 'PerlinNoise' when no variable is declared
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(93,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(94,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(107,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(108,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(121,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\UnitTesting\UnitTesting.cpp(122,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
      Creating library D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\x64\Debug\UnitTesting.lib and object D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\x64\Debug\UnitTesting.exp
-Terrain.obj : error LNK2019: unresolved external symbol "public: void __cdecl TArray<class FVector>::Add(class FVector)" (?Add@?$TArray@VFVector@@@@QEAAXVFVector@@@Z) referenced in function "private: void __cdecl ATerrain::CreateVertices(void)" (?CreateVertices@ATerrain@@AEAAXXZ)
-Terrain.obj : error LNK2019: unresolved external symbol "public: void __cdecl TArray<class FVector2D>::Add(class FVector2D)" (?Add@?$TArray@VFVector2D@@@@QEAAXVFVector2D@@@Z) referenced in function "private: void __cdecl ATerrain::CreateVertices(void)" (?CreateVertices@ATerrain@@AEAAXXZ)
-D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\x64\Debug\UnitTesting.dll : fatal error LNK1120: 2 unresolved externals
+  UnitTesting.vcxproj -> D:\UE\gra--generowanie__proceduralne\Testy\Project_Test\x64\Debug\UnitTesting.dll

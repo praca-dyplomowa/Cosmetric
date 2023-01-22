@@ -169,7 +169,7 @@ void AAnimalMenager::init(int seed)
 		spc.legsscale = 1.0 + Stream.GetFraction();
 		spc.food = 10.0 + Stream.GetFraction() * 10.0;
 		spc.material = 10.0 + Stream.GetFraction() * 10.0;
-		spc.life = 2.0 + Stream.GetFraction() * 10.0;
+		spc.life = 1.0 + Stream.GetFraction() * 3.0;
 		spc.agresive = Stream.GetFraction() > 0.5 ? true : false;
 		spc.name = FirstName[floor(Stream.GetFraction() * FirstName.Num())] + " "
 			+ SecondName[floor(Stream.GetFraction() * SecondName.Num())] + " "

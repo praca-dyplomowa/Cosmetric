@@ -65,7 +65,7 @@ void AIsCollectable::Tick(float DeltaTime)
 			}
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Food += Materials[0];
 			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Wood += Materials[1];
-			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalMaterial += Materials[1];
+			((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->AnimalMaterial += Materials[2];
 			Action = false;
 			this->SetLifeSpan(5);
 		}
@@ -83,7 +83,7 @@ void AIsCollectable::OnSelectedCollect(AActor* Target, FKey ButtonPressed)
 	{
 		if (Collectable)
 		{
-			if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
+			if (700 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 			{
 				((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->Movement_Flag = false;
 				if (CollectProgressBar)

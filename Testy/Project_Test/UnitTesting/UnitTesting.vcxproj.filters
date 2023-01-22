@@ -19,36 +19,6 @@
     <Filter Include="Source Files\Utilities">
       <UniqueIdentifier>{fb3e47ae-fc12-4319-ad14-7e7779e63bd6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Terrain">
-      <UniqueIdentifier>{96810b23-887f-4eac-bb99-280928c71a3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Interfaces">
-      <UniqueIdentifier>{51841600-1cc2-481d-a08a-3ae01ebdd9d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Interfaces\IsActionable">
-      <UniqueIdentifier>{100eca1d-b0d7-4b59-a01e-30d1b99d7e8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Interfaces\IsCollectable">
-      <UniqueIdentifier>{0669ce07-f712-414b-862b-42df6e248656}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Interfaces\IsScannable">
-      <UniqueIdentifier>{ad5cda50-8851-41d0-8b14-86d80bd2bf54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Terrain\Menager">
-      <UniqueIdentifier>{8856edc9-2ee0-454c-992f-3e41b7185fbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Tree">
-      <UniqueIdentifier>{b531ed1d-0693-4263-a445-61cf939c6b30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Tree\Generic">
-      <UniqueIdentifier>{6d3584fd-78cf-4e46-890f-88b88d1b9e8a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Animal">
-      <UniqueIdentifier>{38fa8d66-4a42-49f5-8e2e-a46f0c2b32fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Character">
-      <UniqueIdentifier>{acefa214-3738-42ea-938d-c70ec4c174e3}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UnitTesting.cpp">
@@ -63,9 +33,6 @@
     <ClCompile Include="FVector2D.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files\Terrain</Filter>
-    </ClCompile>
     <ClCompile Include="FVector.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
@@ -74,21 +41,6 @@
     </ClCompile>
     <ClCompile Include="TArray.cpp">
       <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="IsActionable.cpp">
-      <Filter>Source Files\Interfaces\IsActionable</Filter>
-    </ClCompile>
-    <ClCompile Include="IsCollectable.cpp">
-      <Filter>Source Files\Interfaces\IsCollectable</Filter>
-    </ClCompile>
-    <ClCompile Include="IsScannable.cpp">
-      <Filter>Source Files\Interfaces\IsScannable</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimalBase.cpp">
-      <Filter>Source Files\Animal</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSTestCharacter.cpp">
-      <Filter>Source Files\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +53,6 @@
     <ClInclude Include="FVector2D.h">
       <Filter>Source Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Source Files\Terrain</Filter>
-    </ClInclude>
     <ClInclude Include="FVector.h">
       <Filter>Source Files\Utilities</Filter>
     </ClInclude>
@@ -112,21 +61,6 @@
     </ClInclude>
     <ClInclude Include="TArray.h">
       <Filter>Source Files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="IsActionable.h">
-      <Filter>Source Files\Interfaces\IsActionable</Filter>
-    </ClInclude>
-    <ClInclude Include="IsCollectable.h">
-      <Filter>Source Files\Interfaces\IsCollectable</Filter>
-    </ClInclude>
-    <ClInclude Include="IsScannable.h">
-      <Filter>Source Files\Interfaces\IsScannable</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimalBase.h">
-      <Filter>Source Files\Animal</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSTestCharacter.h">
-      <Filter>Source Files\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -86,7 +86,7 @@ void AIsScannable::OnSelectedScan(AActor* Target, FKey ButtonPressed)
 {
 	if (EKeys::RightMouseButton == ButtonPressed && !Action)
 	{
-		if (500 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
+		if (700 >= this->GetDistanceTo(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))))
 		{
 			if (!(((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()))->TreeCatalogClass.Contains(Name)))
 			{
