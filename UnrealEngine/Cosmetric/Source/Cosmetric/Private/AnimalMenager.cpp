@@ -156,9 +156,9 @@ void AAnimalMenager::init(int seed)
 		FSpecies spc;
 		spc.bodyflag = 1 + floor(Stream.GetFraction() * 5);
 		spc.headflag = 1 + floor(Stream.GetFraction() * 5);
-		spc.tailflag = 1 + floor(Stream.GetFraction() * 2);
-		spc.lowerlegsflag = 1 + floor(Stream.GetFraction() * 4);
-		spc.upperlegsflag = 1 + floor(Stream.GetFraction() * 4);
+		spc.tailflag = 1 + floor(Stream.GetFraction() * 7);
+		spc.lowerlegsflag = 1 + floor(Stream.GetFraction() * 7);
+		spc.upperlegsflag = 1 + floor(Stream.GetFraction() * 7);
 		spc.red = floor(Stream.GetFraction() * 256);
 		spc.green = floor(Stream.GetFraction() * 256);
 		spc.blue = floor(Stream.GetFraction() * 256);

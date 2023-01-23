@@ -128,6 +128,8 @@ protected:
 public:
 	/** Returns Mesh1P subobject **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
+	UFUNCTION(BlueprintCallable)
+	USkeletalMeshComponent* GetMesh1PBP() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

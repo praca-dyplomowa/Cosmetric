@@ -297,6 +297,7 @@ void AFPSTestCharacter::ShowCatalog()
 {
 	if (CatalogViewClass)
 	{
+		Mesh1P->SetVisibility(false, true);
 		FTransform pos = GetActorTransform();
 		CatalogView = GetWorld()->SpawnActor<AActor>(CatalogViewClass, pos);
 		FRotator tmpR = GetWorld()->GetFirstPlayerController()->GetControlRotation();
