@@ -36,6 +36,10 @@ ASpiralConeTree::ASpiralConeTree()
 	TreetopRender.HorizontalStretch = 1;
 	TreetopRender.RotationDegreesVariance = 0;
 	TreetopRender.HorizontalScalingVariance = 0;
+
+
+	FoodAmountClamp = FVector2D(1, 10);
+	WoodAmountClamp = FVector2D(5, 20);
 }
 
 double ASpiralConeTree::RenderTrunk(double Offset)

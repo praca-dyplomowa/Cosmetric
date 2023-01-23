@@ -27,4 +27,7 @@ ASpruceLikeTree::ASpruceLikeTree()
 	TreetopRender.HorizontalStretch = 2.3;
 	TreetopRender.RotationDegreesVariance = 5;
 	TreetopRender.HorizontalScalingVariance = 0.3;
+
+	FoodAmountClamp = FVector2D(1, 5);
+	WoodAmountClamp = FVector2D(1, 20);
 }

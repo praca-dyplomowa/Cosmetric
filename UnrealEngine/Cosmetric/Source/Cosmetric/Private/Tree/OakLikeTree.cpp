@@ -35,6 +35,9 @@ AOakLikeTree::AOakLikeTree()
 	TreetopRender.HorizontalStretch = 2.3;
 	TreetopRender.RotationDegreesVariance = 5;
 	TreetopRender.HorizontalScalingVariance = 0.3;
+
+	FoodAmountClamp = FVector2D(10, 40);
+	WoodAmountClamp = FVector2D(40, 70);
 }
 
 double AOakLikeTree::RenderTreetop(double offset)

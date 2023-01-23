@@ -72,6 +72,19 @@ struct FTrunkRenderVariables : public FTreeComponentRenderVariables {
 	GENERATED_BODY()
 };
 
+USTRUCT(BlueprintType)
+struct FTreeParams {
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	double Height;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	double CalorificValue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isPoisonous;
+
+};
+
 UCLASS()
 class COSMETRIC_API AGenericTree : public AIsCollectable
 {
@@ -100,7 +113,8 @@ public:
 		FTreetopRenderVariables treetopRender = FTreetopRenderVariables()
 	);
 	void InitializeSpecies(FString Color, FString Size);
-
+	UFUNCTION(BlueprintCallable)
+	FTreeParams GetAverageParams();
 protected:
 	double GetRandomFromVector(FVector2D& bounds);
 
@@ -135,6 +149,9 @@ protected:
 	FString Species;
 	FString Color;
 	FString Size;
+	FVector2D WoodAmountClamp;
+	FVector2D FoodAmountClamp;
+	bool isPoisonous;
 private:
 	double InitStruct(FTreeComponentInit& init, FTreeComponentRender& render);
 	void RandomizeScale();
@@ -149,6 +166,16 @@ const TMap<FString, FColor> colorMap = {
 {TEXT("Laure"), FColor(252, 173, 3)},
 {TEXT("Helin"), FColor(54, 0, 166)},
 {TEXT("Culuina"), FColor(157, 28, 0)},
+};
+
+const TMap<FString, double> calorificValueMap = {
+	{TEXT("Andunie"), 22.85 }, // sunset treetop, dummy FColor value
+	{TEXT("Carne"), 6.70 },
+	{TEXT("Luine"), 11.30 },
+	{TEXT("Laiqua"), 1.74 },
+	{TEXT("Laure"), 5.63 },
+	{TEXT("Helin"), 2.58 },
+	{TEXT("Culuina"), 5.42 },
 };
 
 const TMap<FString, double> sizeMap = {

@@ -46,6 +46,9 @@ AGenericTree::AGenericTree()
 	TrunkRender.Instanced->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	TreetopRender.Instanced->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	TreetopRender.Instanced->NumCustomDataFloats = 3;
+
+	FoodAmountClamp = FVector2D(1, 20);
+	WoodAmountClamp = FVector2D(30, 60);
 }
 
 void AGenericTree::Initialize(FTreetopInit treetopInit, FTrunkInit trunkInit) {
@@ -73,6 +76,16 @@ void AGenericTree::InitializeSpecies(FString sColor, FString sSize)
 {
 	Color = sColor;
 	Size = sSize;
+}
+
+FTreeParams AGenericTree::GetAverageParams()
+{
+	auto params = FTreeParams();
+	params.CalorificValue = calorificValueMap[Color];
+	params.CalorificValue *= Materials[0] * 100;
+	params.isPoisonous = isPoisonous;
+	params.Height = TreetopRender.Height + TrunkRender.Height;
+	return params;
 }
 
 void AGenericTree::Initialize(FTrunkInit trunkInit, FTreetopInit treetopInit, FTreetopRenderVariables treetopRender, FTrunkRenderVariables trunkRender) {
@@ -163,8 +176,6 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 		+ GetActorLocation().Y
 		+ GetActorLocation().Z
 	);
-	Materials[0] = Stream.GetFraction() * 20;
-	Materials[1] = Stream.GetFraction() * 30;
 	
 	double treetopOffset = InitStruct(TreetopInit, TreetopRender);
 	double trunkOffset = InitStruct(TrunkInit, TrunkRender);
@@ -179,7 +190,6 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 	if(Size == "") RandomizeScale();
 	double scale = sizeMap[Size];
 	SetActorRelativeScale3D(FVector(scale));
-
 	
 	FLinearColor myColor;
 	// choose a random colour for the tree
@@ -207,12 +217,29 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 			Color = TEXT("Culuina");
 		}
 	};
+	// randomize parameters
+	isPoisonous = Stream.RandRange(0, 1) == 1;
+
+	// set Food and Wood material values
+	Materials[0] = FMath::Floor(
+		GetRandomFromVector(FoodAmountClamp) *
+		(1 + (isPoisonous ? -0.2 : 0.2) * scale));
+
+	Materials[1] = FMath::Floor(
+		GetRandomFromVector(WoodAmountClamp) *
+		(1 + scale * 0.1) *
+		calorificValueMap[Color]);
+
+	// set species name
 	Name = Species + " " + Size + "-" + Color;
+
 	if (Color == TEXT("Andunie")) {
 		return SunsetizeTreetop(treetopNum);
 	}
-	myColor = colorMap[Color];
+	
 	// color all treetop instances
+	myColor = colorMap[Color];
+	
 	TArray<float> color;
 	color.Init(0,3);
 	color[0] = myColor.R + (float)Stream.FRandRange(-0.05, 0.05);
@@ -222,9 +249,6 @@ void AGenericTree::OnConstruction(const FTransform& transform)
 		TreetopRender.Instanced->SetCustomData(i, color, false);
 	}
 	TreetopRender.Instanced->MarkRenderStateDirty();
-	
-	// set species name 
-	
 }
 
 void AGenericTree::OnCollected()
