@@ -84,7 +84,7 @@ FTreeParams AGenericTree::GetAverageParams()
 	params.CalorificValue = calorificValueMap[Color];
 	params.CalorificValue *= Materials[0] * 100;
 	params.isPoisonous = isPoisonous;
-	params.Height = TreetopRender.Height + TrunkRender.Height;
+	params.Height = (TreetopRender.Height + TrunkRender.Height) * sizeMap[Size];
 	return params;
 }
 
