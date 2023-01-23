@@ -172,6 +172,7 @@
     <None Include="..\..\Cosmetric.uproject"/>
     <None Include="..\..\Source\Cosmetric.Target.cs"/>
     <None Include="..\..\Source\CosmetricEditor.Target.cs"/>
+    <None Include="..\..\Cosmetric.png"/>
     <None Include="..\..\FPSTest.png"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini"/>
