@@ -461,11 +461,11 @@ void AFPSTestCharacter::ManageHunger(float dT)
 
 	if (HungerTimer >= 0)
 	{
-		HungerTimer -= dT/6;
+		HungerTimer -= dT;
 	}
 	else if (0.0 >= Hunger)
 	{
-		Health -= dT;
+		Health -= dT/6;
 	}
 	else
 	{
