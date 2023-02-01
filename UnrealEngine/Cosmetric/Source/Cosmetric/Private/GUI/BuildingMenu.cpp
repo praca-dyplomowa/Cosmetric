@@ -4,6 +4,7 @@
 #include "GUI/BuildingMenu.h"
 #include "Components/Button.h"
 #include "../FPSTestCharacter.h"
+#include <cmath>
 
 void UBuildingMenu::NativeConstruct()
 {
@@ -22,5 +23,5 @@ void UBuildingMenu::OnContinueButtonClicked()
 void UBuildingMenu::SetEQ()
 {
 	AFPSTestCharacter* tmp = ((AFPSTestCharacter*)(GetWorld()->GetFirstPlayerController()->GetPawn()));
-	EQ->SetText(FText::FromString("Drewno"+FString::SanitizeFloat(tmp->Wood)+"\nSkora:"+ FString::SanitizeFloat(tmp->AnimalMaterial)));
+	EQ->SetText(FText::FromString("Drewno"+FString::SanitizeFloat(round(tmp->Wood * 100)/100)+"\nSkora:"+ FString::SanitizeFloat(round(tmp->AnimalMaterial * 100) / 100)));
 }
